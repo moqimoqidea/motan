@@ -31,7 +31,7 @@ public class TestStringRunnable extends AbstractClientRunnable {
         for (int i = 0; i < length; i++) {
             builder.append((char) (ThreadLocalRandom.current().nextInt(33, 128)));
         }
-        str = builder.toString();
+        // FIXME: Code Completion From Here.
     }
 
     @Override
