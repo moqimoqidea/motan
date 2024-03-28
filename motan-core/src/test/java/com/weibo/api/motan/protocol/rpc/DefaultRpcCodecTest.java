@@ -38,7 +38,7 @@ import com.weibo.api.motan.transport.Channel;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-5-26
- * 
+ *
  */
 public class DefaultRpcCodecTest extends TestCase {
     protected Codec rpcCodec = new DefaultRpcCodec();
@@ -168,7 +168,7 @@ public class DefaultRpcCodecTest extends TestCase {
 
         Response result = (Response) rpcCodec.decode(channel, "", bytes);
 
-        Assert.assertTrue(result.getException().getMessage().equals(response.getException().getMessage()));
+        // FIXME: Code Completion From Here.
         Assert.assertTrue(result.getException().getClass().equals(response.getException().getClass()));
     }
 

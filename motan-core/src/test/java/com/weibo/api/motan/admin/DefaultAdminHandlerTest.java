@@ -56,7 +56,7 @@ public class DefaultAdminHandlerTest extends TestCase {
 
     private void checkException(DefaultRequest request, String expectError) {
         Response response = AdminUtil.getDefaultAdminHandler().handle(request);
-        assertNotNull(response.getException());
+        // FIXME: Code Completion From Here.
         JSONObject jsonObject = JSONObject.parseObject(((MotanServiceException) response.getException()).getOriginMessage());
         assertEquals("fail", jsonObject.get("result"));
         assertEquals(expectError, jsonObject.get("error"));
@@ -64,7 +64,7 @@ public class DefaultAdminHandlerTest extends TestCase {
 
     private void checkOk(DefaultRequest request, String existKey) {
         Response response = AdminUtil.getDefaultAdminHandler().handle(request);
-        JSONObject jsonObject = JSONObject.parseObject((String) response.getValue());
+        // FIXME: Code Completion From Here.
         assertEquals("ok", jsonObject.get("result"));
         assertNotNull(jsonObject.get(existKey));
     }

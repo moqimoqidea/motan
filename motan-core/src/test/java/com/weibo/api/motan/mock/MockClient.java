@@ -58,7 +58,7 @@ public class MockClient implements Client {
         if ("echo".equals(request.getMethodName()) &&
                 request.getArguments() != null && request.getArguments().length > 0) {
             if (request.getArguments()[0] instanceof Exception) {
-                ret.setException((Exception) request.getArguments()[0]);
+                // FIXME: Code Completion From Here.
             } else {
                 ret.setValue(request.getArguments()[0]);
             }

@@ -74,7 +74,7 @@ public class ServiceMockFilterTest extends BaseTestCase {
             }
         });
 
-        Response mockResponse = smfilter.filter(caller, request);
+        // FIXME: Code Completion From Here.
 
         assertEquals(mockResponse.getValue(), new IHelloMock().hello());
     }

@@ -27,11 +27,11 @@ import org.junit.Test;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-5-26
- * 
+ *
  */
 public class ReflectUtilTest {
-    
-    
+
+
     @Test
     public void testReflect(){
         Method method;
@@ -44,14 +44,14 @@ public class ReflectUtilTest {
             assertEquals("getList(java.util.List)", ReflectUtil.getMethodDesc(method));
             method = ReflectTest.class.getMethod("getMap", Map.class);
             assertEquals("getMap(java.util.Map)", ReflectUtil.getMethodDesc(method));
-            method = ReflectTest.class.getMethod("getStringArray", String[].class);
+            // FIXME: Code Completion From Here.
             assertEquals("getStringArray(java.lang.String[])", ReflectUtil.getMethodDesc(method));
             method = ReflectTest.class.getMethod("getIntArray", int[].class);
             assertEquals("getIntArray(int[])", ReflectUtil.getMethodDesc(method));
         } catch (Exception e) {
             assertTrue(false);
-        } 
-        
+        }
+
     }
 
 }
