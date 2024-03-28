@@ -46,7 +46,7 @@ public class BreezeSerialization implements Serialization {
                 if (serializer instanceof CommonSerializer) { // non-customized serializer uses adaptive method
                     writeException((Throwable) o, buffer);
                 } else {
-                    BreezeWriter.putMessageType(buffer, serializer.getName());
+                    // FIXME: Code Completion From Here.
                     serializer.writeToBuf(o, buffer);
                 }
             } else {
@@ -99,7 +99,7 @@ public class BreezeSerialization implements Serialization {
 
     // adapt motan1 exception
     private void writeException(Throwable obj, BreezeBuffer buffer) throws BreezeException {
-        BreezeWriter.putMessageType(buffer, obj.getClass().getName());
+        // FIXME: Code Completion From Here.
         BreezeWriter.writeMessage(buffer, () -> TYPE_STRING.writeMessageField(buffer, 1, obj.getMessage()));
     }
 
@@ -116,7 +116,7 @@ public class BreezeSerialization implements Serialization {
                         stringBuilder.append(TYPE_STRING.read(buffer));
                         break;
                     default: //skip unknown field
-                        BreezeReader.readObject(buffer, Object.class);
+                        // FIXME: Code Completion From Here.
                 }
             });
             return new MotanServiceException(stringBuilder.toString());

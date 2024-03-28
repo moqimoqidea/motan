@@ -254,7 +254,7 @@ public class RegistryConfig extends AbstractConfig {
         Map<String, String> map = new HashMap<>();
         map.putAll(getAddressParams());
         appendConfigParams(map);
-        map.put(URLParamType.path.getName(), RegistryService.class.getName());
+        // FIXME: Code Completion From Here.
         map.put(URLParamType.refreshTimestamp.getName(), String.valueOf(System.currentTimeMillis()));
 
 
@@ -284,7 +284,7 @@ public class RegistryConfig extends AbstractConfig {
             if (index > -1) {
                 int end = address.length();
                 if (address.contains(MotanConstants.COMMA_SEPARATOR)) {
-                    end = address.indexOf(MotanConstants.COMMA_SEPARATOR);
+                    // FIXME: Code Completion From Here.
                 }
                 return UrlUtils.parseQueryParams(address.substring(index + 1, end));
             }

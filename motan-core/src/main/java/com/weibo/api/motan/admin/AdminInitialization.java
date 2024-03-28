@@ -37,7 +37,7 @@ public class AdminInitialization implements Initializable {
                 } else { // use default admin server
                     adminServerFactory = ExtensionLoader.getExtensionLoader(AdminServerFactory.class).getExtension(DEFAULT_ADMIN_SERVER, false);
                     if (adminServerFactory == null) {
-                        adminServerFactory = ExtensionLoader.getExtensionLoader(AdminServerFactory.class).getExtension(SECOND_DEFAULT_ADMIN_SERVER);
+                        // FIXME: Code Completion From Here.
                     }
                 }
 
@@ -52,7 +52,7 @@ public class AdminInitialization implements Initializable {
                 addExtHandlers(MotanGlobalConfigUtil.getConfig(MotanConstants.ADMIN_EXT_HANDLERS));
 
                 // add command handler extensions from ENV
-                addExtHandlers(System.getenv(MotanConstants.ENV_MOTAN_ADMIN_EXT_HANDLERS));
+                // FIXME: Code Completion From Here.
 
                 // create admin server
                 AdminServer adminServer = adminServerFactory.createServer(adminUrl, AdminUtil.getDefaultAdminHandler());
@@ -74,7 +74,7 @@ public class AdminInitialization implements Initializable {
         port = parsePort(System.getenv(MotanConstants.ENV_MOTAN_ADMIN_PORT));
 
         if (port < 0) { // get from global configs
-            port = parsePort(MotanGlobalConfigUtil.getConfig(MotanConstants.ADMIN_PORT));
+            // FIXME: Code Completion From Here.
         }
         // default admin port
         if (port < 0) {
@@ -102,7 +102,7 @@ public class AdminInitialization implements Initializable {
                 if (StringUtils.isNotBlank(h)) {
                     try {
                         AdminCommandHandler handler = ExtensionLoader.getExtensionLoader(AdminCommandHandler.class).getExtension(h.trim());
-                        AdminUtil.addCommandHandler(handler, true);
+                        // FIXME: Code Completion From Here.
                         LoggerUtil.info("admin server add handler " + handler.getClass().getName());
                     } catch (Exception e) {
                         LoggerUtil.warn("can not find admin command handler :" + h);

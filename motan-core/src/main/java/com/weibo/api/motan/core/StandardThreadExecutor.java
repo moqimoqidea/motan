@@ -28,24 +28,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <pre>
- * 
+ *
  * 代码和思路主要来自于：
- * 
- * tomcat : 
+ *
+ * tomcat :
  * 		org.apache.catalina.core.StandardThreadExecutor
- * 
+ *
  * java.util.concurrent
- * threadPoolExecutor execute执行策略： 		优先offer到queue，queue满后再扩充线程到maxThread，如果已经到了maxThread就reject 
+ * threadPoolExecutor execute执行策略： 		优先offer到queue，queue满后再扩充线程到maxThread，如果已经到了maxThread就reject
  * 						   		比较适合于CPU密集型应用（比如runnable内部执行的操作都在JVM内部，memory copy, or compute等等）
- * 
- * StandardThreadExecutor execute执行策略：	优先扩充线程到maxThread，再offer到queue，如果满了就reject 
+ *
+ * StandardThreadExecutor execute执行策略：	优先扩充线程到maxThread，再offer到queue，如果满了就reject
  * 						      	比较适合于业务处理需要远程资源的场景
- * 
+ *
  * </pre>
- * 
+ *
  * @author maijunsheng
  * @version 创建时间：2013-6-20
- * 
+ *
  */
 public class StandardThreadExecutor extends ThreadPoolExecutor {
 
@@ -53,7 +53,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 	public static final int DEFAULT_MAX_THREADS = 200;
 	public static final int DEFAULT_MAX_IDLE_TIME = 60 * 1000; // 1 minutes
 
-	protected AtomicInteger submittedTasksCount;	// 正在处理的任务数 
+	protected AtomicInteger submittedTasksCount;	// 正在处理的任务数
 	private int maxSubmittedTaskCount;				// 最大允许同时处理的任务数
 
 	public StandardThreadExecutor() {
@@ -91,16 +91,16 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 		((ExecutorQueue) getQueue()).setStandardThreadExecutor(this);
 
 		submittedTasksCount = new AtomicInteger(0);
-		
-		// 最大并发任务限制： 队列buffer数 + 最大线程数 
-		maxSubmittedTaskCount = queueCapacity + maxThreads; 
+
+		// 最大并发任务限制： 队列buffer数 + 最大线程数
+		maxSubmittedTaskCount = queueCapacity + maxThreads;
 	}
 
 	public void execute(Runnable command) {
 		int count = submittedTasksCount.incrementAndGet();
 
 		// 超过最大的并发任务限制，进行 reject
-		// 依赖的LinkedTransferQueue没有长度限制，因此这里进行控制 
+		// 依赖的LinkedTransferQueue没有长度限制，因此这里进行控制
 		if (count > maxSubmittedTaskCount) {
 			submittedTasksCount.decrementAndGet();
 			getRejectedExecutionHandler().rejectedExecution(command, this);
@@ -112,7 +112,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 		} catch (RejectedExecutionException rx) {
 			// there could have been contention around the queue
 			if (!((ExecutorQueue) getQueue()).force(command)) {
-				submittedTasksCount.decrementAndGet();
+				// FIXME: Code Completion From Here.
 
 				getRejectedExecutionHandler().rejectedExecution(command, this);
 			}
@@ -122,7 +122,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 	public int getSubmittedTasksCount() {
 		return this.submittedTasksCount.get();
 	}
-	
+
 	public int getMaxSubmittedTaskCount() {
 		return maxSubmittedTaskCount;
 	}
@@ -133,12 +133,12 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 }
 
 /**
- * LinkedTransferQueue 能保证更高性能，相比与LinkedBlockingQueue有明显提升 
- * 
+ * LinkedTransferQueue 能保证更高性能，相比与LinkedBlockingQueue有明显提升
+ *
  * <pre>
  * 		1) 不过LinkedTransferQueue的缺点是没有队列长度控制，需要在外层协助控制
  * </pre>
- * 
+ *
  * @author maijunsheng
  *
  */
@@ -154,7 +154,7 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
 		this.threadPoolExecutor = threadPoolExecutor;
 	}
 
-	// 注：代码来源于 tomcat 
+	// 注：代码来源于 tomcat
 	public boolean force(Runnable o) {
 		if (threadPoolExecutor.isShutdown()) {
 			throw new RejectedExecutionException("Executor not running, can't force a command into the queue");
@@ -163,7 +163,7 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
 		return super.offer(o);
 	}
 
-	// 注：tomcat的代码进行一些小变更 
+	// 注：tomcat的代码进行一些小变更
 	public boolean offer(Runnable o) {
 		int poolSize = threadPoolExecutor.getPoolSize();
 
@@ -178,9 +178,7 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
 		}
 		// if we have less threads than maximum force creation of a new
 		// thread
-		if (poolSize < threadPoolExecutor.getMaximumPoolSize()) {
-			return false;
-		}
+		// FIXME: Code Completion From Here.
 		// if we reached here, we need to add it to the queue
 		return super.offer(o);
 	}

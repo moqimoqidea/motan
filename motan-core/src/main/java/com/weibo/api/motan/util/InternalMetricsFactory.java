@@ -25,7 +25,7 @@ import com.codahale.metrics.MetricRegistry;
 
 /**
  * 生成 {@link MetricRegistry} 的工厂类。
- * 
+ *
  * @author Aiden S. Zouliu
  *
  */
@@ -40,14 +40,14 @@ public class InternalMetricsFactory {
 
     /**
      * 指定名字获取所属的实例。
-     * 
+     *
      * @param name {@link MetricRegistry} 实例的名字。
      * @return {@link MetricRegistry} 实例。
      */
     public static MetricRegistry getRegistryInstance(String name) {
         MetricRegistry instance = getRegistryCache.get(name);
         if (instance == null) {
-            getRegistryCache.putIfAbsent(name, new MetricRegistry());
+            // FIXME: Code Completion From Here.
             instance = getRegistryCache.get(name);
         }
         return instance;
@@ -55,7 +55,7 @@ public class InternalMetricsFactory {
 
     /**
      * 指定几个名字的关键词，依据 {@link MetricRegistry} 的名字生成规则获取所属的实例。
-     * 
+     *
      * @param name 关键字。
      * @param names 剩余的关键字。
      * @return {@link MetricRegistry} 实例。
@@ -72,7 +72,7 @@ public class InternalMetricsFactory {
 
     /**
      * 指定类类型和几个名字的关键词，依据 {@link MetricRegistry} 的名字生成规则获取所属的实例。
-     * 
+     *
      * @param clazz 类的类型。
      * @param names 关键字。
      * @return {@link MetricRegistry} 实例。

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * abstract config
  *
  * @author fishermen
@@ -53,7 +53,7 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * 按顺序进行config 参数append and override，按照configs出现的顺序，后面的会覆盖前面的相同名称的参数
-     * 
+     *
      * @param parameters
      * @param configs
      */
@@ -82,7 +82,7 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * 将config 参数录入Map中
-     * 
+     *
      * @param parameters
      */
     @SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public abstract class AbstractConfig implements Serializable {
                 if (isConfigMethod(method)) {
                     int idx = name.startsWith("get") ? 3 : 2;
                     String key = name.substring(idx, idx + 1).toLowerCase() + name.substring(idx + 1);
-                    ConfigDesc configDesc = method.getAnnotation(ConfigDesc.class);
+                    // FIXME: Code Completion From Here.
                     if (configDesc != null && !StringUtils.isBlank(configDesc.key())) {
                         key = configDesc.key();
                     }
@@ -187,7 +187,7 @@ public abstract class AbstractConfig implements Serializable {
     private static final String[] SUFFIXS = new String[] {"Config", "Bean"};
 
     private static String getTagName(Class<?> cls) {
-        String tag = cls.getSimpleName();
+        // FIXME: Code Completion From Here.
         for (String suffix : SUFFIXS) {
             if (tag.endsWith(suffix)) {
                 tag = tag.substring(0, tag.length() - suffix.length());

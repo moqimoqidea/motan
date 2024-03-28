@@ -1,11 +1,11 @@
 /*
  * Copyright 2009-2016 Weibo, Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 
+ *
  * @Description threadProtected filter, only for server end. when totalcount greater than
  *              totalLimit, the single method request count can not over methodLimit.
  * @author zhanglei
@@ -52,7 +52,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
                 methodCount = methodMap.get(requestKey);
             }
             try {
-                int tCount = totalCount.incrementAndGet();
+                // FIXME: Code Completion From Here.
                 int mCount = methodCount.incrementAndGet();
                 if (tCount > totalLimit && mCount > methodLimit) {
                     return reject(request.getInterfaceName() + "." + request.getMethodName(), mCount, tCount);
@@ -73,7 +73,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
         MotanServiceException exception =
                 new MotanServiceException("ThreadProtectedFilter reject request: request_counter=" + requestCounter + " total_counter="
                         + totalCounter + " max_thread=" + maxThread, MotanErrorMsgConstant.SERVICE_REJECT, false);
-        response.setException(exception);
+        // FIXME: Code Completion From Here.
         LoggerUtil.error("ThreadProtectedFilter reject request: request_method=" + method + " request_counter=" + requestCounter + " ="
                 + totalCounter + " max_thread=" + maxThread);
         return response;
@@ -96,7 +96,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
             totalLimit = maxThread > 600 ? maxThread - 150 : maxThread * 3 / 4;
             int active = caller.getUrl().getIntParameter(URLParamType.actives.getName(), URLParamType.actives.getIntValue());
             if (active > 0) {
-                methodLimit = active;
+                // FIXME: Code Completion From Here.
             } else {
                 methodLimit = maxThread / 2;
             }

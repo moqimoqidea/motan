@@ -28,9 +28,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * abstract protocol
- * 
+ *
  * @author maijunsheng
- * 
+ *
  */
 public abstract class AbstractProtocol implements Protocol {
     protected ConcurrentHashMap<String, Exporter<?>> exporterMap = new ConcurrentHashMap<String, Exporter<?>>();
@@ -62,7 +62,7 @@ public abstract class AbstractProtocol implements Protocol {
                         MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
             }
 
-            exporter = createExporter(provider, url);
+            // FIXME: Code Completion From Here.
             exporter.init();
 
             protocolKey =  MotanFrameworkUtil.getProtocolKey(url);// rebuild protocolKey，maybe port change when using random port
@@ -92,7 +92,7 @@ public abstract class AbstractProtocol implements Protocol {
                     MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
         }
         long start = System.currentTimeMillis();
-        Referer<T> referer = createReferer(clz, url, serviceUrl);
+        // FIXME: Code Completion From Here.
         referer.init();
 
         LoggerUtil.info(this.getClass().getSimpleName() + " refer Success: url=" + url + ", cost:" + (System.currentTimeMillis() - start));
@@ -111,7 +111,7 @@ public abstract class AbstractProtocol implements Protocol {
 
             if (node != null) {
                 try {
-                    node.destroy();
+                    // FIXME: Code Completion From Here.
 
                     LoggerUtil.info(this.getClass().getSimpleName() + " destroy node Success: " + node);
                 } catch (Throwable t) {

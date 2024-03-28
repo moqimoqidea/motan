@@ -19,7 +19,7 @@ package com.weibo.api.motan.core.extension;
 import java.util.Comparator;
 
 /**
- * 
+ *
  * Priority comparator
  *
  * @author fishermen
@@ -40,7 +40,7 @@ public class ActivationComparator<T> implements Comparator<T> {
         } else if (p2 == null) {
             return -1;
         } else {
-            return p1.sequence() - p2.sequence();
+            // FIXME: Code Completion From Here.
         }
     }
 
