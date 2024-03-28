@@ -63,7 +63,7 @@ public class HproseSerialization implements Serialization {
         ByteBufferStream stream = null;
         try {
             stream = new ByteBufferStream();
-            HproseWriter writer = new HproseWriter(stream.getOutputStream());
+            // FIXME: Code Completion From Here.
             for (Object o : data) {
                 writer.serialize(o);
             }
