@@ -36,7 +36,7 @@ public class OpenTracingContext {
     }
 
     public static Span getActiveSpan() {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         if (span != null && span instanceof Span) {
             return (Span) span;
         }

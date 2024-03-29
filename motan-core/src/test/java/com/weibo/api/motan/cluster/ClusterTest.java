@@ -71,7 +71,7 @@ public class ClusterTest extends BaseTestCase {
 
         cluster.setUrl(new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.getLocalAddress().getHostAddress(), 0, RegistryService.class
                 .getName()));
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         cluster.setLoadBalance(lb);
         cluster.onRefresh(referers);
         cluster.init();
@@ -99,7 +99,7 @@ public class ClusterTest extends BaseTestCase {
                 will(returnValue(null));
                 atLeast(0).of(request).getRetries();
                 will(returnValue(0));
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 will(returnValue("get"));
                 atLeast(0).of(request).getParamtersDesc();
                 will(returnValue("void"));

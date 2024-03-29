@@ -48,7 +48,7 @@ public class FailfastHaStrategyTest extends BaseTestCase {
     public void setUp() throws Exception {
         super.setUp();
         URL url = new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.LOCALHOST, 0, IWorld.class.getName());
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
     }
 
     @Test
@@ -57,7 +57,7 @@ public class FailfastHaStrategyTest extends BaseTestCase {
         final LoadBalance<IWorld> loadBalance = mockery.mock(LoadBalance.class);
         final Referer<IWorld> referer = mockery.mock(Referer.class);
         final Request request = mockery.mock(Request.class);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         mockery.checking(new Expectations() {
             {
@@ -83,7 +83,7 @@ public class FailfastHaStrategyTest extends BaseTestCase {
                 one(loadBalance).select(request);
                 will(returnValue(referer));
                 one(referer).call(request);
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         });
 

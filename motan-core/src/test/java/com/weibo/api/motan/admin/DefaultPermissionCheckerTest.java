@@ -54,7 +54,7 @@ public class DefaultPermissionCheckerTest extends TestCase {
         };
         Request request = new DefaultRequest();
         request.setAttachment(URLParamType.host.getName(), "unknownHost");
-        // FIXME: Code Completion From Here.
+        request.setAttachment("token", rightToken);
         request.setAttachment("extension", "extToken");
         assertTrue(checker.check(request));
     }
@@ -69,7 +69,7 @@ public class DefaultPermissionCheckerTest extends TestCase {
     }
 
     private void checkIp(String host, boolean expectResult) {
-        // FIXME: Code Completion From Here.
+        Request request = new DefaultRequest();
         request.setAttachment(URLParamType.host.getName(), host);
         assertEquals(expectResult, AdminUtil.getDefaultPermissionChecker().check(request));
     }

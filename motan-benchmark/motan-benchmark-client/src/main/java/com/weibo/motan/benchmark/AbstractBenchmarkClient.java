@@ -55,7 +55,7 @@ public abstract class AbstractBenchmarkClient {
         long endTime = currentTime + runTime * 1000 * 1000L;
 
         List<ClientRunnable> runnables = new ArrayList<>();
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         CountDownLatch countDownLatch = new CountDownLatch(this.concurrents);
         for (int i = 0; i < this.concurrents; i++) {
             ClientRunnable runnable = getClientRunnable(classname, params, cyclicBarrier, countDownLatch, startTime, endTime);
@@ -74,7 +74,7 @@ public abstract class AbstractBenchmarkClient {
         for (ClientRunnable runnable : runnables) {
             runnableStatisticses.add(runnable.getStatistics());
         }
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         statistics.collectStatistics();
 
         printStatistics();
@@ -102,7 +102,7 @@ public abstract class AbstractBenchmarkClient {
         System.out.println("Concurrents: " + concurrents);
         System.out.println("Runtime: " + runTime + " seconds");
         System.out.println("ClassName: " + classname);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         statistics.printStatistics();
     }
 

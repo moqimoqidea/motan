@@ -152,7 +152,7 @@ public class OpenTracingFilter implements Filter {
         String operationName = buildOperationName(request);
         SpanBuilder span = tracer.buildSpan(operationName);
         try {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             if (spanContext != null) {
                 span.asChildOf(spanContext);
             }

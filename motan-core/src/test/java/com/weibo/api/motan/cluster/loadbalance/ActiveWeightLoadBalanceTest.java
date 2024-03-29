@@ -165,7 +165,7 @@ public class ActiveWeightLoadBalanceTest {
         }
 
         ActiveWeightLoadBalance balance = new ActiveWeightLoadBalance();
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         return balance;
     }

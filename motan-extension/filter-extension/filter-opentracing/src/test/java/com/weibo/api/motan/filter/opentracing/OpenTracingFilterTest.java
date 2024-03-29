@@ -128,7 +128,7 @@ public class OpenTracingFilterTest {
             MockSpan span = mt.finishedSpans().get(0);
             assertEquals(span.operationName(), "Motan_test_HelloService.sayHello(java.lang.String)");
             assertEquals(span.parentId(), 0);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             assertEquals("request success.", span.logEntries().get(0).fields().get("event"));
             assertTrue(span.tags().containsKey("requestId"));
         }

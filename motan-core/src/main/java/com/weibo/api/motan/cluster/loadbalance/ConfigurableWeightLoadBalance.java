@@ -65,7 +65,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
             return null;
         }
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         Referer<T> r = h.next();
         if (!r.isAvailable()) {
             int retryTimes = getReferers().size() - 1;
@@ -160,7 +160,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
             LoggerUtil.info("ConfigurableWeightLoadBalance build new MultiGroupHolder. weights:" + weights);
             String[] groupsAndWeights = weights.split(",");
             int[] weightsArr = new int[groupsAndWeights.length];
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             int i = 0;
             for (String groupAndWeight : groupsAndWeights) {
                 String[] gw = groupAndWeight.split(":");

@@ -67,7 +67,7 @@ public class DefaultRpcCodecTest {
 
         long start = System.nanoTime();
         for (int i = 0; i < loop; i++) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
         System.out.println("request encode performance: " + (System.nanoTime() - start) / loop + " ns");
 
@@ -100,7 +100,7 @@ public class DefaultRpcCodecTest {
         request.setAttachment("version", "1.0");
         request.setAttachment("graph", "yf-rpc");
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         return bytes;
     }
