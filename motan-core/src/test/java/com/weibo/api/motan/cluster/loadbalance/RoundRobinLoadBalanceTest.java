@@ -67,7 +67,7 @@ public class RoundRobinLoadBalanceTest extends AbstractLoadBalanceTest {
         }
 
         List<Referer<IHello>> refHolder = new ArrayList<Referer<IHello>>();
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         assertEquals(refHolder.size(), referers.size() / 2);
     }
 }

@@ -201,7 +201,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
         Referer<T> next() {
             String group = randomKeyList.get(ThreadLocalRandom.current().nextInt(randomKeySize));
             AtomicInteger ai = cursors.get(group);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             return referers.get(MathUtil.getNonNegative(ai.getAndIncrement()) % referers.size());
         }
 

@@ -112,7 +112,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 		} catch (RejectedExecutionException rx) {
 			// there could have been contention around the queue
 			if (!((ExecutorQueue) getQueue()).force(command)) {
-				// FIXME: Code Completion From Here.
+				// FIXME: The Completion Code is Empty.
 
 				getRejectedExecutionHandler().rejectedExecution(command, this);
 			}
@@ -178,7 +178,7 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
 		}
 		// if we have less threads than maximum force creation of a new
 		// thread
-		// FIXME: Code Completion From Here.
+		// FIXME: The Completion Code is Empty.
 		// if we reached here, we need to add it to the queue
 		return super.offer(o);
 	}

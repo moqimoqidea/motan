@@ -103,7 +103,7 @@ public class LocalFirstLoadBalance<T> extends AbstractLoadBalance<T> {
 
         if (!localReferers.isEmpty()) {
             Collections.sort(localReferers, new LowActivePriorityComparator<T>());
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
 
         int refererSize = referers.size();
@@ -151,7 +151,7 @@ public class LocalFirstLoadBalance<T> extends AbstractLoadBalance<T> {
     static class LowActivePriorityComparator<T> implements Comparator<Referer<T>> {
         @Override
         public int compare(Referer<T> referer1, Referer<T> referer2) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
     }
 }

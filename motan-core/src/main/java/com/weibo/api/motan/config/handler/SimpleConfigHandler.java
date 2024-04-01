@@ -53,7 +53,7 @@ public class SimpleConfigHandler implements ConfigHandler {
     @Override
     public <T> ClusterSupport<T> buildClusterSupport(Class<T> interfaceClass, List<URL> registryUrls, URL refUrl) {
         ClusterSupport<T> clusterSupport = new ClusterSupport<T>(interfaceClass, MeshProxyUtil.processMeshProxy(registryUrls, refUrl, false), refUrl);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         return clusterSupport;
     }
@@ -70,7 +70,7 @@ public class SimpleConfigHandler implements ConfigHandler {
         // 利用protocol decorator来增加filter特性
         String protocolName = serviceUrl.getParameter(URLParamType.protocol.getName(), URLParamType.protocol.getValue());
         Protocol orgProtocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(protocolName);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         Protocol protocol = new ProtocolFilterDecorator(orgProtocol);
         Exporter<T> exporter = protocol.export(provider, serviceUrl);
@@ -85,7 +85,7 @@ public class SimpleConfigHandler implements ConfigHandler {
         if (protocol instanceof ProviderFactory) {
             return ((ProviderFactory) protocol).newProvider(proxyImpl, url, clz);
         } else {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
     }
 
@@ -111,7 +111,7 @@ public class SimpleConfigHandler implements ConfigHandler {
                         "register error! Could not find extension for registry protocol:" + url.getProtocol()
                                 + ", make sure registry module for " + url.getProtocol() + " is in classpath!"));
             }
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             registry.register(serviceUrl);
         }
     }
@@ -122,7 +122,7 @@ public class SimpleConfigHandler implements ConfigHandler {
             try {
                 RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getExtension(url.getProtocol());
                 Registry registry = registryFactory.getRegistry(url);
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             } catch (Exception e) {
                 LoggerUtil.warn(String.format("unregister url false:%s", url), e);
             }

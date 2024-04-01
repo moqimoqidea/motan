@@ -94,7 +94,7 @@ public abstract class AbstractConfig implements Serializable {
                 if (isConfigMethod(method)) {
                     int idx = name.startsWith("get") ? 3 : 2;
                     String key = name.substring(idx, idx + 1).toLowerCase() + name.substring(idx + 1);
-                    // FIXME: Code Completion From Here.
+                    // FIXME: The Completion Code is Empty.
                     if (configDesc != null && !StringUtils.isBlank(configDesc.key())) {
                         key = configDesc.key();
                     }
@@ -187,7 +187,7 @@ public abstract class AbstractConfig implements Serializable {
     private static final String[] SUFFIXS = new String[] {"Config", "Bean"};
 
     private static String getTagName(Class<?> cls) {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         for (String suffix : SUFFIXS) {
             if (tag.endsWith(suffix)) {
                 tag = tag.substring(0, tag.length() - suffix.length());
