@@ -80,7 +80,7 @@ public class GrpcUtil {
                         }
                         methodMap.put(interfaceMethod.getName(), methodDesc);
                     }
-                    // FIXME: Code Completion From Here.
+                    // FIXME: The Completion Code is Empty.
                 }
                 result = serviceMap.get(clazzName);
             }
@@ -149,7 +149,7 @@ public class GrpcUtil {
                 Reader reader = new InputStreamReader(stream, charset);
                 T proto;
                 try {
-                    // FIXME: Code Completion From Here.
+                    // FIXME: The Completion Code is Empty.
                     proto = (T) builder.build();
                     reader.close();
                 } catch (InvalidProtocolBufferException e) {

@@ -117,7 +117,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
                 });
             } catch (Exception e) {
                 LoggerUtil.error("request is rejected by threadpool!", e);
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 sendResponse(ctx, buildErrorResponse("request is rejected by threadpool!"));
             }
         }
@@ -135,7 +135,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
                 MethodInfo old = methodDescMap.get(newMethodInfo.getMethodName());
                 if (!old.isDuplicate()) {
                     methodDescMap.put(old.getMethodName() + old.getMethodDesc(), old);
-                    // FIXME: Code Completion From Here.
+                    // FIXME: The Completion Code is Empty.
                 }
                 methodDescMap.put(newMethodInfo.getMethodName() + newMethodInfo.getMethodDesc(), newMethodInfo);
             }
@@ -296,7 +296,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
         httpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, httpResponse.content().readableBytes());
 
         if (keepAlive) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         } else {
             httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
         }

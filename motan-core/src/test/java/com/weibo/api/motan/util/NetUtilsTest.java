@@ -42,7 +42,7 @@ public class NetUtilsTest extends BaseTestCase {
         assertTrue(NetUtils.isValidAddress(address));
         try {
             if(NetUtils.isValidAddress(InetAddress.getLocalHost())){
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();

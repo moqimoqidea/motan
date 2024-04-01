@@ -52,7 +52,7 @@ public class RequestIdGenerator {
                     offset.set(0);
                 }
             }
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
         return (currentTime << BITS) + count;
     }

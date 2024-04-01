@@ -59,7 +59,7 @@ public class ProviderMessageRouterTest extends TestCase {
         providerMessageRouter.addProvider(providerA);
         providerMessageRouter.addProvider(providerB);
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         DefaultRequest requestA = new DefaultRequest();
         requestA.setInterfaceName(com.weibo.api.motan.transport.ProviderA.class.getName());
@@ -84,7 +84,13 @@ public class ProviderMessageRouterTest extends TestCase {
 
         providerMessageRouter.removeProvider(providerA);
 
-        // FIXME: Code Completion From Here.
+        try {
+            response = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);
+            response.getValue();
+            Assert.assertTrue(false);
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
 
         try {
             Response result = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);

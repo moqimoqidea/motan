@@ -62,7 +62,7 @@ public class HeartbeatClientEndpointManager implements EndpointManager {
                         }
 
                         HeartbeatFactory factory = entry.getValue();
-                        // FIXME: Code Completion From Here.
+                        // FIXME: The Completion Code is Empty.
                     } catch (Exception e) {
                         LoggerUtil.error("HeartbeatEndpointManager send heartbeat Error: url=" + endpoint.getUrl().getUri() + ", " + e.getMessage());
                     }
@@ -97,7 +97,7 @@ public class HeartbeatClientEndpointManager implements EndpointManager {
 
         String heartbeatFactoryName = url.getParameter(URLParamType.heartbeatFactory.getName(), URLParamType.heartbeatFactory.getValue());
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         endpoints.put(client, heartbeatFactory);
     }
 

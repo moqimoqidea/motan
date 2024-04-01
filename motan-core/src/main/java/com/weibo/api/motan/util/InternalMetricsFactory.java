@@ -47,7 +47,7 @@ public class InternalMetricsFactory {
     public static MetricRegistry getRegistryInstance(String name) {
         MetricRegistry instance = getRegistryCache.get(name);
         if (instance == null) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             instance = getRegistryCache.get(name);
         }
         return instance;

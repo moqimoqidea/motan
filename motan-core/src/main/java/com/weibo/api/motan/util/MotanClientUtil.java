@@ -44,7 +44,7 @@ public class MotanClientUtil {
         request.setRequestId(RequestIdGenerator.getRequestId());
         request.setInterfaceName(interfaceName);
         request.setMethodName(methodName);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         if (StringUtils.isNotEmpty(paramtersDesc)) {
             request.setParamtersDesc(paramtersDesc);
         }

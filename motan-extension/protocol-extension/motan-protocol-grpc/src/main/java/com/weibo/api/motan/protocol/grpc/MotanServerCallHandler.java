@@ -111,7 +111,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
                         motanRequest.setAttachment(URLParamType.host.getName(), ip);
                     }
                     if (responseStream) {
-                        // FIXME: Code Completion From Here.
+                        // FIXME: The Completion Code is Empty.
                     } else {
                         motanRequest.setArguments(new Object[] {request});
                     }
@@ -158,7 +158,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
         final ServerCallStreamObserverImpl<ReqT, RespT> responseObserver = new ServerCallStreamObserverImpl<ReqT, RespT>(call);
         DefaultRequest request = getBaseMotanRequest(headers);
         request.setArguments(new Object[] {responseObserver});
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         final StreamObserver<ReqT> requestObserver = (StreamObserver<ReqT>) response.getValue();
         responseObserver.freeze();
         if (responseObserver.autoFlowControlEnabled) {
@@ -212,7 +212,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
             rid = headers.get(Metadata.Key.of(URLParamType.requestIdFromClient.getName().toLowerCase(), Metadata.ASCII_STRING_MARSHALLER));
         }
         if (rid != null) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
         // fill attachment info from headers
         Set<String> keys = headers.keys();
@@ -318,7 +318,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
             if (frozen) {
                 throw new IllegalStateException("Cannot disable auto flow control after initialization");
             } else {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         }
 

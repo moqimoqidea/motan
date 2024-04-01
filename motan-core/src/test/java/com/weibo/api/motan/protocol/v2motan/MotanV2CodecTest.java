@@ -82,7 +82,7 @@ public class MotanV2CodecTest {
 
         bytes = codec.encode(channel, response);
         Response newRes = (Response) codec.decode(channel, "localhost", bytes);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
     }
 
@@ -119,7 +119,7 @@ public class MotanV2CodecTest {
             throw new RuntimeException("map size not equals!");
         }
         for(Map.Entry<String, String> entry : map1.entrySet()){
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
     }
 

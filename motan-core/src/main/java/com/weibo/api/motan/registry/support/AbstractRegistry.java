@@ -52,7 +52,7 @@ public abstract class  AbstractRegistry implements Registry {
     public AbstractRegistry(URL url) {
         this.registryUrl = url.createCopy();
         // register a heartbeat switcher to perceive service state change and change available state
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         MotanSwitcherUtil.registerSwitcherListener(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, new SwitcherListener() {
 
             @Override
@@ -76,7 +76,7 @@ public abstract class  AbstractRegistry implements Registry {
         }
         LoggerUtil.info("[{}] Url ({}) will register to Registry [{}]", registryClassName, url, registryUrl.getIdentity());
         doRegister(removeUnnecessaryParmas(url.createCopy()));
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         // available if heartbeat switcher already open
         if (MotanSwitcherUtil.isOpen(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER)) {
             available(url);
@@ -90,7 +90,7 @@ public abstract class  AbstractRegistry implements Registry {
             return;
         }
         LoggerUtil.info("[{}] Url ({}) will unregister to Registry [{}]", registryClassName, url, registryUrl.getIdentity());
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         registeredServiceUrls.remove(url);
     }
 
@@ -126,7 +126,7 @@ public abstract class  AbstractRegistry implements Registry {
         url = url.createCopy();
         List<URL> results = new ArrayList<URL>();
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         if (categoryUrls != null && categoryUrls.size() > 0) {
             for (List<URL> urls : categoryUrls.values()) {
                 for (URL tempUrl : urls) {
@@ -183,7 +183,7 @@ public abstract class  AbstractRegistry implements Registry {
         List<URL> urls = new ArrayList<URL>();
         for (List<URL> us : rsUrls.values()) {
             for (URL tempUrl : us) {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         }
         return urls;
@@ -224,7 +224,7 @@ public abstract class  AbstractRegistry implements Registry {
      */
     private URL removeUnnecessaryParmas(URL url) {
         // codec参数不能提交到注册中心，如果client端没有对应的codec会导致client端不能正常请求。
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         return url;
     }
 

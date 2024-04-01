@@ -56,7 +56,7 @@ public class ProtocolFilterDecorator implements Protocol {
 
     @Override
     public <T> Exporter<T> export(Provider<T> provider, URL url) {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ProtocolFilterDecorator implements Protocol {
     }
 
     public <T> Referer<T> decorateRefererFilter(Referer<T> referer, URL url) {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
     }
 
     private <T> Referer<T> decorateWithFilter(Referer<T> referer, URL url) {
@@ -216,7 +216,7 @@ public class ProtocolFilterDecorator implements Protocol {
         List<Filter> filters = new ArrayList<>();
         List<Filter> defaultFilters = ExtensionLoader.getExtensionLoader(Filter.class).getExtensions(key);
         if (defaultFilters != null && defaultFilters.size() > 0) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
 
         // add filters from "filter" config, env, global config
@@ -239,7 +239,7 @@ public class ProtocolFilterDecorator implements Protocol {
                         LoggerUtil.warn("filter extension not found. filer name: " + fn);
                         continue;
                     }
-                    // FIXME: Code Completion From Here.
+                    // FIXME: The Completion Code is Empty.
                 }
             }
 

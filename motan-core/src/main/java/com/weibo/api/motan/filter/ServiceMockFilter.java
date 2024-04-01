@@ -53,7 +53,7 @@ public class ServiceMockFilter implements Filter {
         MockInfo info = mockServices.get(url.getIdentity());
         if (info == null) {
             info = new MockInfo(url);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             info = mockServices.get(url.getIdentity());
         }
         return info;
@@ -80,7 +80,7 @@ public class ServiceMockFilter implements Filter {
                 long sleepTime = caclSleepTime(info);
                 Thread.sleep(sleepTime);
 
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             } catch (RuntimeException e) {
                 if (e.getCause() != null) {
                     response.setException(new MotanBizException("mock service call process error", e.getCause()));
@@ -140,7 +140,7 @@ public class ServiceMockFilter implements Filter {
     private Object invoke(Object clz, Method method, Object[] args, MockInfo info) throws InterruptedException, InvocationTargetException,
             IllegalAccessException {
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         long sleepTime = caclSleepTime(info);
         Thread.sleep(sleepTime);

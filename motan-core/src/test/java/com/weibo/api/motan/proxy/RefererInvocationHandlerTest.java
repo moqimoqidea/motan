@@ -50,7 +50,7 @@ public class RefererInvocationHandlerTest extends BaseTestCase {
 
         List<Cluster> clus = new ArrayList<Cluster>();
         clus.add(cluster);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         Method[] methods = String.class.getMethods();
         try {
             handler.invoke(null, methods[1], null);
@@ -86,7 +86,7 @@ public class RefererInvocationHandlerTest extends BaseTestCase {
         RefererInvocationHandler handler = new RefererInvocationHandler(TestService.class, clusters);
         //local method
         Method method = TestServiceImpl.class.getMethod("toString");
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         try {
             String result = (String)handler.invoke(null, method, null);
             assertEquals("{protocol:motan[motan://local:80/test?group=default_rpc, available:true]}", result);

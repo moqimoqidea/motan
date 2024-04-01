@@ -67,7 +67,7 @@ public class AccessLogFilter implements Filter {
                 }
                 return response;
             } finally {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         } else {
             return caller.call(request);
@@ -126,7 +126,7 @@ public class AccessLogFilter implements Filter {
         append(builder, NetUtils.getLocalAddress().getHostAddress());
         append(builder, request.getInterfaceName());
         append(builder, request.getMethodName());
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         // 对于client，url中的remote ip 和 service获取的地方不同
         if (MotanConstants.NODE_TYPE_REFERER.equals(side)) {
             append(builder, caller.getUrl().getHost()); // direct
@@ -144,7 +144,7 @@ public class AccessLogFilter implements Filter {
         if (StringUtils.isBlank(requestId)) {
             requestId = String.valueOf(request.getRequestId());
         }
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         append(builder, request.getAttachments().get(MotanConstants.CONTENT_LENGTH));
         append(builder, response == null ? "0" : response.getAttachments().get(MotanConstants.CONTENT_LENGTH));
         append(builder, segmentTime);

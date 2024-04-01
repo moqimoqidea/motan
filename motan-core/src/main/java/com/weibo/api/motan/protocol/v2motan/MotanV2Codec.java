@@ -86,7 +86,7 @@ public class MotanV2Codec extends AbstractCodec {
                 putString(buf, M2_PATH);
                 putString(buf, request.getInterfaceName());
                 putString(buf, M2_METHOD);
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 if (request.getParamtersDesc() != null) {
                     putString(buf, M2_METHOD_DESC);
                     putString(buf, request.getParamtersDesc());
@@ -114,7 +114,7 @@ public class MotanV2Codec extends AbstractCodec {
                     putString(buf, ExceptionUtil.toMessage(response.getException()));
                     header.setStatus(MotanV2Header.MessageStatus.EXCEPTION.getStatus());
                 }
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
 
                 header.setRequestId(response.getRequestId());
                 header.setRequest(false);
@@ -174,7 +174,7 @@ public class MotanV2Codec extends AbstractCodec {
 
 
     private void putString(GrowableByteBuffer buf, String content) {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         buf.put("\n".getBytes(StandardCharsets.UTF_8));
     }
 
@@ -249,7 +249,7 @@ public class MotanV2Codec extends AbstractCodec {
                 request.setRequestId(header.getRequestId());
                 request.setInterfaceName(metaMap.remove(M2_PATH));
                 request.setMethodName(metaMap.remove(M2_METHOD));
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 request.setAttachments(metaMap);
                 request.setRpcProtocolVersion(RpcProtocolVersion.VERSION_2.getVersion());
                 request.setSerializeNumber(header.getSerialize());
@@ -286,7 +286,7 @@ public class MotanV2Codec extends AbstractCodec {
             if (header.getStatus() == MotanV2Header.MessageStatus.NORMAL.getStatus()) {//只解析正常消息
                 response.setValue(obj);
             } else {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 Exception e = ExceptionUtil.fromMessage(errMsg);
                 if (e == null) {
                     e = new MotanServiceException("default remote exception. remote err msg:" + errMsg, false);

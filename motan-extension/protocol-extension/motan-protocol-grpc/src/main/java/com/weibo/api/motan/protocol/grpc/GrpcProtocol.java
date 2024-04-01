@@ -72,7 +72,7 @@ public class GrpcProtocol extends AbstractProtocol {
                             + url.getServerPortStr(), true));
             server = new GrpcServer(url.getPort(), shareChannel, executor);
             serverMap.putIfAbsent(ipPort, server);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
 
         }
         return new GrpcExporter<T>(provider, url, server);
@@ -113,7 +113,7 @@ public class GrpcProtocol extends AbstractProtocol {
         protected boolean doInit() {
             try {
                 server.init();
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 return true;
             } catch (Exception e) {
                 LoggerUtil.error("grpc server init fail!", e);

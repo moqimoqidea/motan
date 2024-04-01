@@ -109,7 +109,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
         // not matched
         FaultInjectionFilter.FaultInjectionConfig config = buildDefaultConfig("com.weibo.test.NotFaultTest");
         configList.add(config);
-        // FIXME: Code Completion From Here.
+        updateConfigs();
         check(processTime.get());
 
         // matched，then not matched
@@ -198,7 +198,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
         FaultInjectionFilter.FaultInjectionConfig config2 = buildDefaultConfig("xxx", "echo", 0, 0.5f);
 
         // only matched one config
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         configList.add(config1); // 不命中
         configList.add(config); // 命中
         configList.add(config2); // 不命中
@@ -242,7 +242,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
                     DefaultResponse tempResponse;
                     if (request.getMethodName().equals("exception")) {
                         tempResponse = MotanFrameworkUtil.buildErrorResponse(request, new MotanServiceException("exception"));
-                        // FIXME: Code Completion From Here.
+                        // FIXME: The Completion Code is Empty.
                         response.onFailure(tempResponse);
                     } else {
                         tempResponse = new DefaultResponse("success");
@@ -304,7 +304,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
             }
         }
         assertNotNull(exception);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         if (exception instanceof MotanBizException) {
             assertSame(expectException, exception.getCause().getClass());
         }

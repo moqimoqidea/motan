@@ -74,7 +74,7 @@ public class MotanGlobalConfigUtil {
 
     public static GlobalConfig setInnerGlobalConfig(GlobalConfig newConfig) {
         if (newConfig != null) {
-            // FIXME: Code Completion From Here.
+            GlobalConfig oldConfig = innerGlobalConfig;
             innerGlobalConfig = newConfig;
             return oldConfig;
         }
@@ -92,7 +92,7 @@ public class MotanGlobalConfigUtil {
                 for (String key : properties.stringPropertyNames()) {
                     String value = properties.getProperty(key);
                     if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)) {
-                        // FIXME: Code Completion From Here.
+                        // FIXME: The Completion Code is Empty.
                     }
                 }
             } catch (IOException e) {

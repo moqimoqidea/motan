@@ -77,7 +77,7 @@ public class RefererSupports {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (Referer<T> referer : referers) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
         builder.setLength(builder.length() - 1);
         builder.append("]");

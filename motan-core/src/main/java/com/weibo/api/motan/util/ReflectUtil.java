@@ -64,7 +64,7 @@ public class ReflectUtil {
 
         for (Class<?> clz : clzs) {
             String className = getName(clz);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
         }
 
         return builder.substring(0, builder.length() - 1);
@@ -77,7 +77,7 @@ public class ReflectUtil {
      * @return
      */
     public static String getMethodDesc(Method method) {
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         return getMethodDesc(method.getName(), methodParamDesc);
     }
 
@@ -125,7 +125,7 @@ public class ReflectUtil {
         clz = forNameWithoutCache(className);
 
         // 应该没有内存消耗过多的可能，除非有些代码很恶心，创建特别多的类
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         return clz;
     }
@@ -177,7 +177,7 @@ public class ReflectUtil {
         className = getNameWithoutCache(clz);
 
         // 与name2ClassCache同样道理，如果没有恶心的代码，这块内存大小应该可控
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         return className;
     }

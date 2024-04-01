@@ -60,7 +60,7 @@ public class TestProtoBuf {
 
 		refererConfig = new RefererConfig<>();
 		refererConfig.setDirectUrl("127.0.0.1:18002");
-		// FIXME: Code Completion From Here.
+		// FIXME: The Completion Code is Empty.
 		refererConfig.setInterface(HelloService.class);
 
 		service = refererConfig.getRef();
@@ -106,7 +106,7 @@ public class TestProtoBuf {
 
 		User newOne = service.copy(user);
 		Assert.assertEquals(user.getId(), newOne.getId());
-		// FIXME: Code Completion From Here.
+		// FIXME: The Completion Code is Empty.
 		Assert.assertEquals(user.getGender(), newOne.getGender());
 		Assert.assertEquals(user.getAddress(0).getId(), newOne.getAddress(0).getId());
 	}

@@ -65,7 +65,7 @@ public class RequestIdGeneratorTest {
         Assert.assertEquals(threadNum, memory.size());
         for(Future<Boolean> future: futureList){
             try {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (ExecutionException e) {

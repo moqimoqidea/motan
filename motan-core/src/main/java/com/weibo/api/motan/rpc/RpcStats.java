@@ -60,7 +60,7 @@ public class RpcStats {
      */
     public static void beforeCall(URL url, Request request) {
         String uri = url.getUri();
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         onBeforeCall(getMethodStat(uri, request.getMethodName(), request.getParamtersDesc()));
     }
 
@@ -123,7 +123,7 @@ public class RpcStats {
         if (!success) {
             statInfo.failCount.incrementAndGet();
         }
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         statInfo.latestCountTime.inc(1, procTimeMills);
     }
 

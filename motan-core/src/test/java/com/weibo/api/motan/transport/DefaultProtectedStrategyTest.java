@@ -40,7 +40,7 @@ public class DefaultProtectedStrategyTest extends TestCase {
     public void testIsAllowRequest() {
 
         DefaultProtectedStrategy defaultProtectedStrategy = new DefaultProtectedStrategy();
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         for (int i = 1; i <= MAX_WORKER_THREAD; i++) {
             Assert.assertTrue(defaultProtectedStrategy.isAllowRequest(i, i, MAX_WORKER_THREAD));
@@ -104,7 +104,7 @@ public class DefaultProtectedStrategyTest extends TestCase {
         DefaultRequest requestA = new DefaultRequest();
         requestA.setInterfaceName(ProviderA.class.getName());
         requestA.setMethodName("providerA");
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         Response response;
 
         response = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);

@@ -45,7 +45,7 @@ public class LocalSwitcherServiceTest extends TestCase {
         Assert.assertNotNull(switcher);
         Assert.assertFalse(switcher.isOn());
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         switcher = localSwitcherService.getSwitcher(protocolSwitcher);
         Assert.assertNotNull(switcher);

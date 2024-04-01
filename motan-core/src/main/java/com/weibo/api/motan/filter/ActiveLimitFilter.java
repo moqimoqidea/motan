@@ -52,7 +52,7 @@ public class ActiveLimitFilter implements Filter {
         RpcStats.beforeCall(caller.getUrl(), request);
         try {
             Response rs = caller.call(request);
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             return rs;
         } catch (RuntimeException re) {
             RpcStats.afterCall(caller.getUrl(), request, false, System.currentTimeMillis() - startTime);

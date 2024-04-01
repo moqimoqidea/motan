@@ -44,7 +44,7 @@ public abstract class CommandFailbackRegistry extends FailbackRegistry {
         manager.addNotifyListener(listener);
 
         subscribeService(urlCopy, manager);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         List<URL> urls = doDiscover(urlCopy);
         if (urls != null && urls.size() > 0) {
@@ -58,7 +58,7 @@ public abstract class CommandFailbackRegistry extends FailbackRegistry {
         URL urlCopy = url.createCopy();
         CommandServiceManager manager = commandManagerMap.get(urlCopy);
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         unsubscribeService(urlCopy, manager);
         unsubscribeCommand(urlCopy, manager);
     }
@@ -75,7 +75,7 @@ public abstract class CommandFailbackRegistry extends FailbackRegistry {
         LoggerUtil.info("CommandFailbackRegistry discover command. commandStr: " + commandStr + ", rpccommand "
                 + (rpcCommand == null ? "is null." : "is not null."));
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         List<URL> finalResult = manager.discoverServiceWithCommand(new HashMap<>(), rpcCommand);
 
         // 在subscribeCommon时，可能订阅完马上就notify，导致首次notify指令时，可能还有其他service没有完成订阅，

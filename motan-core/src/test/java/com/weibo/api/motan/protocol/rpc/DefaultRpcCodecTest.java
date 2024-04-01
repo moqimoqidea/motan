@@ -168,7 +168,7 @@ public class DefaultRpcCodecTest extends TestCase {
 
         Response result = (Response) rpcCodec.decode(channel, "", bytes);
 
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         Assert.assertTrue(result.getException().getClass().equals(response.getException().getClass()));
     }
 

@@ -48,7 +48,7 @@ public class StringToolsTest {
         if (expectString == null || expectString.length == 0) {
             assertEquals(0, result.size());
         } else {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             for (String s : expectString) {
                 assertTrue(result.contains(s));
             }

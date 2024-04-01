@@ -56,7 +56,7 @@ public class MotanV2HeaderTest {
         checkEquals(header);
 
         header.setStatus(5);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
 
         header.setRequestId(-798729l);
         checkEquals(header);

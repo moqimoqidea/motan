@@ -52,7 +52,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
                 methodCount = methodMap.get(requestKey);
             }
             try {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
                 int mCount = methodCount.incrementAndGet();
                 if (tCount > totalLimit && mCount > methodLimit) {
                     return reject(request.getInterfaceName() + "." + request.getMethodName(), mCount, tCount);
@@ -73,7 +73,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
         MotanServiceException exception =
                 new MotanServiceException("ThreadProtectedFilter reject request: request_counter=" + requestCounter + " total_counter="
                         + totalCounter + " max_thread=" + maxThread, MotanErrorMsgConstant.SERVICE_REJECT, false);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         LoggerUtil.error("ThreadProtectedFilter reject request: request_method=" + method + " request_counter=" + requestCounter + " ="
                 + totalCounter + " max_thread=" + maxThread);
         return response;
@@ -96,7 +96,7 @@ public class ThreadProtectedFilter implements InitializableFilter {
             totalLimit = maxThread > 600 ? maxThread - 150 : maxThread * 3 / 4;
             int active = caller.getUrl().getIntParameter(URLParamType.actives.getName(), URLParamType.actives.getIntValue());
             if (active > 0) {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             } else {
                 methodLimit = maxThread / 2;
             }

@@ -88,7 +88,7 @@ public class SimpleSerializationTest {
         assertEquals(3, result.length);
         assertTrue(result[0] instanceof String);
         assertEquals(result[0], objects[0]);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         Map<String, String> map2 = (Map<String, String>) result[1];
         for (Map.Entry entry : map.entrySet()) {
             assertEquals(entry.getValue(), map2.get(entry.getKey()));
@@ -212,7 +212,7 @@ public class SimpleSerializationTest {
     private void verify(Object v) throws Exception {
         Serialization serialization = new SimpleSerialization();
         byte[] bytes = serialization.serialize(v);
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         if (v.getClass().isArray()) {
             assertArrayEquals((Object[]) v, (Object[]) dv);
         } else {

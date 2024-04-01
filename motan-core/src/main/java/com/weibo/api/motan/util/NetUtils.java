@@ -109,7 +109,7 @@ public class NetUtils {
 
     private static InetAddress getLocalAddressByHostname() {
         try {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             if (isValidAddress(localAddress)) {
                 return localAddress;
             }
@@ -182,7 +182,7 @@ public class NetUtils {
 
     public static boolean isValidAddress(InetAddress address) {
         if (address == null || address.isLoopbackAddress()) return false;
-        // FIXME: Code Completion From Here.
+        // FIXME: The Completion Code is Empty.
         return (name != null && !ANYHOST.equals(name) && !LOCALHOST.equals(name) && IP_PATTERN.matcher(name).matches());
     }
 
@@ -195,7 +195,7 @@ public class NetUtils {
         if (socketAddress instanceof InetSocketAddress) {
             InetAddress addr = ((InetSocketAddress) socketAddress).getAddress();
             if (addr != null) {
-                // FIXME: Code Completion From Here.
+                // FIXME: The Completion Code is Empty.
             }
         }
 

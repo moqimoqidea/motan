@@ -36,7 +36,7 @@ public class ApplicationInfo {
         String module = url.getModule();
         Application application = applications.get(app + "_" + module);
         if (application == null) {
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             application = applications.get(app + "_" + module);
         }
         return application;
