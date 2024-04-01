@@ -25,7 +25,7 @@ public class AdminUtil {
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler) {
-        addCommandHandler(adminCommandHandler, false);
+        DEFAULT_ADMIN_HANDLER.addCommandHandler(adminCommandHandler);
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler, boolean override) {
@@ -47,7 +47,7 @@ public class AdminUtil {
         DefaultResponse response = new DefaultResponse();
         response.setRequestId(request.getRequestId());
         response.setRpcProtocolVersion(request.getRpcProtocolVersion());
-        response.setValue(returnValue);
+        response.setSerializeNumber(request.getSerializeNumber());
         return response;
     }
 

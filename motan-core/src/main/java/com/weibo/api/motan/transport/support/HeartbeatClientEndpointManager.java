@@ -62,7 +62,7 @@ public class HeartbeatClientEndpointManager implements EndpointManager {
                         }
 
                         HeartbeatFactory factory = entry.getValue();
-                        endpoint.heartbeat(factory.createRequest());
+                        factory.sendHeartbeat(endpoint);
                     } catch (Exception e) {
                         LoggerUtil.error("HeartbeatEndpointManager send heartbeat Error: url=" + endpoint.getUrl().getUri() + ", " + e.getMessage());
                     }

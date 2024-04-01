@@ -56,7 +56,7 @@ public abstract class AbstractPoolClient extends AbstractClient {
         poolConfig.maxActive = poolConfig.maxIdle;
         poolConfig.maxWait = url.getIntParameter(URLParamType.requestTimeout.getName(), URLParamType.requestTimeout.getIntValue());
         poolConfig.lifo = url.getBooleanParameter(URLParamType.poolLifo.getName(), URLParamType.poolLifo.getBooleanValue());
-        poolConfig.minEvictableIdleTimeMillis = defaultMinEvictableIdleTimeMillis;
+        poolConfig.testOnBorrow = url.getBooleanParameter(URLParamType.clientConnectionTest.getName(), URLParamType.clientConnectionTest.getBooleanValue());
         poolConfig.softMinEvictableIdleTimeMillis = defaultSoftMinEvictableIdleTimeMillis;
         poolConfig.timeBetweenEvictionRunsMillis = defaultTimeBetweenEvictionRunsMillis;
         factory = createChannelFactory();

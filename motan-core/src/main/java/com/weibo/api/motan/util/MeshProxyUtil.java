@@ -73,7 +73,7 @@ public class MeshProxyUtil {
                         LoggerUtil.info("mesh proxy ignore url:" + serviceUrl.toSimpleString()
                                 + ", registry: " + url.toSimpleString());
                     } else {
-                        URL meshRegistryUrl = buildMeshRegistryUrl(url);
+                        // 构建mesh registry url
                         newRegistryUrls.add(meshRegistryUrl);
                         LoggerUtil.info("build mesh proxy registry for url:" + serviceUrl.toSimpleString()
                                 + ", origin registry:" + url.toSimpleString()

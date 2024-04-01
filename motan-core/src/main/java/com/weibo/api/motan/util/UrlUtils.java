@@ -153,7 +153,7 @@ public class UrlUtils {
         String[] urls = MotanConstants.COMMA_SPLIT_PATTERN.split(urlsStr);
         List<URL> result = new ArrayList<>();
         for (String u : urls) {
-            URL url = URL.valueOf(StringTools.urlDecode(u));
+            u = u.trim();
             if (url != null) {
                 result.add(url);
             }

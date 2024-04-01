@@ -23,7 +23,7 @@ import com.weibo.api.motan.rpc.Request;
 import com.weibo.api.motan.rpc.Response;
 
 /**
- * 
+ *
  * Fail fast ha strategy.
  *
  * @author fishermen
@@ -34,7 +34,7 @@ public class FailfastHaStrategy<T> extends AbstractHaStrategy<T> {
 
     @Override
     public Response call(Request request, LoadBalance<T> loadBalance) {
-        Referer<T> refer = loadBalance.select(request);
+        Referer<T> refer = loadBalance.select();
         return refer.call(request);
     }
 }

@@ -53,7 +53,7 @@ public class ServiceMockFilter implements Filter {
         MockInfo info = mockServices.get(url.getIdentity());
         if (info == null) {
             info = new MockInfo(url);
-            mockServices.putIfAbsent(url.getIdentity(), info);
+            MockInfo old = mockServices.putIfAbsent(url.getIdentity(), info);
             info = mockServices.get(url.getIdentity());
         }
         return info;
@@ -80,7 +80,7 @@ public class ServiceMockFilter implements Filter {
                 long sleepTime = caclSleepTime(info);
                 Thread.sleep(sleepTime);
 
-                response.setValue(parseMockValue(value));
+                response.setProcessTime(sleepTime);
             } catch (RuntimeException e) {
                 if (e.getCause() != null) {
                     response.setException(new MotanBizException("mock service call process error", e.getCause()));
@@ -140,7 +140,7 @@ public class ServiceMockFilter implements Filter {
     private Object invoke(Object clz, Method method, Object[] args, MockInfo info) throws InterruptedException, InvocationTargetException,
             IllegalAccessException {
 
-        info.callNum.addAndGet(1);
+        // TODO: 2018/3/9  motan-core/src/main/java/com/weibo/api/motan/filter/ServiceMockFilter.java:123
 
         long sleepTime = caclSleepTime(info);
         Thread.sleep(sleepTime);

@@ -55,7 +55,7 @@ public class DefaultPermissionChecker implements PermissionChecker {
         // set token
         String token = System.getenv(MotanConstants.ENV_MOTAN_ADMIN_TOKEN);
         if (StringUtils.isBlank(token)) {
-            token = MotanGlobalConfigUtil.getConfig(MotanConstants.ADMIN_TOKEN);
+            token = MotanGlobalConfigUtil.getConfig(MotanConstants.ENV_MOTAN_ADMIN_TOKEN);
         }
         if (token != null) {
             this.token = token.trim();

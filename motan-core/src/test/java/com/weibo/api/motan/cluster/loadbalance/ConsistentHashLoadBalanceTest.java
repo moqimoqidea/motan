@@ -23,7 +23,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * Unit test
  *
  * @author fishermen

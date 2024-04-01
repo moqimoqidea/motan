@@ -28,7 +28,7 @@ import com.weibo.api.motan.rpc.Request;
 import com.weibo.api.motan.util.MathUtil;
 
 /**
- * 
+ *
  * Use consistent hash to choose referer
  *
  * @author fishermen

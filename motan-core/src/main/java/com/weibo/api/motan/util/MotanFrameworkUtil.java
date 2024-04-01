@@ -58,7 +58,7 @@ public class MotanFrameworkUtil {
     public static String getRemoteIpFromRequest(Request request) {
         String rip = getValueFromRequest(request, MotanConstants.X_FORWARDED_FOR, null);
         if (rip == null) {
-            rip = getValueFromRequest(request, URLParamType.host.getName(), null);
+            rip = getValueFromRequest(request, MotanConstants.X_REAL_IP, null);
         }
         return rip;
     }

@@ -24,7 +24,7 @@ import com.weibo.api.motan.protocol.example.IHello;
 import com.weibo.api.motan.rpc.Referer;
 
 /**
- * 
+ *
  * Precreate referers.
  *
  * @author fishermen

@@ -97,7 +97,7 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
         DefaultResponse response = MotanFrameworkUtil.buildErrorResponse(request, exception);
         LoggerUtil.error(exception.getMessage());
         incrCounter(method, rejectCounters);
-        rejectCounter.incrementAndGet();
+        incrCounter("reject_count", rejectCounters);
         return response;
     }
 
@@ -147,7 +147,7 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
 
     @Override
     public String statisticCallback() {
-        int count = rejectCounter.getAndSet(0);
+        int count = 0;
         if (count > 0) {
             StringBuilder builder = new StringBuilder();
             builder.append("type:").append("motan").append(" ")

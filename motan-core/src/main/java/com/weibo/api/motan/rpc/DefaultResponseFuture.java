@@ -119,7 +119,9 @@ public class DefaultResponseFuture implements ResponseFuture, Callbackable, Trac
 
                 return getValueOrThrowable();
             } else {
-                long waitTime = timeout - (System.currentTimeMillis() - createTime);
+                try {
+                    lock.wait(timeout);
+                }
 
                 if (waitTime > 0) {
                     for (; ; ) {
@@ -360,7 +362,7 @@ public class DefaultResponseFuture implements ResponseFuture, Callbackable, Trac
 
     @Override
     public void addFinishCallback(Runnable runnable, Executor executor) {
-        callbackHolder.addFinishCallback(runnable, executor);
+        callbackHolder.addCallback(runnable, executor);
     }
 
     @Override

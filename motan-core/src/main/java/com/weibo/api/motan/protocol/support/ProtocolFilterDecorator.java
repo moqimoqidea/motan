@@ -56,7 +56,7 @@ public class ProtocolFilterDecorator implements Protocol {
 
     @Override
     public <T> Exporter<T> export(Provider<T> provider, URL url) {
-        return protocol.export(decorateWithFilter(provider, url), url);
+        return decorateExporter(protocol.export(provider, url), url);
     }
 
     @Override

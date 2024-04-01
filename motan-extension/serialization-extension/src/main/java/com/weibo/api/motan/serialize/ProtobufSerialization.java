@@ -141,7 +141,7 @@ public class ProtobufSerialization implements Serialization {
 
                 try {
                     Method method = clazz.getDeclaredMethod("newBuilder");
-                    MessageLite.Builder builder = (MessageLite.Builder) method.invoke(null);
+                    Object builder = method.invoke(null);
                     in.readMessage(builder, null);
                     value = builder.build();
                 } catch (Exception e) {

@@ -47,7 +47,7 @@ public class ShutDownHook extends Thread {
         if (instance == null) {
             init();
         }
-        instance.resourceList.add(new closableObject(closable, priority));
+        instance.addResource(closable, priority);
         LoggerUtil.info("add resource " + closable.getClass() + " to list");
     }
 

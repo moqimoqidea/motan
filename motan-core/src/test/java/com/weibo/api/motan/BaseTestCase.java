@@ -38,9 +38,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * base test
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */
@@ -182,7 +182,20 @@ public class BaseTestCase extends TestCase {
     protected static List<ProtocolConfig> getMultiProtocols(String... protocolNames) {
         List<ProtocolConfig> protocols = new ArrayList<ProtocolConfig>();
         for (String protocol : protocolNames) {
-            protocols.add(mockProtocolConfig(protocol));
+            ProtocolConfig pc = createProtocol(protocol);
+            protocols.add(pc);
+        }
+        return protocols;
+    }
+    protected static List<RegistryConfig> getMultiRegister(String... registerName) {
+        List<RegistryConfig> registries = new ArrayList<RegistryConfig>();
+        for (String register : registerName) {
+            RegistryConfig registryConfig = createLocalRegistryConfig(register, register);
+            registries.add(registryConfig);
+        }
+        return registries;
+    }
+}
         }
         return protocols;
     }

@@ -53,7 +53,7 @@ public class SimpleConfigHandler implements ConfigHandler {
     @Override
     public <T> ClusterSupport<T> buildClusterSupport(Class<T> interfaceClass, List<URL> registryUrls, URL refUrl) {
         ClusterSupport<T> clusterSupport = new ClusterSupport<T>(interfaceClass, MeshProxyUtil.processMeshProxy(registryUrls, refUrl, false), refUrl);
-        clusterSupport.init();
+        clusterSupport.setCluster(new Cluster<T>(interfaceClass, clusterSupport));
 
         return clusterSupport;
     }
@@ -70,7 +70,10 @@ public class SimpleConfigHandler implements ConfigHandler {
         // 利用protocol decorator来增加filter特性
         String protocolName = serviceUrl.getParameter(URLParamType.protocol.getName(), URLParamType.protocol.getValue());
         Protocol orgProtocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(protocolName);
-        Provider<T> provider = getProvider(orgProtocol, ref, serviceUrl, interfaceClass);
+        if (orgProtocol == null) {
+            throw new MotanFrameworkException(new MotanErrorMsg(500, MotanErrorMsgConstant.FRAMEWORK_EXPORT_ERROR_CODE,
+                    "export error! Could not find extension for protocol:" + protocolName + ", make sure protocol module for " + protocolName + " is in classpath!"));
+        }
 
         Protocol protocol = new ProtocolFilterDecorator(orgProtocol);
         Exporter<T> exporter = protocol.export(provider, serviceUrl);
@@ -85,7 +88,9 @@ public class SimpleConfigHandler implements ConfigHandler {
         if (protocol instanceof ProviderFactory) {
             return ((ProviderFactory) protocol).newProvider(proxyImpl, url, clz);
         } else {
-            return new DefaultProvider<T>(proxyImpl, url, clz);
+            throw new MotanFrameworkException(new MotanErrorMsg(500, MotanErrorMsgConstant.FRAMEWORK_EXPORT_ERROR_CODE,
+                    "export error! Could not find extension for protocol:" + url.getProtocol() + ", make sure provider module for " + url.getProtocol() + " is in classpath!"));
+        }
         }
     }
 

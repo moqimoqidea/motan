@@ -94,7 +94,7 @@ public class ConfigurableWeightLoadBalanceTest {
             }
         }
 
-        balance = new ConfigurableWeightLoadBalance();
+        // build balance
         balance.setWeightString(sb.substring(0, sb.length() - 1));
         balance.onRefresh(list);
         return counterMap;

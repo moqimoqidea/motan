@@ -56,6 +56,19 @@ public abstract class AbstractClientRunnable implements ClientRunnable {
         callService();
         countDownLatch.countDown();
     }
+    private void callService() {
+        long beginTime = System.nanoTime() / 1000L;
+        while (beginTime <= startTime) {
+            // warm up
+            beginTime = System.nanoTime() / 1000L;
+            Object result = call(benchmarkService);
+        }
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+        callService();
+        countDownLatch.countDown();
+    }
 
     private void callService() {
         long beginTime = System.nanoTime() / 1000L;

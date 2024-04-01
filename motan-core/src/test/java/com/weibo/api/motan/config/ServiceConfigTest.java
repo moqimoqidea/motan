@@ -188,7 +188,7 @@ public class ServiceConfigTest extends BaseTestCase {
         reset();
         serviceConfig.export();
         assertEquals(2, serviceConfig.getExporters().size());
-        checkGroupNames(group, envGroup);
+        checkGroupNames(URLParamType.group.getValue(), envGroup);
 
         // multi group with additional multi group
         reset();

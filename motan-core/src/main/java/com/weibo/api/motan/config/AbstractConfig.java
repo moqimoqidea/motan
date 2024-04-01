@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * abstract config
  *
  * @author fishermen
@@ -53,7 +53,7 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * 按顺序进行config 参数append and override，按照configs出现的顺序，后面的会覆盖前面的相同名称的参数
-     * 
+     *
      * @param parameters
      * @param configs
      */
@@ -82,7 +82,7 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * 将config 参数录入Map中
-     * 
+     *
      * @param parameters
      */
     @SuppressWarnings("unchecked")

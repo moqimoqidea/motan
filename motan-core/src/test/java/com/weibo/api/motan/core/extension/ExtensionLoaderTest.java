@@ -41,7 +41,7 @@ public class ExtensionLoaderTest extends TestCase {
         // 手动添加实现类
         Assert.assertEquals(1, ExtensionLoader.getExtensionLoader(SpiPrototypeInterface.class).getExtensions("").size());
         ExtensionLoader loader = ExtensionLoader.getExtensionLoader(SpiPrototypeInterface.class);
-        loader.addExtensionClass(SpiPrototypeTestImpl2.class);
+        loader.addExtension("spiPrototypeTest", new SpiPrototypeImpl());
 
         // 返回所有实现类
         ExtensionLoader.initExtensionLoader(SpiPrototypeInterface.class);

@@ -49,7 +49,7 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
         this.exporterMap = exporterMap;
         this.ipPort2RequestRouter = ipPort2RequestRouter;
 
-        ProviderMessageRouter requestRouter = initRequestRouter(url);
+        // FIXME: The Completion Code is Empty.
         endpointFactory =
                 ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension(
                         url.getParameter(URLParamType.endpointFactory.getName(), URLParamType.endpointFactory.getValue()));
@@ -101,7 +101,7 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
 
     @Override
     public void destroy() {
-        endpointFactory.safeReleaseResource(server, url);
+        server.close();
         LoggerUtil.info("DefaultRpcExporter destroy Success: url={}", url);
     }
 

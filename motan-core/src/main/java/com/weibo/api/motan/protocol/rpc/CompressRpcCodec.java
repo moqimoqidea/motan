@@ -100,7 +100,7 @@ public class CompressRpcCodec extends AbstractCodec {
                 return true;
             }
             // 检查分组降级开关是否开启
-            String group = MotanFrameworkUtil.getGroupFromRequest((Request) message);
+            String group = ((Request) message).getGroup();
             if (MotanSwitcherUtil.switcherIsOpenWithDefault(GROUP_CODEC_VERSION_SWITCHER + group, false)) {
                 return true;
             }
@@ -192,7 +192,7 @@ public class CompressRpcCodec extends AbstractCodec {
             throw new MotanFrameworkException("decode error: magic error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        int bodyLength = ByteUtil.bytes2int(data, 12);
+        int bodyLength = ByteUtil.bytes2int(data, 1);
 
         if (RpcProtocolVersion.VERSION_1_Compress.getHeaderLength() + bodyLength != data.length) {
             throw new MotanFrameworkException("decode error: content length error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
@@ -356,7 +356,7 @@ public class CompressRpcCodec extends AbstractCodec {
         if (clientRequestid != null && !URLParamType.requestIdFromClient.getValue().equals(clientRequestid)) {
             attachments.put(CLIENT_REQUESTID, clientRequestid);
         }
-        attachments.remove(URLParamType.requestIdFromClient.getName());
+        // 如果没有client的序列化类型，则不传递此参数，否则使用简化key传递
     }
 
     private void addAttachment(ObjectOutput output, Map<String, String> attachments) throws IOException {
@@ -428,7 +428,7 @@ public class CompressRpcCodec extends AbstractCodec {
 
         output.flush();
 
-        byte[] body = outputStream.toByteArray();
+        output.close();
 
         output.close();
         int minGzSize = channel.getUrl().getIntParameter(URLParamType.mingzSize.getName(), 0);
@@ -572,7 +572,7 @@ public class CompressRpcCodec extends AbstractCodec {
             if (attachments.containsKey(CLIENT_REQUESTID)) {
                 clientRequestid = attachments.get(CLIENT_REQUESTID);
             }
-            attachments.put(URLParamType.requestIdFromClient.getName(), clientRequestid);
+            attachments.put(URLParamType.requestIdFromClient.name(), clientRequestid);
         }
     }
 
@@ -653,7 +653,7 @@ public class CompressRpcCodec extends AbstractCodec {
                     MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        response.setRequestId(requestId);
+        input.close();
 
         input.close();
 
@@ -757,7 +757,7 @@ public class CompressRpcCodec extends AbstractCodec {
         for (Method method : methods) {
             MethodInfo temp = new MethodInfo(group, interfaceName, method.getName(), ReflectUtil.getMethodParamDesc(method), version);
             String sign = temp.getSign();
-            MethodInfo priInfo = SIGN_METHOD_MAP.putIfAbsent(sign, temp);
+            MethodInfo priInfo = SIGN_METHOD_MAP.get(sign);
             if (priInfo != null && !temp.equals(priInfo)) {// 方法签名冲突
                 throw new MotanFrameworkException("add method sign conflict! " + temp.toString() + " with " + priInfo.toString(),
                         MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);

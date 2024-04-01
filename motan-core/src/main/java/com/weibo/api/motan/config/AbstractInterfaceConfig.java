@@ -421,7 +421,9 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             for (RegistryConfig config : registries) {
                 List<URL> urls = config.toURLs();
                 if (urls != null && !urls.isEmpty()) {
-                    registryUrls.addAll(urls);
+                    for (URL url : urls) {
+                        registryUrls.add(url);
+                    }
                 }
             }
         }
@@ -464,7 +466,10 @@ public class AbstractInterfaceConfig extends AbstractConfig {
                     throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not found method " + methodName,
                             MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
                 }
-                methodBean.setArgumentTypes(ReflectUtil.getMethodParamDesc(hasMethod));
+                if (methodBean.getRetries() != null && methodBean.getRetries() < 0) {
+                    throw new MotanFrameworkException("The method " + methodName + "'s retries attribute must >= 0",
+                            MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
+                }
             }
         }
     }
@@ -480,7 +485,10 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             }
         }
 
-        InetAddress address = NetUtils.getLocalAddress(regHostPorts);
+        if (regHostPorts.size() > 1) {
+            throw new MotanFrameworkException("Multiple registries' host and port is not allowed to be different!",
+                    MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
+        }
         if (address != null) {
             localAddress = address.getHostAddress();
         }

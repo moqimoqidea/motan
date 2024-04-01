@@ -48,6 +48,8 @@ public class CompatibleCodec implements Codec {
                 return v1.encode(channel, message);
             } else if (version == RpcProtocolVersion.VERSION_1_Compress.getVersion()) {
                 return v1Compress.encode(channel, message);
+            } else if (version == RpcProtocolVersion.VERSION_2.getVersion()) {
+                return v2.encode(channel, message);
             }
         }
         return v2.encode(channel, message);// v2 codec as default.

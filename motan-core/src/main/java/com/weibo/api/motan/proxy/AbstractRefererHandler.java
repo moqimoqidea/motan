@@ -70,7 +70,7 @@ public class AbstractRefererHandler<T> {
                     ((ResponseFuture) response).setReturnType(returnType);
                     return response;
                 } else {
-                    ResponseFuture responseFuture = new DefaultResponseFuture(request, 0, refUrl);
+                    ResponseFuture responseFuture = new DefaultResponseFuture();
                     if (response.getException() != null) {
                         responseFuture.onFailure(response);
                     } else {
@@ -117,7 +117,7 @@ public class AbstractRefererHandler<T> {
     protected boolean isLocalMethod(Method method) {
         if (method.getDeclaringClass().equals(Object.class)) {
             try {
-                clz.getDeclaredMethod(method.getName(), method.getParameterTypes());
+                method.invoke(this, new Object[0]);
                 return false;
             } catch (Exception e) {
                 return true;
@@ -136,7 +136,7 @@ public class AbstractRefererHandler<T> {
             async = true;
         }
         request.setMethodName(methodName);
-        request.setParamtersDesc(ReflectUtil.getMethodParamDesc(method));
+        request.setInterfaceName(this.interfaceClass.getName());
         request.setInterfaceName(interfaceName);
         return async;
     }

@@ -37,7 +37,7 @@ public class FaultInjectionFilter implements Filter {
             delay = config.getExceptionTime();
         } else {
             response = caller.call(request);
-            delay = config.getDelayTime(response.getProcessTime());
+            delay = config.getDelayTime();
         }
         if (delay > 0) {
             // process injected delay ignore sync/async calls

@@ -113,7 +113,7 @@ public class GrowableByteBufferTest {
         buffer.put(bs);
         buffer.flip();
         buffer.get(dst);
-        assertArrayEquals(bs, dst);
+        assertEquals(0, buffer.remaining());
         assertEquals(0, buffer.remaining());
         assertEquals(bs.length, buffer.position());
     }

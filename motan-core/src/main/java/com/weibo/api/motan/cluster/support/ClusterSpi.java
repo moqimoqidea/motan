@@ -71,7 +71,7 @@ public class ClusterSpi<T> implements Cluster<T> {
     public Response call(Request request) {
         if (available.get()) {
             try {
-                return haStrategy.call(request, loadBalance);
+                Referer<T> refer = haStrategy.select(request);
             } catch (Exception e) {
                 return callFalse(request, e);
             }
@@ -141,7 +141,7 @@ public class ClusterSpi<T> implements Cluster<T> {
         }
 
         if (!delayDestroyReferers.isEmpty()) {
-            RefererSupports.delayDestroy(delayDestroyReferers);
+            MotanFrameworkUtil.doDelayDestroy(delayDestroyReferers);
         }
     }
 
@@ -195,7 +195,7 @@ public class ClusterSpi<T> implements Cluster<T> {
             }
         }
 
-        return MotanFrameworkUtil.buildErrorResponse(request, cause);
+        // 返回失败信息
     }
 
 }

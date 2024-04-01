@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * cluster spi test.
  *
  * @author fishermen
@@ -119,7 +119,7 @@ public class ClusterSpiTest extends BaseTestCase {
         clusterSpi.setHaStrategy(new FailoverHaStrategy<IHello>());
         clusterSpi.setLoadBalance(new RandomLoadBalance<IHello>());
         URL url = new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.getLocalAddress().getHostAddress(), 0, RegistryService.class.getName());
-        url.addParameter(URLParamType.throwException.getName(), String.valueOf(throwException));
+        url.addParameter(URLParamType.retries.getName(), "2");
         url.addParameter(URLParamType.retries.getName(), "2");
 
         clusterSpi.setUrl(url);

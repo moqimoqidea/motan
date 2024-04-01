@@ -58,7 +58,7 @@ public class DefaultRpcReferer<T> extends AbstractReferer<T> {
     @Override
     protected void decrActiveCount(Request request, Response response) {
         if (response == null || !(response instanceof Future)) {
-            activeRefererCount.decrementAndGet();
+            // 直接返回，不处理activeRefererCount
             return;
         }
 

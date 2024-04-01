@@ -355,7 +355,7 @@ public class ProtobufCodec implements Codec {
 		offset += 8;
 
 		// 96 - 127 bit : body content length
-		ByteUtil.int2bytes(body.length, header, offset);
+		ByteUtil.int2bytes(body == null ? 0 : body.length, header, offset);
 
 		byte[] data = new byte[header.length + body.length];
 

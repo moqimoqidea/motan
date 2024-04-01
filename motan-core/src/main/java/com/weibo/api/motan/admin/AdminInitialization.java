@@ -37,7 +37,10 @@ public class AdminInitialization implements Initializable {
                 } else { // use default admin server
                     adminServerFactory = ExtensionLoader.getExtensionLoader(AdminServerFactory.class).getExtension(DEFAULT_ADMIN_SERVER, false);
                     if (adminServerFactory == null) {
-                        adminServerFactory = ExtensionLoader.getExtensionLoader(AdminServerFactory.class).getExtension(SECOND_DEFAULT_ADMIN_SERVER);
+                        adminServerFactory = ExtensionLoader.getExtensionLoader(AdminServerFactory.class).getExtension(SECOND_DEFAULT_ADMIN_SERVER, false);
+                    }
+                    if (adminServerFactory == null) {
+                        throw new RuntimeException("No admin server found.");
                     }
                 }
 
@@ -52,7 +55,7 @@ public class AdminInitialization implements Initializable {
                 addExtHandlers(MotanGlobalConfigUtil.getConfig(MotanConstants.ADMIN_EXT_HANDLERS));
 
                 // add command handler extensions from ENV
-                addExtHandlers(System.getenv(MotanConstants.ENV_MOTAN_ADMIN_EXT_HANDLERS));
+                addExtHandlers(System.getenv("MOTAN_ADMIN_EXT_HANDLERS"));
 
                 // create admin server
                 AdminServer adminServer = adminServerFactory.createServer(adminUrl, AdminUtil.getDefaultAdminHandler());
@@ -102,7 +105,7 @@ public class AdminInitialization implements Initializable {
                 if (StringUtils.isNotBlank(h)) {
                     try {
                         AdminCommandHandler handler = ExtensionLoader.getExtensionLoader(AdminCommandHandler.class).getExtension(h.trim());
-                        AdminUtil.addCommandHandler(handler, true);
+                        AdminUtil.addCommandHandler(handler);
                         LoggerUtil.info("admin server add handler " + handler.getClass().getName());
                     } catch (Exception e) {
                         LoggerUtil.warn("can not find admin command handler :" + h);
