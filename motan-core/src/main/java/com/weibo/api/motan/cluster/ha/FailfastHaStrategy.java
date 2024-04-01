@@ -34,7 +34,7 @@ public class FailfastHaStrategy<T> extends AbstractHaStrategy<T> {
 
     @Override
     public Response call(Request request, LoadBalance<T> loadBalance) {
-        // FIXME: Code Completion From Here.
+        Referer<T> refer = loadBalance.select();
         return refer.call(request);
     }
 }

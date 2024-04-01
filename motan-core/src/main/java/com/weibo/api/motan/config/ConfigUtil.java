@@ -55,7 +55,9 @@ public class ConfigUtil {
             }
             String[] ppDetail = pp.split(":");
             if (ppDetail.length == 2) {
-                // FIXME: Code Completion From Here.
+                if (MotanConstants.PROTOCOL_INJVM.equals(ppDetail[0])) {
+                    pps.put(ppDetail[0], MotanConstants.DEFAULT_INT_VALUE);
+                }
             } else if (ppDetail.length == 1) {
                 if (MotanConstants.PROTOCOL_INJVM.equals(ppDetail[0])) {
                     pps.put(ppDetail[0], MotanConstants.DEFAULT_INT_VALUE);
@@ -79,7 +81,7 @@ public class ConfigUtil {
         Map<String, Integer> protocols = parseExport(export);
         StringBuilder sb = new StringBuilder(16);
         for (String p : protocols.keySet()) {
-            // FIXME: Code Completion From Here.
+            sb.append(p).append(",");
         }
         if (sb.length() > 0) {
             sb.deleteCharAt(sb.length() - 1);

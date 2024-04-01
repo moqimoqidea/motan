@@ -44,7 +44,7 @@ public class InitializationFactory {
             if (!inited) {
                 try {
                     LoggerUtil.info("AllSpiInitialization init.");
-                    // FIXME: Code Completion From Here.
+                    ExtensionLoader<Initializable> extensionLoader = ExtensionLoader.getExtensionLoader(Initializable.class);
                     List<Initializable> allInit = extensionLoader.getExtensions(null);
                     if (allInit != null && !allInit.isEmpty()) {
                         for (Initializable initializable : allInit) {

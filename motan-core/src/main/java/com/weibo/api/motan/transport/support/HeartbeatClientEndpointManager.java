@@ -62,7 +62,7 @@ public class HeartbeatClientEndpointManager implements EndpointManager {
                         }
 
                         HeartbeatFactory factory = entry.getValue();
-                        // FIXME: Code Completion From Here.
+                        factory.sendHeartbeat(endpoint);
                     } catch (Exception e) {
                         LoggerUtil.error("HeartbeatEndpointManager send heartbeat Error: url=" + endpoint.getUrl().getUri() + ", " + e.getMessage());
                     }
@@ -97,7 +97,7 @@ public class HeartbeatClientEndpointManager implements EndpointManager {
 
         String heartbeatFactoryName = url.getParameter(URLParamType.heartbeatFactory.getName(), URLParamType.heartbeatFactory.getValue());
 
-        // FIXME: Code Completion From Here.
+        HeartbeatFactory heartbeatFactory = ExtensionLoader.getExtensionLoader(HeartbeatFactory.class).getExtension(heartbeatFactoryName);
         endpoints.put(client, heartbeatFactory);
     }
 

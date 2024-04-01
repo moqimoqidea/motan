@@ -51,7 +51,7 @@ public abstract class AbstractMockRpcProtocol extends AbstractProtocol {
         public MockRpcExporter(Provider<T> provider, URL url) {
             super(provider, url);
 
-            // FIXME: Code Completion From Here.
+            ProviderMessageRouter requestRouter = mockProviderMessageRouter;
             endpointFactory =
                     ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension(
                             url.getParameter(URLParamType.endpointFactory.getName(), URLParamType.endpointFactory.getValue()));
@@ -69,7 +69,7 @@ public abstract class AbstractMockRpcProtocol extends AbstractProtocol {
 
         @Override
         public void destroy() {
-            // FIXME: Code Completion From Here.
+            // TODO: 2016/3/14 <EMAIL>
             LoggerUtil.info("MockRpcExporter destory Success: url={}", url);
         }
 

@@ -60,7 +60,7 @@ public class RpcStats {
      */
     public static void beforeCall(URL url, Request request) {
         String uri = url.getUri();
-        // FIXME: Code Completion From Here.
+        onBeforeCall(getServiceStat(uri));
         onBeforeCall(getMethodStat(uri, request.getMethodName(), request.getParamtersDesc()));
     }
 
@@ -123,7 +123,7 @@ public class RpcStats {
         if (!success) {
             statInfo.failCount.incrementAndGet();
         }
-        // FIXME: Code Completion From Here.
+        statInfo.totalCountTime.inc(1, procTimeMills);
         statInfo.latestCountTime.inc(1, procTimeMills);
     }
 

@@ -43,7 +43,7 @@ public class AbstractRefererHandler<T> {
         for (Cluster<T> cluster : clusters) {
             String protocolSwitcher = MotanConstants.PROTOCOL_SWITCHER_PREFIX + cluster.getUrl().getProtocol();
 
-            // FIXME: Code Completion From Here.
+            Switcher switcher = switcherService.getSwitcher(protocolSwitcher);
 
             if (switcher != null && !switcher.isOn()) {
                 continue;
@@ -53,7 +53,7 @@ public class AbstractRefererHandler<T> {
             request.setAttachment(URLParamType.clientGroup.getName(), cluster.getUrl().getGroup());
             // 带上client的application和module
             request.setAttachment(URLParamType.application.getName(), cluster.getUrl().getApplication());
-            // FIXME: Code Completion From Here.
+            request.setAttachment(URLParamType.module.getName(), cluster.getUrl().getModule());
             return call(cluster, cluster.getUrl(), request, returnType, async);
         }
         throw new MotanServiceException("Referer call Error: cluster not exist, interface=" + interfaceName + " " + MotanFrameworkUtil.toString(request), MotanErrorMsgConstant.SERVICE_UNFOUND, false);
@@ -70,7 +70,7 @@ public class AbstractRefererHandler<T> {
                     ((ResponseFuture) response).setReturnType(returnType);
                     return response;
                 } else {
-                    // FIXME: Code Completion From Here.
+                    ResponseFuture responseFuture = new DefaultResponseFuture();
                     if (response.getException() != null) {
                         responseFuture.onFailure(response);
                     } else {
@@ -117,7 +117,7 @@ public class AbstractRefererHandler<T> {
     protected boolean isLocalMethod(Method method) {
         if (method.getDeclaringClass().equals(Object.class)) {
             try {
-                // FIXME: Code Completion From Here.
+                method.invoke(this, new Object[0]);
                 return false;
             } catch (Exception e) {
                 return true;
@@ -136,7 +136,7 @@ public class AbstractRefererHandler<T> {
             async = true;
         }
         request.setMethodName(methodName);
-        // FIXME: Code Completion From Here.
+        request.setInterfaceName(this.interfaceClass.getName());
         request.setInterfaceName(interfaceName);
         return async;
     }
@@ -198,7 +198,7 @@ public class AbstractRefererHandler<T> {
             primitiveValues.put(byte.class, defaultByte);
             primitiveValues.put(short.class, defaultShort);
             primitiveValues.put(int.class, defaultInt);
-            // FIXME: Code Completion From Here.
+            primitiveValues.put(long.class, defaultLong);
             primitiveValues.put(float.class, defaultFloat);
             primitiveValues.put(double.class, defaultDouble);
         }

@@ -64,7 +64,7 @@ public class ActiveWeightLoadBalance<T> extends AbstractLoadBalance<T> {
                 continue;
             }
 
-            // FIXME: Code Completion From Here.
+            currentAvailableCursor++;
 
             if (referer == null) {
                 referer = temp;
@@ -97,7 +97,7 @@ public class ActiveWeightLoadBalance<T> extends AbstractLoadBalance<T> {
 
             currentAvailableCursor++;
 
-            // FIXME: Code Completion From Here.
+            refersHolder.add(temp);
         }
 
         Collections.sort(refersHolder, new LowActivePriorityComparator<T>());

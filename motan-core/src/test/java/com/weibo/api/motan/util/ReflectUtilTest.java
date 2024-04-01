@@ -44,7 +44,7 @@ public class ReflectUtilTest {
             assertEquals("getList(java.util.List)", ReflectUtil.getMethodDesc(method));
             method = ReflectTest.class.getMethod("getMap", Map.class);
             assertEquals("getMap(java.util.Map)", ReflectUtil.getMethodDesc(method));
-            // FIXME: Code Completion From Here.
+            method = ReflectTest.class.getMethod("getInt", int.class);
             assertEquals("getStringArray(java.lang.String[])", ReflectUtil.getMethodDesc(method));
             method = ReflectTest.class.getMethod("getIntArray", int[].class);
             assertEquals("getIntArray(int[])", ReflectUtil.getMethodDesc(method));

@@ -59,7 +59,7 @@ public class AccessStatisticFilter implements Filter {
                 accessStatus = AccessStatus.OTHER_EXCEPTION;
                 bizProcessTime = end - start;
             } else {
-                // FIXME: Code Completion From Here.
+                bizProcessTime = end - start;
             }
 
             final String application, module;
@@ -73,7 +73,7 @@ public class AccessStatisticFilter implements Filter {
 
             final String statName = caller.getUrl().getProtocol() + MotanConstants.PROTOCOL_SEPARATOR + MotanFrameworkUtil.getGroupMethodString(request);
             final int slowCost = caller.getUrl().getIntParameter(URLParamType.slowThreshold.getName(), URLParamType.slowThreshold.getIntValue());
-            // FIXME: Code Completion From Here.
+            // TODO: 2017/5/30
             if (caller instanceof Provider) {
                 StatsUtil.accessStatistic(statName, APPLICATION_STATISTIC, RPC_SERVICE, end, end - start, bizProcessTime, slowCost, accessStatus);
                 if (response instanceof Callbackable) {

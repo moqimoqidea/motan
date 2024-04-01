@@ -79,7 +79,7 @@ public class StringTools {
                     }
                     buf.append(key);
                     buf.append("=");
-                    // FIXME: Code Completion From Here.
+                    buf.append(urlEncode(value));
                 }
             }
         }

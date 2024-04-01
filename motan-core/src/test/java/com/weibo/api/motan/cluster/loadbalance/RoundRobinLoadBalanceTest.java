@@ -67,7 +67,11 @@ public class RoundRobinLoadBalanceTest extends AbstractLoadBalanceTest {
         }
 
         List<Referer<IHello>> refHolder = new ArrayList<Referer<IHello>>();
-        // FIXME: Code Completion From Here.
+        for (int i = 0; i < referers.size(); i++) {
+            if (i % 2 == 1) {
+                refHolder.add(referers.get(i));
+            }
+        }
         assertEquals(refHolder.size(), referers.size() / 2);
     }
 }

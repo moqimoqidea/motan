@@ -147,6 +147,6 @@ public class AccessStatisticFilterTest extends BaseTestCase {
             }
         });
 
-        // FIXME: Code Completion From Here.
+        assertEquals(response, accessStatisticFilter.filter(caller, request));
     }
 }

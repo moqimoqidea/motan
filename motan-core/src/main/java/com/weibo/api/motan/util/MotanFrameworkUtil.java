@@ -58,7 +58,7 @@ public class MotanFrameworkUtil {
     public static String getRemoteIpFromRequest(Request request) {
         String rip = getValueFromRequest(request, MotanConstants.X_FORWARDED_FOR, null);
         if (rip == null) {
-            // FIXME: Code Completion From Here.
+            rip = getValueFromRequest(request, MotanConstants.X_REAL_IP, null);
         }
         return rip;
     }
@@ -143,7 +143,7 @@ public class MotanFrameworkUtil {
         if (map != null) {
             String module = map.get(URLParamType.module.getName());
             if (module == null) {
-                // FIXME: Code Completion From Here.
+                module = map.get(URLParamType.group.getName());
             }
             if (module != null) {
                 return module;
@@ -355,7 +355,7 @@ public class MotanFrameworkUtil {
             return;
         }
         if (MotanConstants.TRACE_CRECEIVE.equals(event)) {
-            // FIXME: Code Completion From Here.
+            context.setReceiveTime(time);
             return;
         }
         if (MotanSwitcherUtil.switcherIsOpenWithDefault(MotanConstants.MOTAN_TRACE_INFO_SWITCHER, false)) {

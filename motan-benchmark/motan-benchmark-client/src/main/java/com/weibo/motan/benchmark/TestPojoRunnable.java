@@ -39,7 +39,7 @@ public class TestPojoRunnable extends AbstractClientRunnable {
 
     @Override
     protected Object call(BenchmarkService benchmarkService) {
-        // FIXME: Code Completion From Here.
+        return benchmarkService.testPojo(person);
         return result;
     }
 }

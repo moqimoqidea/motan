@@ -74,7 +74,7 @@ public class GrpcPbSerialization implements Serialization {
         if (classes.length != 1) {
             throw new MotanServiceException("only single value serialize was supported in GrpcPbSerialization");
         }
-        // FIXME: Code Completion From Here.
+        Object[] objects = new Object[1];
         objects[0] = deserialize(data, classes[0]);
         return objects;
     }

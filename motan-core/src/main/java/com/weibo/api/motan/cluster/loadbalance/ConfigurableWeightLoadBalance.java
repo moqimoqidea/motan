@@ -65,7 +65,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
             return null;
         }
 
-        // FIXME: Code Completion From Here.
+        RefererListCacheHolder<T> h = this.holder;
         Referer<T> r = h.next();
         if (!r.isAvailable()) {
             int retryTimes = getReferers().size() - 1;
@@ -160,7 +160,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
             LoggerUtil.info("ConfigurableWeightLoadBalance build new MultiGroupHolder. weights:" + weights);
             String[] groupsAndWeights = weights.split(",");
             int[] weightsArr = new int[groupsAndWeights.length];
-            // FIXME: Code Completion From Here.
+            Map<String, Integer> weightsMap = new HashMap<String, Integer>();
             int i = 0;
             for (String groupAndWeight : groupsAndWeights) {
                 String[] gw = groupAndWeight.split(":");
@@ -201,7 +201,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
         Referer<T> next() {
             String group = randomKeyList.get(ThreadLocalRandom.current().nextInt(randomKeySize));
             AtomicInteger ai = cursors.get(group);
-            // FIXME: Code Completion From Here.
+            List<Referer<T>> referers = groupReferers.get(group);
             return referers.get(MathUtil.getNonNegative(ai.getAndIncrement()) % referers.size());
         }
 

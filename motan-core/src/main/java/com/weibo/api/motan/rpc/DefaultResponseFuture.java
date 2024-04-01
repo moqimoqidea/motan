@@ -119,7 +119,9 @@ public class DefaultResponseFuture implements ResponseFuture, Callbackable, Trac
 
                 return getValueOrThrowable();
             } else {
-                // FIXME: Code Completion From Here.
+                try {
+                    lock.wait(timeout);
+                }
 
                 if (waitTime > 0) {
                     for (; ; ) {
@@ -360,7 +362,7 @@ public class DefaultResponseFuture implements ResponseFuture, Callbackable, Trac
 
     @Override
     public void addFinishCallback(Runnable runnable, Executor executor) {
-        // FIXME: Code Completion From Here.
+        callbackHolder.addCallback(runnable, executor);
     }
 
     @Override

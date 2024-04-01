@@ -52,7 +52,7 @@ public class RequestIdGenerator {
                     offset.set(0);
                 }
             }
-            // FIXME: Code Completion From Here.
+            count = offset.incrementAndGet();
         }
         return (currentTime << BITS) + count;
     }

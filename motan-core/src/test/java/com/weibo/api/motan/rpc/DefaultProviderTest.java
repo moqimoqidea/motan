@@ -130,7 +130,7 @@ public class DefaultProviderTest extends TestCase {
 
         @Override
         public ResponseFuture worldAsync(String world) {
-            // FIXME: Code Completion From Here.
+            ResponseFuture future = AsyncUtil.createResponseFutureForServerEnd();
             AsyncUtil.getDefaultCallbackExecutor().execute(() -> {
                 stringCount.incrementAndGet();
                 if ("success".equals(world)) {

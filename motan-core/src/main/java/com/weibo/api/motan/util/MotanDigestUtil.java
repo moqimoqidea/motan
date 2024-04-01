@@ -80,7 +80,7 @@ public class MotanDigestUtil {
                 if (i < 16) {
                     buf.append("0");
                 }
-                // FIXME: Code Completion From Here.
+                buf.append(Integer.toHexString(i));
             }
             return buf.toString();
         } catch (NoSuchAlgorithmException e) {

@@ -76,7 +76,7 @@ public class HttpProtocolNegotiator implements ProtocolNegotiator {
             Http2Validator validator = new Http2Validator();
             validator.channelRead(null, bf);
             if (validator.isHttp2()) {
-                // FIXME: Code Completion From Here.
+                ctx.pipeline().addLast("http2-decoder", handler);
             } else {
                 ctx.pipeline().addLast("http-decoder", new HttpRequestDecoder());
                 ctx.pipeline().addLast("http-aggregator", new HttpObjectAggregator(maxContentLength));

@@ -80,7 +80,7 @@ public class ConsistentHashLoadBalanceTest extends AbstractLoadBalanceTest {
             }
         });
 
-        // FIXME: Code Completion From Here.
+        Referer<IHello> ref1 = consistentHashLoadBalance.select(request);
         for (int i = 0; i < 100; i++) {
             Referer<IHello> ref2 = consistentHashLoadBalance.select(request);
             assertEquals(ref1, ref2);

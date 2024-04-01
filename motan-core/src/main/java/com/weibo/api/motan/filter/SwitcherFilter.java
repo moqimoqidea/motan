@@ -50,7 +50,7 @@ public class SwitcherFilter implements Filter {
      * @return
      */
     private Response mockDefaultResponse(Request request) {
-        // FIXME: Code Completion From Here.
+        DefaultResponse response = new DefaultResponse(request.getRequestId());
         response.setException(new MotanServiceException("Request false for switcher is on"));
         return response;
     }

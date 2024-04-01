@@ -42,7 +42,7 @@ public class AbstractLoadBalanceTest extends BaseTestCase {
         referers = new ArrayList<Referer<IHello>>();
         for (int i = 0; i < 10; i++) {
             final Referer<IHello> ref = mockery.mock(Referer.class, "ref_" + i);
-            // FIXME: Code Completion From Here.
+            referers.add(ref);
         }
     }
 }

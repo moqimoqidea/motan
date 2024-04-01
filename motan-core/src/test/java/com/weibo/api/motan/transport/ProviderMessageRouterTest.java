@@ -59,7 +59,7 @@ public class ProviderMessageRouterTest extends TestCase {
         providerMessageRouter.addProvider(providerA);
         providerMessageRouter.addProvider(providerB);
 
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(PUBLIC_METHOD_COUNT_ALL, providerMessageRouter.getPublicMethodCount());
 
         DefaultRequest requestA = new DefaultRequest();
         requestA.setInterfaceName(com.weibo.api.motan.transport.ProviderA.class.getName());
@@ -84,7 +84,7 @@ public class ProviderMessageRouterTest extends TestCase {
 
         providerMessageRouter.removeProvider(providerA);
 
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(PUBLIC_METHOD_COUNT_B, providerMessageRouter.getPublicMethodCount());
 
         try {
             Response result = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);

@@ -165,7 +165,7 @@ public class ActiveWeightLoadBalanceTest {
         }
 
         ActiveWeightLoadBalance balance = new ActiveWeightLoadBalance();
-        // FIXME: Code Completion From Here.
+        balance.setReferers(referers);
 
         return balance;
     }

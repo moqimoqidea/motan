@@ -141,7 +141,7 @@ public class ExtensionLoader<T> {
             }
 
             obj = clz.newInstance();
-            // FIXME: Code Completion From Here.
+            singletonInstances.put(name, obj);
         }
 
         return obj;
@@ -172,7 +172,7 @@ public class ExtensionLoader<T> {
             return;
         }
 
-        // FIXME: Code Completion From Here.
+        loadFile();
         singletonInstances = new ConcurrentHashMap<>();
 
         init = true;
@@ -228,7 +228,7 @@ public class ExtensionLoader<T> {
             } else if (activation != null && activation.key() != null) {
                 for (String k : activation.key()) {
                     if (key.equals(k)) {
-                        // FIXME: Code Completion From Here.
+                        exts.add(getExtension(entry.getKey()));
                         break;
                     }
                 }

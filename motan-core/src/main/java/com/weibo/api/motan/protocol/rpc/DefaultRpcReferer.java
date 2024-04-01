@@ -41,7 +41,7 @@ public class DefaultRpcReferer<T> extends AbstractReferer<T> {
                 ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension(
                         url.getParameter(URLParamType.endpointFactory.getName(), URLParamType.endpointFactory.getValue()));
 
-        // FIXME: Code Completion From Here.
+        client = endpointFactory.createClient(url);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class DefaultRpcReferer<T> extends AbstractReferer<T> {
     @Override
     protected void decrActiveCount(Request request, Response response) {
         if (response == null || !(response instanceof Future)) {
-            // FIXME: Code Completion From Here.
+            // 直接返回，不处理activeRefererCount
             return;
         }
 

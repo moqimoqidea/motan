@@ -110,7 +110,9 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             return;
         }
 
-        // FIXME: Code Completion From Here.
+        if (interfaceClass == null) {
+            throw new IllegalStateException("interfaceClass can not be null");
+        }
 
         loadRegistryUrls();
         if (registryUrls == null || registryUrls.size() == 0) {
@@ -137,7 +139,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         try {
             ConfigHandler configHandler =
                     ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
-            // FIXME: Code Completion From Here.
+            configHandler.unexport(exporters, registryUrls);
         } finally {
             afterUnexport();
         }
@@ -168,7 +170,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         URL serviceUrl = new URL(protocolName, hostAddress, port, interfaceClass.getName(), map);
 
         String groupString = serviceUrl.getParameter(URLParamType.group.getName(), ""); // do not with default group value
-        // FIXME: Code Completion From Here.
+        String additionalGroup = serviceUrl.getParameter(URLParamType.group.getName()); // do not with default group value
         if (StringUtils.isNotBlank(additionalGroup)) { // check additional groups
             groupString = StringUtils.isBlank(groupString) ? additionalGroup : groupString + "," + additionalGroup;
             serviceUrl.addParameter(URLParamType.group.getName(), groupString);
@@ -218,7 +220,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
 
         ConfigHandler configHandler = ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
 
-        // FIXME: Code Completion From Here.
+        Exporter<T> exporter = configHandler.export(interfaceClass, this, urls, serviceUrl);
     }
 
     private void afterExport() {
@@ -249,7 +251,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         if (StringUtils.isBlank(export)) {
             throw new MotanServiceException("export should not empty in service config:" + interfaceClass.getName());
         }
-        // FIXME: Code Completion From Here.
+        Map<String, Integer> protocolAndPort = new HashMap<>();
     }
 
     @ConfigDesc(excluded = true)

@@ -119,7 +119,7 @@ public class UrlUtils {
         if (defaultParameters != null && defaultParameters.size() > 0) {
             for (Map.Entry<String, String> entry : defaultParameters.entrySet()) {
                 String key = entry.getKey();
-                // FIXME: Code Completion From Here.
+                String defaultValue = entry.getValue();
                 if (defaultValue != null && defaultValue.length() > 0) {
                     String value = parameters.get(key);
                     if (value == null || value.length() == 0) {
@@ -153,7 +153,7 @@ public class UrlUtils {
         String[] urls = MotanConstants.COMMA_SPLIT_PATTERN.split(urlsStr);
         List<URL> result = new ArrayList<>();
         for (String u : urls) {
-            // FIXME: Code Completion From Here.
+            u = u.trim();
             if (url != null) {
                 result.add(url);
             }

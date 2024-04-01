@@ -69,7 +69,9 @@ public class DefaultGlobalConfig implements GlobalConfig {
                 if (override) {
                     this.configs.put(entry.getKey(), entry.getValue());
                 } else {
-                    // FIXME: Code Completion From Here.
+                    if (!this.configs.containsKey(entry.getKey())) {
+                        this.configs.put(entry.getKey(), entry.getValue());
+                    }
                 }
             }
         }

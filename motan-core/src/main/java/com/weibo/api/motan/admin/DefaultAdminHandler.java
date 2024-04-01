@@ -34,7 +34,7 @@ public class DefaultAdminHandler implements AdminHandler {
         if (!pass) {
             return AdminUtil.notAllowed(request);
         }
-        // FIXME: Code Completion From Here.
+        String command = request.getParam(AdminUtil.COMMAND_KEY);
         if (handler == null) {
             return AdminUtil.unknownCommand(request);
         }
@@ -68,7 +68,7 @@ public class DefaultAdminHandler implements AdminHandler {
             throw new MotanFrameworkException("admin permission checker is null");
         }
         PermissionChecker old = this.permissionChecker;
-        // FIXME: Code Completion From Here.
+        this.permissionChecker = permissionChecker;
         return old;
     }
 
