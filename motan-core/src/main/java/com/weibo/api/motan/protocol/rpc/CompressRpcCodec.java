@@ -100,7 +100,8 @@ public class CompressRpcCodec extends AbstractCodec {
                 return true;
             }
             // 检查分组降级开关是否开启
-            String group = MotanFrameworkUtil.getGroupFromRequest((Request) message);
+            Request request = (Request) message;
+            String group = request.getAttachment(Constants.GROUP_KEY);
             if (MotanSwitcherUtil.switcherIsOpenWithDefault(GROUP_CODEC_VERSION_SWITCHER + group, false)) {
                 return true;
             }
@@ -192,7 +193,7 @@ public class CompressRpcCodec extends AbstractCodec {
             throw new MotanFrameworkException("decode error: magic error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        int bodyLength = ByteUtil.bytes2int(data, 12);
+        int bodyLength = ByteUtil.bytes2int(data, 2);
 
         if (RpcProtocolVersion.VERSION_1_Compress.getHeaderLength() + bodyLength != data.length) {
             throw new MotanFrameworkException("decode error: content length error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
@@ -328,6 +329,8 @@ public class CompressRpcCodec extends AbstractCodec {
             output.writeUTF(request.getInterfaceName());
             output.writeUTF(request.getMethodName());
             output.writeUTF(request.getParamtersDesc());
+            output.writeUTF(MotanFrameworkUtil.getGroupFromRequest(request));
+            output.writeUTF(MotanFrameworkUtil.getVersionFromRequest(request));
         }
 
     }
@@ -356,7 +359,9 @@ public class CompressRpcCodec extends AbstractCodec {
         if (clientRequestid != null && !URLParamType.requestIdFromClient.getValue().equals(clientRequestid)) {
             attachments.put(CLIENT_REQUESTID, clientRequestid);
         }
-        attachments.remove(URLParamType.requestIdFromClient.getName());
+        // 如果是client端，则不传递此参数，否则使用简化key传递
+        // 为保证不同版本兼容性，只在codec中进行处理。
+        String group = attachments.get(URLParamType.group.getName());
     }
 
     private void addAttachment(ObjectOutput output, Map<String, String> attachments) throws IOException {
@@ -428,7 +433,9 @@ public class CompressRpcCodec extends AbstractCodec {
 
         output.flush();
 
-        byte[] body = outputStream.toByteArray();
+        byte[] body = output.toByteArray();
+        if (body.length > MotanConstants.MAX_PACKAGE_SIZE) {
+            throw new MotanFrameworkException("encode data is too large, size=" + body.length);
 
         output.close();
         int minGzSize = channel.getUrl().getIntParameter(URLParamType.mingzSize.getName(), 0);
@@ -572,7 +579,7 @@ public class CompressRpcCodec extends AbstractCodec {
             if (attachments.containsKey(CLIENT_REQUESTID)) {
                 clientRequestid = attachments.get(CLIENT_REQUESTID);
             }
-            attachments.put(URLParamType.requestIdFromClient.getName(), clientRequestid);
+            attachments.remove(CLIENT_REQUESTID);
         }
     }
 
@@ -653,7 +660,9 @@ public class CompressRpcCodec extends AbstractCodec {
                     MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        response.setRequestId(requestId);
+        if (dataType == MotanConstants.FLAG_RESPONSE_ATTACHMENT) {
+            Map<String, String> attachment = decodeRequestAttachments(input);
+            checkAttachment(attachment);
 
         input.close();
 

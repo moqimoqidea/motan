@@ -458,6 +458,8 @@ public class SimpleSerialization implements Serialization {
         buffer.position(pos);
         buffer.putInt(npos - pos - 4);
         buffer.position(npos);
+        buffer.putInt(npos - pos - 4);
+        buffer.position(npos);
     }
 
     private int getAndCheckSize(GrowableByteBuffer buffer) {

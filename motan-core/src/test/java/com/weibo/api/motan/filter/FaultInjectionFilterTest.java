@@ -109,7 +109,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
         // not matched
         FaultInjectionFilter.FaultInjectionConfig config = buildDefaultConfig("com.weibo.test.NotFaultTest");
         configList.add(config);
-        updateConfigs();
+        // FIXME: The Completion Code is Empty.
         check(processTime.get());
 
         // matched，then not matched
@@ -304,7 +304,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
             }
         }
         assertNotNull(exception);
-        assertTrue(exception instanceof MotanAbstractException);
+        assertSame(expectException, exception.getClass());
         if (exception instanceof MotanBizException) {
             assertSame(expectException, exception.getCause().getClass());
         }

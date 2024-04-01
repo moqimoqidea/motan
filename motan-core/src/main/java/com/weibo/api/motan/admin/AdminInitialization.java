@@ -102,7 +102,7 @@ public class AdminInitialization implements Initializable {
                 if (StringUtils.isNotBlank(h)) {
                     try {
                         AdminCommandHandler handler = ExtensionLoader.getExtensionLoader(AdminCommandHandler.class).getExtension(h.trim());
-                        AdminUtil.addCommandHandler(handler, true);
+                        AdminServer.getInstance().addHandler(handler);
                         LoggerUtil.info("admin server add handler " + handler.getClass().getName());
                     } catch (Exception e) {
                         LoggerUtil.warn("can not find admin command handler :" + h);

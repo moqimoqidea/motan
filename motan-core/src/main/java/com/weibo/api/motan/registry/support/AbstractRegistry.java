@@ -52,7 +52,8 @@ public abstract class  AbstractRegistry implements Registry {
     public AbstractRegistry(URL url) {
         this.registryUrl = url.createCopy();
         // register a heartbeat switcher to perceive service state change and change available state
-        MotanSwitcherUtil.initSwitcher(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, false);
+        MotanSwitcherUtil.registerSwitcher(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, true);
+        // register a listener to change available state when switcher value changed
         MotanSwitcherUtil.registerSwitcherListener(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, new SwitcherListener() {
 
             @Override
@@ -126,7 +127,9 @@ public abstract class  AbstractRegistry implements Registry {
         url = url.createCopy();
         List<URL> results = new ArrayList<URL>();
 
-        Map<String, List<URL>> categoryUrls = subscribedCategoryResponses.get(url);
+        // 1. Get the cached URL list
+        List<URL> categoryUrls = getCachedUrls(url);
+        // 2. If the cache is not empty, return the cache
         if (categoryUrls != null && categoryUrls.size() > 0) {
             for (List<URL> urls : categoryUrls.values()) {
                 for (URL tempUrl : urls) {
@@ -183,7 +186,7 @@ public abstract class  AbstractRegistry implements Registry {
         List<URL> urls = new ArrayList<URL>();
         for (List<URL> us : rsUrls.values()) {
             for (URL tempUrl : us) {
-                urls.add(tempUrl.createCopy());
+                urls.add(tempUrl);
             }
         }
         return urls;
@@ -224,7 +227,9 @@ public abstract class  AbstractRegistry implements Registry {
      */
     private URL removeUnnecessaryParmas(URL url) {
         // codec参数不能提交到注册中心，如果client端没有对应的codec会导致client端不能正常请求。
-        url.getParameters().remove(URLParamType.codec.getName());
+        url = url.removeParameter(Constants.CODEC_KEY);
+        // 不需要提交到注册中心的参数
+        url = url.removeParameters(Constants.EXPORT_KEY, Constants.REFER_KEY, Constants.GROUP_KEY, Constants.VERSION_KEY, Constants.CLASSIFIER_KEY, Constants.GENERIC_KEY, Constants.TIMESTAMP_KEY, Constants.MONITOR_KEY, Constants.APPLICATION_KEY, Constants.REGISTRY_KEY, Constants.
         return url;
     }
 

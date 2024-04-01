@@ -24,7 +24,7 @@ import com.weibo.api.motan.protocol.example.IHello;
 import com.weibo.api.motan.rpc.Referer;
 
 /**
- * 
+ *
  * Precreate referers.
  *
  * @author fishermen
@@ -42,7 +42,9 @@ public class AbstractLoadBalanceTest extends BaseTestCase {
         referers = new ArrayList<Referer<IHello>>();
         for (int i = 0; i < 10; i++) {
             final Referer<IHello> ref = mockery.mock(Referer.class, "ref_" + i);
-            referers.add(ref);
+            mockery.checking(new Expectations() {
+                {
+                    allowing(ref).getUrl();
         }
     }
 }

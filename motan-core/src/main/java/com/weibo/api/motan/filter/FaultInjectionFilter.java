@@ -37,7 +37,7 @@ public class FaultInjectionFilter implements Filter {
             delay = config.getExceptionTime();
         } else {
             response = caller.call(request);
-            delay = config.getDelayTime(response.getProcessTime());
+            delay = config.getDelayTime();
         }
         if (delay > 0) {
             // process injected delay ignore sync/async calls
@@ -170,7 +170,7 @@ public class FaultInjectionFilter implements Filter {
                 if (config == null) { // Unmatched cache
                     config = NOT_MATCH;
                 }
-                matchCache.put(service + SEPARATOR + method, config);
+                matchCache.putIfAbsent(service + SEPARATOR + method, config);
             }
             if (config == NOT_MATCH) { // Mismatch
                 return null;

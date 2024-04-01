@@ -122,7 +122,9 @@ public class MotanGlobalConfigUtilTest {
 
         // set new GlobalConfig
         GlobalConfig newConfig = new DefaultGlobalConfig();
-        newConfig.putConfig(testAppendKey, testAppendValue);
+        newConfig.setConfig(testAppendKey, testAppendValue);
+        value = newConfig.getConfig(testAppendKey);
+        assertEquals(testAppendValue, value);
         old = MotanGlobalConfigUtil.setInnerGlobalConfig(newConfig);
         value = old.getConfig(testAppendKey);
         assertNull(value);

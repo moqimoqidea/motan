@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * ClusterSupport test.
  *
  * @author fishermen
@@ -81,7 +81,9 @@ public class ClusterSupportTest {
 
         mockery.checking(new Expectations() {
             {
-                allowing(any(Registry.class)).method("register").with(any(URL.class));
+                for (int i = 0; i < 10; i++) {
+                    allowing(any(Registry.class)).method("register").with(any(URL.class));
+                    allowing(any(Registry.class)).method("unregister").with(any(URL.class));
                 allowing(any(Registry.class)).method("subscribe").with(any(URL.class), any(NotifyListener.class));
             }
         });
@@ -307,7 +309,9 @@ public class ClusterSupportTest {
         if (portReferers.get(url.getIdentity()) != null) {
             return portReferers.get(url.getIdentity());
         }
-        portReferers.put(url.getIdentity(), mockery.mock(Referer.class, url.getIdentity()));
+        Referer<IHello> referer = mock(Referer.class);
+        when(referer.getServiceUrl()).thenReturn(url);
+        when(referer.getUrl()).thenReturn(url);
         return portReferers.get(url.getIdentity());
 
     }

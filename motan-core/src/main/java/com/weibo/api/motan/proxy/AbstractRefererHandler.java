@@ -54,6 +54,8 @@ public class AbstractRefererHandler<T> {
             // 带上client的application和module
             request.setAttachment(URLParamType.application.getName(), cluster.getUrl().getApplication());
             request.setAttachment(URLParamType.module.getName(), cluster.getUrl().getModule());
+            request.setAttachment(URLParamType.protocol.getName(), cluster.getUrl().getProtocol());
+            request.setAttachment(URLParamType.group.getName(), cluster.getUrl().getGroup());
             return call(cluster, cluster.getUrl(), request, returnType, async);
         }
         throw new MotanServiceException("Referer call Error: cluster not exist, interface=" + interfaceName + " " + MotanFrameworkUtil.toString(request), MotanErrorMsgConstant.SERVICE_UNFOUND, false);
@@ -70,7 +72,7 @@ public class AbstractRefererHandler<T> {
                     ((ResponseFuture) response).setReturnType(returnType);
                     return response;
                 } else {
-                    ResponseFuture responseFuture = new DefaultResponseFuture(request, 0, refUrl);
+                    ResponseFuture responseFuture = new DefaultResponseFuture(request, returnType, null);
                     if (response.getException() != null) {
                         responseFuture.onFailure(response);
                     } else {
@@ -117,7 +119,7 @@ public class AbstractRefererHandler<T> {
     protected boolean isLocalMethod(Method method) {
         if (method.getDeclaringClass().equals(Object.class)) {
             try {
-                clz.getDeclaredMethod(method.getName(), method.getParameterTypes());
+                method.invoke(null, null);
                 return false;
             } catch (Exception e) {
                 return true;
@@ -136,7 +138,8 @@ public class AbstractRefererHandler<T> {
             async = true;
         }
         request.setMethodName(methodName);
-        request.setParamtersDesc(ReflectUtil.getMethodParamDesc(method));
+        request.setParamtersDesc(ReflectUtil.getParamDesc(method));
+        request.setReturnType(method.getReturnType());
         request.setInterfaceName(interfaceName);
         return async;
     }

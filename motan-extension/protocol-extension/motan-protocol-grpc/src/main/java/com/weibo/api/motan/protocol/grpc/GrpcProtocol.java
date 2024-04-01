@@ -1,11 +1,11 @@
 /*
  * Copyright 2009-2016 Weibo, Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -33,7 +33,7 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.LoggerUtil;
 import com.weibo.api.motan.util.MotanFrameworkUtil;
 /**
- * 
+ *
  * @Description GrpcProtocol
  * @author zhanglei
  * @date Oct 13, 2016
@@ -72,7 +72,8 @@ public class GrpcProtocol extends AbstractProtocol {
                             + url.getServerPortStr(), true));
             server = new GrpcServer(url.getPort(), shareChannel, executor);
             serverMap.putIfAbsent(ipPort, server);
-            server = serverMap.get(ipPort);
+            server.start();
+            server.registerService(provider);
 
         }
         return new GrpcExporter<T>(provider, url, server);
@@ -113,7 +114,7 @@ public class GrpcProtocol extends AbstractProtocol {
         protected boolean doInit() {
             try {
                 server.init();
-                server.addExporter(this);
+                server.start();
                 return true;
             } catch (Exception e) {
                 LoggerUtil.error("grpc server init fail!", e);

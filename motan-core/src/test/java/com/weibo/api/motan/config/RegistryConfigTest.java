@@ -73,7 +73,8 @@ public class RegistryConfigTest extends BaseTestCase {
         // test urls to string
         String urlString = UrlUtils.urlsToString(registryUrls);
         List<URL> parsedUrls = UrlUtils.stringToURLs(urlString);
-        assertEquals(registryUrls, parsedUrls);
+        assertEquals(parsedUrls.size(), 1);
+        assertEquals(parsedUrls.get(0), registryUrls.get(0));
 
         URL resultURL = URL.valueOf(expectURLString);
         assertEquals(registryUrls.get(0), resultURL);

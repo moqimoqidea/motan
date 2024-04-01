@@ -29,7 +29,7 @@ import com.weibo.api.motan.rpc.Referer;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-14
- * 
+ *
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ActiveWeightLoadBalanceTest {
@@ -165,7 +165,7 @@ public class ActiveWeightLoadBalanceTest {
         }
 
         ActiveWeightLoadBalance balance = new ActiveWeightLoadBalance();
-        balance.onRefresh(referers);
+        balance.setReferers(referers);
 
         return balance;
     }

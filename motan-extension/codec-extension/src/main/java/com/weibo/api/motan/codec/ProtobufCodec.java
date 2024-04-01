@@ -99,7 +99,7 @@ public class ProtobufCodec implements Codec {
 		CodedOutputStream output = CodedOutputStream.newInstance(outputStream);
 		output.writeStringNoTag(request.getInterfaceName());
 		output.writeStringNoTag(request.getMethodName());
-		output.writeStringNoTag(request.getParamtersDesc());
+		output.writeStringNoTag(request.getMethodParamDesc());
 
 		Serialization serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension(
 				channel.getUrl().getParameter(URLParamType.serialize.getName(), URLParamType.serialize.getValue()));

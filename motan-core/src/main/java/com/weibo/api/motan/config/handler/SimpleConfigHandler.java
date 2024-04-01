@@ -53,7 +53,7 @@ public class SimpleConfigHandler implements ConfigHandler {
     @Override
     public <T> ClusterSupport<T> buildClusterSupport(Class<T> interfaceClass, List<URL> registryUrls, URL refUrl) {
         ClusterSupport<T> clusterSupport = new ClusterSupport<T>(interfaceClass, MeshProxyUtil.processMeshProxy(registryUrls, refUrl, false), refUrl);
-        clusterSupport.init();
+        clusterSupport.setReferer(refer(interfaceClass, clusterSupport.getClusters(), refUrl.getParameter(URLParamType.proxy.getName(), URLParamType.proxy.getValue())));
 
         return clusterSupport;
     }
@@ -122,7 +122,7 @@ public class SimpleConfigHandler implements ConfigHandler {
             try {
                 RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getExtension(url.getProtocol());
                 Registry registry = registryFactory.getRegistry(url);
-                registry.unregister(serviceUrl);
+                registry.unRegister(serviceUrl);
             } catch (Exception e) {
                 LoggerUtil.warn(String.format("unregister url false:%s", url), e);
             }

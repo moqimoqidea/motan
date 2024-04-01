@@ -115,7 +115,7 @@ public class DefaultResponseFutureTest {
         String key = "ddd";
         String value = "xxx";
         responseFuture.getTraceableContext().setReceiveTime(receiveTime);
-        responseFuture.getTraceableContext().addTraceInfo(key, value);
+        responseFuture.getTraceableContext().setTraceInfo(key, value);
 
         // add attachment
         responseFuture.setAttachment("aaa", "bbb");
@@ -142,6 +142,8 @@ public class DefaultResponseFutureTest {
         String errMsg = "biz fail";
         responseFuture.onFailure(new RuntimeException(errMsg));
         DefaultResponse defaultResponse = DefaultResponse.fromServerEndResponseFuture(responseFuture);
+        assertEquals(receiveTime, defaultResponse.getTraceableContext().getReceiveTime());
+        assertEquals(value, defaultResponse.getTraceableContext().getTraceInfo(key));
         assertTrue(defaultResponse.getException() instanceof MotanBizException); // check exception type
         assertTrue(defaultResponse.getException().getCause() instanceof RuntimeException);
         assertEquals(errMsg, defaultResponse.getException().getCause().getMessage());

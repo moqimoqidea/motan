@@ -105,7 +105,7 @@ public class DefaultRpcCodec extends AbstractCodec {
 
         byte flag = data[3];
         byte dataType = (byte) (flag & MASK);
-        boolean isResponse = (dataType != MotanConstants.FLAG_REQUEST);
+        boolean isResponse = (flag & RESPONSE_MASK) == RESPONSE_MASK;
 
         byte[] body = new byte[bodyLength];
 
@@ -360,7 +360,8 @@ public class DefaultRpcCodec extends AbstractCodec {
         try {
             // read class name (String)
             String className = input.readUTF();
-            Class<?> clz = ReflectUtil.forName(className);
+            Class<?> clz = Class.forName(className);
+            // read data
             Object result = deserialize((byte[]) input.readObject(), clz, serialization);
             if (dataType == MotanConstants.FLAG_RESPONSE) {
                 response.setValue(result);

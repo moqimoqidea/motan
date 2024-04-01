@@ -38,9 +38,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * base test
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */
@@ -116,6 +116,8 @@ public class BaseTestCase extends TestCase {
         serviceConfig.setGroup(group);
         serviceConfig.setShareChannel(true);
         serviceConfig.setVersion("2.0");
+        serviceConfig.setShareChannel(true);
+        serviceConfig.setVersion("2.0");
 
         return serviceConfig;
     }
@@ -182,7 +184,8 @@ public class BaseTestCase extends TestCase {
     protected static List<ProtocolConfig> getMultiProtocols(String... protocolNames) {
         List<ProtocolConfig> protocols = new ArrayList<ProtocolConfig>();
         for (String protocol : protocolNames) {
-            protocols.add(mockProtocolConfig(protocol));
+            ProtocolConfig protocolConfig = createProtocol(protocol);
+            protocols.add(protocolConfig);
         }
         return protocols;
     }

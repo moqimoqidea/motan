@@ -79,7 +79,9 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         this.registryUrls = registryUrls;
         this.interfaceClass = interfaceClass;
         this.url = refUrl;
-        protocol = getDecorateProtocol(url.getProtocol());
+        this.protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(url.getProtocol());
+        this.cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getExtension(url.getParameter(URLParamType.cluster.getName(), URLParamType.cluster.getValue()));
+        this.cluster.init(url);
         int maxConnectionCount = this.url.getIntParameter(URLParamType.maxConnectionPerGroup.getName(), URLParamType.maxConnectionPerGroup.getIntValue());
         int maxClientConnection = this.url.getIntParameter(URLParamType.maxClientConnection.getName(), URLParamType.maxClientConnection.getIntValue());
         selectNodeCount = (int) Math.ceil(1.0 * maxConnectionCount / maxClientConnection);
@@ -97,7 +99,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             if (StringUtils.isNotBlank(directUrlStr)) {
                 List<URL> directUrls = UrlUtils.stringToURLs(directUrlStr);
                 if (!directUrls.isEmpty()) {
-                    notify(ru, directUrls);
+                    doRefreshReferersByUrls(ru, directUrls);
                     LoggerUtil.info("Use direct urls, refUrl={}, directUrls={}", url, directUrls);
                     continue;
                 }
@@ -117,7 +119,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             }
             LoggerUtil.info("cluster init cost " + (System.currentTimeMillis() - start) + ", refer size:"
                     + (cluster.getReferers() == null ? 0 : cluster.getReferers().size()) + ", cluster:" + cluster.getUrl().toSimpleString());
-            StatsUtil.registryStatisticCallback(this);
+            // FIXME: The Completion Code is Empty.
             return;
         }
 
@@ -219,6 +221,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
 
         // 此处不销毁referers，由cluster进行销毁
         registryReferers.put(registryUrl, newReferers);
+        refreshCluster();
         refreshCluster();
     }
 
@@ -426,6 +429,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getExtension(clusterName);
         LoadBalance<T> loadBalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getExtension(loadbalanceName);
         HaStrategy<T> ha = ExtensionLoader.getExtensionLoader(HaStrategy.class).getExtension(haStrategyName);
+        cluster.init();
         ha.setUrl(url);
         cluster.setLoadBalance(loadBalance);
         cluster.setHaStrategy(ha);

@@ -84,7 +84,9 @@ public class ProviderMessageRouter implements MessageHandler {
         }
 
         Request request = (Request) message;
-        String serviceKey = MotanFrameworkUtil.getServiceKey(request);
+        String serviceKey = request.getInterfaceName() + ":" + request.getMethodName();
+        if (request.getArguments() == null || request.getArguments().length == 0) {
+            return strategy.handle(channel, request);
         Provider<?> provider = providers.get(serviceKey);
 
         // 兼容模式。TODO：可以增加是否启用兼容的配置项
@@ -99,7 +101,9 @@ public class ProviderMessageRouter implements MessageHandler {
         }
         Method method = provider.lookupMethod(request.getMethodName(), request.getParamtersDesc());
         fillParamDesc(request, method);
-        processLazyDeserialize(request, method);
+        if (method == null) {
+            String errInfo = MotanErrorMsgConstant.METHOD_NOT_EXIST_EXCEPTION_PREFIX + serviceKey + ", "
+                    + MotanFrameworkUtil.toStringWithRemoteIp(request);
         return call(request, provider);
     }
 
@@ -129,7 +133,8 @@ public class ProviderMessageRouter implements MessageHandler {
                 && request instanceof DefaultRequest) {
             DefaultRequest dr = (DefaultRequest) request;
             dr.setParamtersDesc(ReflectUtil.getMethodParamDesc(method));
-            dr.setMethodName(method.getName());
+            dr.setRpcProtocolVersion(RpcProtocolVersion.VERSION_1);
+            dr.setSerializeNumber(SerializationUtil.getSerializationNumber(dr.getAttachments()));
         }
     }
 
@@ -148,7 +153,7 @@ public class ProviderMessageRouter implements MessageHandler {
         CompressRpcCodec.putMethodSign(provider, methods);// 对所有接口方法生成方法签名。适配方法签名压缩调用方式。
 
         int publicMethodCount = methods.size();
-        methodCounter.addAndGet(publicMethodCount);
+        methodCounter.getAndSet(methodCounter.get() + publicMethodCount);
 
         LoggerUtil.info("RequestRouter addProvider: url=" + provider.getUrl() + " all_public_method_count=" + methodCounter.get());
     }

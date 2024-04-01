@@ -74,7 +74,8 @@ public abstract class AbstractBenchmarkClient {
         for (ClientRunnable runnable : runnables) {
             runnableStatisticses.add(runnable.getStatistics());
         }
-        statistics = new ClientStatistics(runnableStatisticses);
+        RunnableStatistics statistics = new RunnableStatistics(runnableStatisticses);
+        statistics.collectStatistics();
         statistics.collectStatistics();
 
         printStatistics();
@@ -103,6 +104,8 @@ public abstract class AbstractBenchmarkClient {
         System.out.println("Runtime: " + runTime + " seconds");
         System.out.println("ClassName: " + classname);
         System.out.println("Params: " + params);
+        System.out.println("--------------------------------------------");
+        System.out.println("TPS: " + statistics.succTPS + "(" + statistics.succRT + "ms)");
         statistics.printStatistics();
     }
 

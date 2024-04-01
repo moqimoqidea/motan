@@ -37,9 +37,9 @@ import com.weibo.api.motan.util.ConcurrentHashSet;
 import com.weibo.api.motan.util.LoggerUtil;
 
 /**
- * 
+ *
  * Failback registry
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-28
  */
@@ -253,7 +253,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         Set<NotifyListener> listeners = entry.getValue();
                         for (NotifyListener listener : listeners) {
                             super.unsubscribe(url, listener);
-                            listeners.remove(listener);
+                            removeForFailedSubAndUnsub(url, listener);
                         }
                     }
                 } catch (Exception e) {

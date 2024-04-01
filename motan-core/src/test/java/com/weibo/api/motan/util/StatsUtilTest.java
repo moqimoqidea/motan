@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-14
- * 
+ *
  */
 public class StatsUtilTest {
 
@@ -57,7 +57,7 @@ public class StatsUtilTest {
         } catch (Exception e) {}
         for (Map.Entry<String, AccessStatisticResult> entry : StatsUtil.getTotalAccessStatistic().entrySet()) {
             if ("application1|module1".equals(entry.getKey())) {
-                Assert.assertEquals(loop * count * 2, entry.getValue().totalCount);
+                Assert.assertEquals(loop * count, entry.getValue().totalCount);
             }
             if ("application2|module2".equals(entry.getKey())) {
                 Assert.assertEquals(loop * count, entry.getValue().totalCount);

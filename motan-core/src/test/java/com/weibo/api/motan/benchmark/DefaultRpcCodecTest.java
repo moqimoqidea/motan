@@ -28,7 +28,7 @@ import com.weibo.api.motan.transport.Channel;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-21
- * 
+ *
  */
 public class DefaultRpcCodecTest {
     private static final int loop = 100000;

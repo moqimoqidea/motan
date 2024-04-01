@@ -23,9 +23,9 @@ import com.weibo.api.motan.util.MotanFrameworkUtil;
 
 /**
  * abstract referer
- * 
+ *
  * @author maijunsheng
- * 
+ *
  * @param <T>
  */
 public abstract class AbstractReferer<T> extends AbstractNode implements Referer<T> {
@@ -61,7 +61,9 @@ public abstract class AbstractReferer<T> extends AbstractNode implements Referer
         incrActiveCount(request);
         Response response = null;
         try {
-            response = doCall(request);
+            response = request.getMethod().isAsync() ? asyncCall(request) : syncCall(request);
+            if (response == null) {
+                throw new MotanFrameworkException("response is null, url=" + url.getUri() + " " + MotanFrameworkUtil.toString(request));
 
             return response;
         } finally {

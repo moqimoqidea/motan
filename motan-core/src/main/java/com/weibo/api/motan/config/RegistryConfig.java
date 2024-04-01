@@ -254,7 +254,9 @@ public class RegistryConfig extends AbstractConfig {
         Map<String, String> map = new HashMap<>();
         map.putAll(getAddressParams());
         appendConfigParams(map);
-        map.put(URLParamType.path.getName(), RegistryService.class.getName());
+        map.put(URLParamType.nodeType.getName(), NodeType.SERVICE.name());
+        map.put(URLParamType.application.getName(), getApplication());
+        map.put(URLParamType.group.getName(), getGroup());
         map.put(URLParamType.refreshTimestamp.getName(), String.valueOf(System.currentTimeMillis()));
 
 

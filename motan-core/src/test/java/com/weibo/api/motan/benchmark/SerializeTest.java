@@ -26,7 +26,7 @@ import com.weibo.api.motan.serialize.Hessian2Serialization;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-9
- * 
+ *
  */
 public class SerializeTest {
     private static final int loop = 10000;
@@ -82,7 +82,7 @@ public class SerializeTest {
         start = System.nanoTime();
 
         for (int i = 0; i < loop; i++) {
-            serialization.deserialize(bytes, object.getClass());
+            serialization.deserialize(bytes, SerializeObject.class);
         }
 
         cost = System.nanoTime() - start;

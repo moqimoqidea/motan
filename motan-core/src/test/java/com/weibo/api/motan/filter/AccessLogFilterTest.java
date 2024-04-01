@@ -104,6 +104,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         checkProcessNormal(url, attachments, isProcess);
         checkProcessWithTraceable(url, attachments, isProcess, true, false);
         checkProcessWithTraceable(url, attachments, isProcess, false, false);
+        checkProcessWithTraceable(url, attachments, isProcess, true, true);
         checkProcessWithTraceable(url, attachments, isProcess, false, true);
     }
 
@@ -162,6 +163,8 @@ public class AccessLogFilterTest extends BaseTestCase {
             caller = mockery.mock(Referer.class);
         }
         final LogService logService = mockery.mock(LogService.class);
+        final LogService logService2 = mockery.mock(LogService.class);
+        final LogService logService3 = mockery.mock(LogService.class);
         final TraceableContext requestTraceableContext = mockery.mock(TraceableContext.class, "requestTraceableContext");
         final TraceableContext responseTraceableContext = mockery.mock(TraceableContext.class, "responseTraceableContext");
         if (!timeout){

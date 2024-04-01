@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * Cluster test。
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */
@@ -99,6 +99,8 @@ public class ClusterTest extends BaseTestCase {
                 will(returnValue(null));
                 atLeast(0).of(request).getRetries();
                 will(returnValue(0));
+                atLeast(0).of(request).getInterfaceName();
+                will(returnValue(Object.class.getName()));
                 atLeast(0).of(request).getMethodName();
                 will(returnValue("get"));
                 atLeast(0).of(request).getParamtersDesc();

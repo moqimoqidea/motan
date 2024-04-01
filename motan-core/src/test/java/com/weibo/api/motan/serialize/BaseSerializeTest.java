@@ -65,7 +65,9 @@ public class BaseSerializeTest {
         UserAttentions user = new UserAttentions();
         user.setAddTimes(null);
         UserAttentions userResult = serialization.deserialize(serialization.serialize(user), UserAttentions.class);
-        assertNull(userResult.getAddTimes());
+        assertEquals(user.getAddTimes(), userResult.getAddTimes());
+        assertEquals(user.getAttentionTimes(), userResult.getAttentionTimes());
+        assertEquals(user.getUid(), userResult.getUid());
     }
 
     public static void testHessianBug(Serialization serialization) throws Exception {
@@ -103,7 +105,7 @@ public class BaseSerializeTest {
     public static void testSerializeMulti(Serialization serialization) throws Exception {
         Object[] objects = new Object[]{"123", 456, true, 45.67f};
         byte[] bytes = serialization.serializeMulti(objects);
-        Class[] classes = new Class[objects.length];
+        Class<?>[] classes = new Class[objects.length];
         for (int i = 0; i < objects.length; i++) {
             classes[i] = objects[i].getClass();
         }

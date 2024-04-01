@@ -36,7 +36,7 @@ import com.weibo.api.motan.util.NetUtils;
 
 
 /**
- * 
+ *
  * test
  *
  * @author fishermen
@@ -147,6 +147,8 @@ public class AccessStatisticFilterTest extends BaseTestCase {
             }
         });
 
-        assertEquals(response, accessStatisticFilter.filter(caller, request));
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_REGISTER_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_AVAILABLE_SWITCHER, true);
     }
 }

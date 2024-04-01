@@ -464,7 +464,9 @@ public class AbstractInterfaceConfig extends AbstractConfig {
                     throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not found method " + methodName,
                             MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
                 }
-                methodBean.setArgumentTypes(ReflectUtil.getMethodParamDesc(hasMethod));
+                if (methodBean.getOninvoke() != null && methodBean.getOnreturn() != null) {
+                    throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not support set oninvoke and onreturn at same time.",
+                            MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
             }
         }
     }
@@ -480,7 +482,9 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             }
         }
 
-        InetAddress address = NetUtils.getLocalAddress(regHostPorts);
+        if (regHostPorts.size() > 0) {
+            localAddress = NetUtils.getLocalHostAddress(regHostPorts);
+        }
         if (address != null) {
             localAddress = address.getHostAddress();
         }

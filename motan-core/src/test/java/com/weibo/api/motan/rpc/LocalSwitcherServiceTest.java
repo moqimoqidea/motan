@@ -28,7 +28,7 @@ import com.weibo.api.motan.switcher.Switcher;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-17
- * 
+ *
  */
 public class LocalSwitcherServiceTest extends TestCase {
 

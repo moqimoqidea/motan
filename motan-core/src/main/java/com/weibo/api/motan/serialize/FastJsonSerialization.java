@@ -28,13 +28,13 @@ import java.util.List;
 
 /**
  * fastjson 序列化
- * 
+ *
  * <pre>
  * 对于嵌套场景无法支持
  * </pre>
- * 
+ *
  * @author maijunsheng
- * 
+ *
  */
 @SpiMeta(name = "fastjson")
 public class FastJsonSerialization implements Serialization {

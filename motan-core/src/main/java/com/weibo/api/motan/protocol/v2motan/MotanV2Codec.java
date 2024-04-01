@@ -114,6 +114,7 @@ public class MotanV2Codec extends AbstractCodec {
                     putString(buf, ExceptionUtil.toMessage(response.getException()));
                     header.setStatus(MotanV2Header.MessageStatus.EXCEPTION.getStatus());
                 }
+                putString(buf, M2_ATTACHMENTS);
                 putMap(buf, response.getAttachments());
 
                 header.setRequestId(response.getRequestId());
@@ -174,7 +175,7 @@ public class MotanV2Codec extends AbstractCodec {
 
 
     private void putString(GrowableByteBuffer buf, String content) {
-        buf.put(content.getBytes(StandardCharsets.UTF_8));
+        buf.put(StringUtils.getBytesUtf8(content));
         buf.put("\n".getBytes(StandardCharsets.UTF_8));
     }
 
@@ -249,7 +250,7 @@ public class MotanV2Codec extends AbstractCodec {
                 request.setRequestId(header.getRequestId());
                 request.setInterfaceName(metaMap.remove(M2_PATH));
                 request.setMethodName(metaMap.remove(M2_METHOD));
-                request.setParamtersDesc(metaMap.remove(M2_METHOD_DESC));
+                request.setSerialize(header.getSerialize());
                 request.setAttachments(metaMap);
                 request.setRpcProtocolVersion(RpcProtocolVersion.VERSION_2.getVersion());
                 request.setSerializeNumber(header.getSerialize());
@@ -286,7 +287,7 @@ public class MotanV2Codec extends AbstractCodec {
             if (header.getStatus() == MotanV2Header.MessageStatus.NORMAL.getStatus()) {//只解析正常消息
                 response.setValue(obj);
             } else {
-                String errMsg = metaMap.remove(M2_ERROR);
+                String errMsg = metaMap.remove(M2_ERR_MSG);
                 Exception e = ExceptionUtil.fromMessage(errMsg);
                 if (e == null) {
                     e = new MotanServiceException("default remote exception. remote err msg:" + errMsg, false);

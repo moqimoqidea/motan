@@ -23,7 +23,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * Unit test
  *
  * @author fishermen
@@ -81,6 +81,8 @@ public class ConsistentHashLoadBalanceTest extends AbstractLoadBalanceTest {
         });
 
         Referer<IHello> ref1 = consistentHashLoadBalance.select(request);
+        assertNotNull(ref1);
+        assertTrue(ref1.isAvailable());
         for (int i = 0; i < 100; i++) {
             Referer<IHello> ref2 = consistentHashLoadBalance.select(request);
             assertEquals(ref1, ref2);

@@ -32,9 +32,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * Failfast ha strategy.
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-6-18
  */
@@ -83,7 +83,7 @@ public class FailfastHaStrategyTest extends BaseTestCase {
                 one(loadBalance).select(request);
                 will(returnValue(referer));
                 one(referer).call(request);
-                will(returnValue(null));
+                will(throwException(new MotanServiceException("test")));
             }
         });
 

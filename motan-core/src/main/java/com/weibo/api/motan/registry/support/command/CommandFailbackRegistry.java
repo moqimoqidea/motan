@@ -58,7 +58,9 @@ public abstract class CommandFailbackRegistry extends FailbackRegistry {
         URL urlCopy = url.createCopy();
         CommandServiceManager manager = commandManagerMap.get(urlCopy);
 
-        manager.removeNotifyListener(listener);
+        if (manager == null) {
+            return;
+        }
         unsubscribeService(urlCopy, manager);
         unsubscribeCommand(urlCopy, manager);
     }
@@ -76,6 +78,7 @@ public abstract class CommandFailbackRegistry extends FailbackRegistry {
                 + (rpcCommand == null ? "is null." : "is not null."));
 
         CommandServiceManager manager = getCommandServiceManager(urlCopy);
+        if (manager == null) {
         List<URL> finalResult = manager.discoverServiceWithCommand(new HashMap<>(), rpcCommand);
 
         // 在subscribeCommon时，可能订阅完马上就notify，导致首次notify指令时，可能还有其他service没有完成订阅，

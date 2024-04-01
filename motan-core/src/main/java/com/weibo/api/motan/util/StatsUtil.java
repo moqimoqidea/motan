@@ -153,7 +153,7 @@ public class StatsUtil {
 
         long currentTimeMillis = System.currentTimeMillis();
 
-        ConcurrentMap<String, AccessStatisticResult> totalResults = new ConcurrentHashMap<>();
+        ConcurrentMap<String, AccessStatisticResult> totalResults = new ConcurrentHashMap<String, AccessStatisticResult>();
 
         for (Map.Entry<String, AccessStatisticItem> entry : accessStatistics.entrySet()) {
             AccessStatisticItem item = entry.getValue();
@@ -223,6 +223,8 @@ public class StatsUtil {
             appResult.costTime += result.costTime;
             appResult.bizTime += result.bizTime;
             appResult.otherExceptionCount += result.otherExceptionCount;
+            appResult.maxCount = Math.max(appResult.maxCount, result.maxCount);
+            appResult.minCount = Math.min(appResult.minCount, result.minCount);
 
             Snapshot snapshot = InternalMetricsFactory.getRegistryInstance(entry.getKey())
                     .histogram(HISTOGRAM_NAME).getSnapshot();
@@ -304,7 +306,7 @@ public class StatsUtil {
     public static void logStatisticCallback() {
         for (StatisticCallback callback : statisticCallbacks) {
             try {
-                String msg = callback.statisticCallback();
+                String msg = callback.getStatisticMessage();
 
                 if (msg != null && !msg.isEmpty()) {
                     LoggerUtil.accessStatsLog("[motan-statisticCallback] {}", msg);
@@ -388,7 +390,7 @@ class AccessStatisticItem {
 
         costTimes[currentIndex].addAndGet((int) costTimeMillis);
         bizProcessTimes[currentIndex].addAndGet((int) bizProcessTime);
-        totalCounter[currentIndex].incrementAndGet();
+        count[currentIndex].incrementAndGet();
 
         if (costTimeMillis >= slowCost) {
             slowCounter[currentIndex].incrementAndGet();

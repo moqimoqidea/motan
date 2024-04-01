@@ -127,6 +127,8 @@ public class AccessLogFilter implements Filter {
         append(builder, request.getInterfaceName());
         append(builder, request.getMethodName());
         append(builder, request.getParamtersDesc());
+        append(builder, request.getArguments());
+        append(builder, request.getAttachments());
         // 对于client，url中的remote ip 和 service获取的地方不同
         if (MotanConstants.NODE_TYPE_REFERER.equals(side)) {
             append(builder, caller.getUrl().getHost()); // direct
@@ -145,6 +147,8 @@ public class AccessLogFilter implements Filter {
             requestId = String.valueOf(request.getRequestId());
         }
         append(builder, requestId);
+        append(builder, request.getAttachments().get(URLParamType.group.getName()));
+        append(builder, request.getAttachments().get(URLParamType.module.getName()));
         append(builder, request.getAttachments().get(MotanConstants.CONTENT_LENGTH));
         append(builder, response == null ? "0" : response.getAttachments().get(MotanConstants.CONTENT_LENGTH));
         append(builder, segmentTime);

@@ -30,7 +30,7 @@ public class FaultInjectCommandHandler extends AbstractAdminCommandHandler {
     static {
         String filters = MotanGlobalConfigUtil.getConfig(ENV_GLOBAL_FILTERS);
         filters = StringUtils.isBlank(filters) ? "faultInjection" : filters + MotanConstants.COMMA_SEPARATOR + "faultInjection";
-        MotanGlobalConfigUtil.putConfig(ENV_GLOBAL_FILTERS, filters);
+        MotanGlobalConfigUtil.setConfig(ENV_GLOBAL_FILTERS, filters);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class FaultInjectCommandHandler extends AbstractAdminCommandHandler {
             if (configList == null) {
                 throw new MotanServiceException("param configs not correct");
             }
-            FaultInjectionFilter.FaultInjectionUtil.updateConfigs(configList);
+            FaultInjectionFilter.FaultInjectionUtil.setConfigs(configList);
         } else if (commands[1].equals(command)) {
             FaultInjectionFilter.FaultInjectionUtil.clearConfigs();
         }else if (commands[2].equals(command)){

@@ -330,6 +330,8 @@ public class CommandServiceManagerTest {
                     }
                     allowing(registry).discoverService(url);
                     will(returnValue(result));
+                    allowing(registry).unSubscribeService(with(any(URL.class)), with(any(ServiceListener.class)));
+                    allowing(registry).subscribeService(with(any(URL.class)), with(any(ServiceListener.class)));
                 }
                 allowing(registry).subscribeService(with(any(URL.class)), with(any(ServiceListener.class)));
                 allowing(registry).getUrl();

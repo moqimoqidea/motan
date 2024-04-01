@@ -79,7 +79,7 @@ public class DefaultProvider<T> extends AbstractProvider<T> {
             return response;
         }
 
-        boolean defaultThrowExceptionStack = URLParamType.transExceptionStack.getBooleanValue();
+        Object proxyImpl = proxy.getProxyImpl();
         try {
             Object value = method.invoke(proxyImpl, request.getArguments());
             if (value instanceof ResponseFuture) { // async method

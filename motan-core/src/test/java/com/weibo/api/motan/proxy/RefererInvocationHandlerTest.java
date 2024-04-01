@@ -50,7 +50,9 @@ public class RefererInvocationHandlerTest extends BaseTestCase {
 
         List<Cluster> clus = new ArrayList<Cluster>();
         clus.add(cluster);
-        RefererInvocationHandler handler = new RefererInvocationHandler(String.class, clus);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_DIRECT_CONNECT_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_HA_SWITCHER, true);
         Method[] methods = String.class.getMethods();
         try {
             handler.invoke(null, methods[1], null);

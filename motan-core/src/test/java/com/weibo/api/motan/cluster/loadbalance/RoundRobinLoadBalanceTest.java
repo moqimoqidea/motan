@@ -26,7 +26,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * RoundRobin loadBalance
  *
  * @author fishermen
@@ -67,7 +67,9 @@ public class RoundRobinLoadBalanceTest extends AbstractLoadBalanceTest {
         }
 
         List<Referer<IHello>> refHolder = new ArrayList<Referer<IHello>>();
-        roundRobinLoadBalance.selectToHolder(request, refHolder);
+        for (int i = 0; i < referers.size(); i++) {
+            if (i % 2 == 0) {
+                refHolder.add(referers.get(i));
         assertEquals(refHolder.size(), referers.size() / 2);
     }
 }

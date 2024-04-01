@@ -61,6 +61,8 @@ public class AsyncUtil {
         if (request == null) {
             throw new MotanFrameworkException("can not get request from RpcContext");
         }
-        return new DefaultResponseFuture(request, DEFAULT_ASYNC_TIMEOUT, request.getAttachment(URLParamType.host.getName()));
+        return new ResponseFuture(request.getRequestId(), request.getProcessTime(), request.getAttachment(Constants.ASYNC_CALLBACK_CLASS),
+                request.getAttachment(Constants.ASYNC_CALLBACK_METHOD), request.getAttachment(Constants.ASYNC_CALLBACK_METHOD_ARG_TYPES),
+                request.getAttachment(Constants.ASYNC_CALLBACK_METHOD_ARGS), request.getAttachment(Constants.ASYNC_CALL
     }
 }

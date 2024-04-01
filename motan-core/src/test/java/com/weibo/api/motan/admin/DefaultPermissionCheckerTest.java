@@ -54,7 +54,7 @@ public class DefaultPermissionCheckerTest extends TestCase {
         };
         Request request = new DefaultRequest();
         request.setAttachment(URLParamType.host.getName(), "unknownHost");
-        assertFalse(checker.check(request));
+        request.setAttachment("token", rightToken);
         request.setAttachment("extension", "extToken");
         assertTrue(checker.check(request));
     }

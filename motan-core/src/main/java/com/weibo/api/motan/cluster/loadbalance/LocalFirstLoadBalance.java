@@ -103,7 +103,9 @@ public class LocalFirstLoadBalance<T> extends AbstractLoadBalance<T> {
 
         if (!localReferers.isEmpty()) {
             Collections.sort(localReferers, new LowActivePriorityComparator<T>());
-            refersHolder.addAll(localReferers);
+            for (int i = 0; i < MAX_REFERER_COUNT && i < localReferers.size(); i++) {
+                refersHolder.add(localReferers.get(i));
+            }
         }
 
         int refererSize = referers.size();

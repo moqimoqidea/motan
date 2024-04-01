@@ -141,7 +141,9 @@ public class ClusterSpi<T> implements Cluster<T> {
         }
 
         if (!delayDestroyReferers.isEmpty()) {
-            RefererSupports.delayDestroy(delayDestroyReferers);
+            for (Referer<T> referer : delayDestroyReferers) {
+                referer.destroy();
+            }
         }
     }
 
@@ -195,7 +197,7 @@ public class ClusterSpi<T> implements Cluster<T> {
             }
         }
 
-        return MotanFrameworkUtil.buildErrorResponse(request, cause);
+        return null;
     }
 
 }

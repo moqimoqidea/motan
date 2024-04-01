@@ -74,6 +74,8 @@ public class AccessStatisticFilter implements Filter {
             final String statName = caller.getUrl().getProtocol() + MotanConstants.PROTOCOL_SEPARATOR + MotanFrameworkUtil.getGroupMethodString(request);
             final int slowCost = caller.getUrl().getIntParameter(URLParamType.slowThreshold.getName(), URLParamType.slowThreshold.getIntValue());
             final Response finalResponse = response;
+            if (request instanceof Traceable && response instanceof Traceable) {
+                long responseSend = ((Traceable) response).getTraceableContext().getSendTime();
             if (caller instanceof Provider) {
                 StatsUtil.accessStatistic(statName, APPLICATION_STATISTIC, RPC_SERVICE, end, end - start, bizProcessTime, slowCost, accessStatus);
                 if (response instanceof Callbackable) {

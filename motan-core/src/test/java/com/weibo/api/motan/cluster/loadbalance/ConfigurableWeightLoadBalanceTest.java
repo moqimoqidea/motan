@@ -94,7 +94,7 @@ public class ConfigurableWeightLoadBalanceTest {
             }
         }
 
-        balance = new ConfigurableWeightLoadBalance();
+        // FIXME: The Completion Code is Empty.
         balance.setWeightString(sb.substring(0, sb.length() - 1));
         balance.onRefresh(list);
         return counterMap;

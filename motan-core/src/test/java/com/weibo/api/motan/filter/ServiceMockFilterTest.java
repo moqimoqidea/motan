@@ -74,7 +74,9 @@ public class ServiceMockFilterTest extends BaseTestCase {
             }
         });
 
-        Response mockResponse = smfilter.filter(caller, request);
+        final URL url =
+                new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.getLocalAddress().getHostAddress(), 0, RegistryService.class.getName());
+        url.addParameter(URLParamType.mock.getName(), "default");
 
         assertEquals(mockResponse.getValue(), new IHelloMock().hello());
     }
