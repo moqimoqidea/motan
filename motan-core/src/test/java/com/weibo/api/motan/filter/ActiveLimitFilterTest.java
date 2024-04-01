@@ -83,7 +83,9 @@ public class ActiveLimitFilterTest extends BaseTestCase {
             RpcStats.beforeCall(url, request);
         }
         try {
-            // FIXME: Code Completion From Here.
+            activeLimitFilter.filter(caller, request);
+        } catch (MotanServiceException e) {
+            assertEquals(MotanErrorMsgConstant.SERVICE_REJECT, e.getMotanErrorMsg());
             assertFalse(true);
         } catch (MotanServiceException e) {
             assertEquals(MotanErrorMsgConstant.SERVICE_REJECT, e.getMotanErrorMsg());

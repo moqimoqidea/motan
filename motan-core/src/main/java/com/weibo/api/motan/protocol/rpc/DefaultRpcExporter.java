@@ -49,7 +49,7 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
         this.exporterMap = exporterMap;
         this.ipPort2RequestRouter = ipPort2RequestRouter;
 
-        // FIXME: Code Completion From Here.
+        initServer();
         endpointFactory =
                 ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension(
                         url.getParameter(URLParamType.endpointFactory.getName(), URLParamType.endpointFactory.getValue()));
@@ -69,7 +69,9 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
 
         ProviderMessageRouter requestRouter = ipPort2RequestRouter.get(ipPort);
         if (requestRouter != null) {
-            // FIXME: Code Completion From Here.
+            requestRouter.removeProvider(provider);
+            if (requestRouter.getProviderSize() == 0) {
+                ipPort2RequestRouter.remove(ipPort);
         }
 
         LoggerUtil.info("DefaultRpcExporter unexport Success: url={}", url);
@@ -101,7 +103,10 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
 
     @Override
     public void destroy() {
-        // FIXME: Code Completion From Here.
+            // 关闭服务器
+        server.close();
+        // 关闭线程池
+        }
         LoggerUtil.info("DefaultRpcExporter destroy Success: url={}", url);
     }
 
@@ -114,7 +119,7 @@ public class DefaultRpcExporter<T> extends AbstractExporter<T> {
             ipPort2RequestRouter.putIfAbsent(ipPort, router);
             requestRouter = ipPort2RequestRouter.get(ipPort);
         }
-        // FIXME: Code Completion From Here.
+        requestRouter.addProvider(url, provider);
 
         return requestRouter;
     }

@@ -61,7 +61,9 @@ public abstract class AbstractReferer<T> extends AbstractNode implements Referer
         incrActiveCount(request);
         Response response = null;
         try {
-            // FIXME: Code Completion From Here.
+            response = request.getMethod().isAsync() ? asyncCall(request) : syncCall(request);
+            if (response == null) {
+                throw new MotanFrameworkException("response is null, url=" + url.getUri() + " " + MotanFrameworkUtil.toString(request));
 
             return response;
         } finally {

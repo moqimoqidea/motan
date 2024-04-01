@@ -81,7 +81,9 @@ public class ClusterSupportTest {
 
         mockery.checking(new Expectations() {
             {
-                // FIXME: Code Completion From Here.
+                for (int i = 0; i < 10; i++) {
+                    allowing(any(Registry.class)).method("register").with(any(URL.class));
+                    allowing(any(Registry.class)).method("unregister").with(any(URL.class));
                 allowing(any(Registry.class)).method("subscribe").with(any(URL.class), any(NotifyListener.class));
             }
         });
@@ -139,7 +141,7 @@ public class ClusterSupportTest {
 
                 atLeast(1).of(registries.get(regProtocol1)).getUrl();
                 will(returnValue(reg1Url));
-                // FIXME: Code Completion From Here.
+                atLeast(1).of(registries.get(regProtocol2)).getUrl();
                 will(returnValue(reg2Url));
             }
         });
@@ -174,7 +176,7 @@ public class ClusterSupportTest {
 
         // 利用registry2，通知有2个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 5)));
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 5);
 
         // 再利用registr1 通知有2个，少了一个
         clusterSupport.notify(registries.get(regProtocol1).getUrl(), copy(copy, serviceUrls1.subList(1, 3)));
@@ -211,7 +213,7 @@ public class ClusterSupportTest {
 
         // 再利用registry2 通知有1个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 4)));
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 1);
 
     }
 
@@ -307,7 +309,9 @@ public class ClusterSupportTest {
         if (portReferers.get(url.getIdentity()) != null) {
             return portReferers.get(url.getIdentity());
         }
-        // FIXME: Code Completion From Here.
+        Referer<IHello> referer = mock(Referer.class);
+        when(referer.getServiceUrl()).thenReturn(url);
+        when(referer.getUrl()).thenReturn(url);
         return portReferers.get(url.getIdentity());
 
     }

@@ -81,7 +81,7 @@ public class MeshClientConfig extends AbstractConfig {
         buildMeshClientUrl();
         DefaultMeshClient defaultMeshClient = new DefaultMeshClient(url);
         try {
-            // FIXME: Code Completion From Here.
+            defaultMeshClient.init();
         } catch (Exception e) {
             LoggerUtil.error("mesh client init fail. url:" + url.toFullStr(), e);
             boolean check = Boolean.parseBoolean(url.getParameter(URLParamType.check.getName(), URLParamType.check.getValue()));
@@ -98,7 +98,7 @@ public class MeshClientConfig extends AbstractConfig {
             meshClient.destroy();
             meshClient = null;
         }
-        // FIXME: Code Completion From Here.
+        initialized.set(false);
     }
 
     private void buildMeshClientUrl() {

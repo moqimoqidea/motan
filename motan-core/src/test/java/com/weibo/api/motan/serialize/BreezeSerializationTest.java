@@ -49,7 +49,9 @@ public class BreezeSerializationTest {
     public void testException() throws IOException {
         MotanFrameworkException exception = new MotanFrameworkException("just test");
         BreezeSerialization serialization = new BreezeSerialization();
-        // FIXME: Code Completion From Here.
+        byte[] bytes = serialization.serialize(exception);
+        assertNotNull(bytes);
+        assertTrue(bytes.length > 0);
         try {
             MotanFrameworkException result = serialization.deserialize(bytes, MotanFrameworkException.class);
             fail();

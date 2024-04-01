@@ -57,7 +57,7 @@ public class DefaultMeshClientTest {
         assertFalse(meshClient.isAvailable());
 
         meshClient.init();
-        // FIXME: Code Completion From Here.
+        assertNotNull(meshClient.innerReferer);
         assertTrue(meshClient.isAvailable());
     }
 

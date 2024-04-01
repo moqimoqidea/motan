@@ -78,7 +78,7 @@ public class DefaultResponseFutureTest {
     public void testCancel() {
         DefaultRequest request = new DefaultRequest();
         DefaultResponseFuture response = new DefaultResponseFuture(request, 10, url);
-        // FIXME: Code Completion From Here.
+        response.cancel();
         try {
             response.getValue();
             fail();
@@ -115,7 +115,7 @@ public class DefaultResponseFutureTest {
         String key = "ddd";
         String value = "xxx";
         responseFuture.getTraceableContext().setReceiveTime(receiveTime);
-        // FIXME: Code Completion From Here.
+        responseFuture.getTraceableContext().setTraceInfo(key, value);
 
         // add attachment
         responseFuture.setAttachment("aaa", "bbb");
@@ -141,7 +141,9 @@ public class DefaultResponseFutureTest {
         DefaultResponseFuture responseFuture = new DefaultResponseFuture(new DefaultRequest(), 100, "127.0.0.1");
         String errMsg = "biz fail";
         responseFuture.onFailure(new RuntimeException(errMsg));
-        // FIXME: Code Completion From Here.
+        DefaultResponse defaultResponse = DefaultResponse.fromServerEndResponseFuture(responseFuture);
+        assertEquals(receiveTime, defaultResponse.getTraceableContext().getReceiveTime());
+        assertEquals(value, defaultResponse.getTraceableContext().getTraceInfo(key));
         assertTrue(defaultResponse.getException() instanceof MotanBizException); // check exception type
         assertTrue(defaultResponse.getException().getCause() instanceof RuntimeException);
         assertEquals(errMsg, defaultResponse.getException().getCause().getMessage());

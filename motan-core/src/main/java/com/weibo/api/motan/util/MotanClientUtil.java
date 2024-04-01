@@ -44,7 +44,7 @@ public class MotanClientUtil {
         request.setRequestId(RequestIdGenerator.getRequestId());
         request.setInterfaceName(interfaceName);
         request.setMethodName(methodName);
-        // FIXME: Code Completion From Here.
+        request.setArguments(arguments);
         if (StringUtils.isNotEmpty(paramtersDesc)) {
             request.setParamtersDesc(paramtersDesc);
         }

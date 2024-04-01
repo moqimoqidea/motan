@@ -49,7 +49,7 @@ public class FastJsonSerializationTest {
             classes[i] = params[i].getClass();
         }
         Object[] result = serialization.deserializeMulti(bytes, classes);
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(params.length, result.length);
         Assert.assertEquals(((UserAttentions) params[0]).getUid(), ((UserAttentions) result[0]).getUid());
         for (int i = 1; i < params.length; i++) {
             Assert.assertEquals(params[i], result[i]);

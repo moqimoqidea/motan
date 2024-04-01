@@ -135,7 +135,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
                 MethodInfo old = methodDescMap.get(newMethodInfo.getMethodName());
                 if (!old.isDuplicate()) {
                     methodDescMap.put(old.getMethodName() + old.getMethodDesc(), old);
-                    // FIXME: Code Completion From Here.
+                    old.setDuplicate(true);
                 }
                 methodDescMap.put(newMethodInfo.getMethodName() + newMethodInfo.getMethodDesc(), newMethodInfo);
             }
@@ -296,7 +296,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
         httpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, httpResponse.content().readableBytes());
 
         if (keepAlive) {
-            // FIXME: Code Completion From Here.
+            httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
         } else {
             httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
         }

@@ -59,7 +59,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
         refererConfig1 = createRefererConfig(IHello.class);
         refererConfig1.setProtocol(mockProtocolConfig(MotanConstants.PROTOCOL_MOTAN));
         refererConfig1.setVersion(version);
-        // FIXME: Code Completion From Here.
+        refererConfig1.setRegistry(registryConfig);
 
         refererConfig2 = createRefererConfig(IHello.class);
         refererConfig2.setProtocol(mockProtocolConfig(MotanConstants.PROTOCOL_MOTAN));
@@ -118,7 +118,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
             serviceConfig2.export();
 
             refererConfig1.setVersion("1.0");
-            // FIXME: Code Completion From Here.
+            IHello hello1 = refererConfig1.getRef();
             validateCall(port1, 3, hello1);
 
             refererConfig2.setVersion("2.0");
@@ -148,7 +148,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
             MockClient.urlMap.clear();
 
             serviceConfig2.setGroup("group2");
-            // FIXME: Code Completion From Here.
+            serviceConfig2.export();
 
             refererConfig2.setGroup("group1");
             IHello hello2 = refererConfig2.getRef();

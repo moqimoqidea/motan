@@ -39,7 +39,7 @@ public class RefererCommonHandler<T> extends AbstractRefererHandler<T> implement
 
     @Override
     public Request buildRequest(String methodName, Object[] arguments) {
-        // FIXME: Code Completion From Here.
+        return MotanClientUtil.buildRequest(methodName, arguments);
     }
 
     @Override

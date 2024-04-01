@@ -59,7 +59,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
             @Override
             public void close() {
                 if(!retryExecutor.isShutdown()){
-                    // FIXME: Code Completion From Here.
+                    retryExecutor.shutdown();
                 }
             }
         });
@@ -92,7 +92,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
             if (isCheckingUrls(getUrl(), url)) {
                 throw new MotanFrameworkException(String.format("[%s] false to registery %s to %s", registryClassName, url, getUrl()), e);
             }
-            // FIXME: Code Completion From Here.
+            failedRegistered.add(url);
         }
     }
 
@@ -125,7 +125,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                 LoggerUtil.warn(String.format("[%s] false to subscribe %s from %s", registryClassName, url, getUrl()), e);
                 throw new MotanFrameworkException(String.format("[%s] false to subscribe %s from %s", registryClassName, url, getUrl()), e);
             }
-            // FIXME: Code Completion From Here.
+            addToFailedMap(failedSubscribed, url, listener);
         }
     }
 
@@ -253,7 +253,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         Set<NotifyListener> listeners = entry.getValue();
                         for (NotifyListener listener : listeners) {
                             super.unsubscribe(url, listener);
-                            // FIXME: Code Completion From Here.
+                            removeForFailedSubAndUnsub(url, listener);
                         }
                     }
                 } catch (Exception e) {

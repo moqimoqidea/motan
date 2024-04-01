@@ -118,7 +118,7 @@ public class GrpcServer{
         synchronized (serviceDefinetions) {
             registry.removeService(serviceDefinetions.remove(url));
             if(httpHandler != null){
-                // FIXME: Code Completion From Here.
+                httpHandler.removeProvider(url);
             }
             if(serviceDefinetions.isEmpty()){
                 server.shutdown();

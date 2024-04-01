@@ -69,7 +69,7 @@ public class DefaultGlobalConfig implements GlobalConfig {
                 if (override) {
                     this.configs.put(entry.getKey(), entry.getValue());
                 } else {
-                    // FIXME: Code Completion From Here.
+                    this.configs.putIfAbsent(entry.getKey(), entry.getValue());
                 }
             }
         }

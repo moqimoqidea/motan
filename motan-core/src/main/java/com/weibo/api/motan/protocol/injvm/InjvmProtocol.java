@@ -72,7 +72,7 @@ public class InjvmProtocol extends AbstractProtocol {
         public void unexport() {
             String protocolKey = MotanFrameworkUtil.getProtocolKey(url);
 
-            // FIXME: Code Completion From Here.
+            Exporter<T> exporter = (Exporter<T>) exporterMap.remove(protocolKey);
 
             if (exporter != null) {
                 exporter.destroy();
@@ -111,7 +111,7 @@ public class InjvmProtocol extends AbstractProtocol {
                         MotanErrorMsgConstant.SERVICE_UNFOUND);
             }
 
-            // FIXME: Code Completion From Here.
+            return exporter.call(request);
         }
 
         @SuppressWarnings("unchecked")

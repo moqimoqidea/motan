@@ -116,7 +116,8 @@ public class DefaultRpcProtocolTest {
 
         DefaultRequest request = new DefaultRequest();
         request.setMethodName("hello");
-        // FIXME: Code Completion From Here.
+        request.setParameterTypes(new Class[]{String.class});
+        request.setArguments(new Object[]{"world"});
 
         Response response = referer.call(request);
 

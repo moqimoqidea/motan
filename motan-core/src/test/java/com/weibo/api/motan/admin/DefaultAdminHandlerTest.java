@@ -64,7 +64,7 @@ public class DefaultAdminHandlerTest extends TestCase {
 
     private void checkOk(DefaultRequest request, String existKey) {
         Response response = AdminUtil.getDefaultAdminHandler().handle(request);
-        // FIXME: Code Completion From Here.
+        JSONObject jsonObject = JSONObject.parseObject(response.getValue());
         assertEquals("ok", jsonObject.get("result"));
         assertNotNull(jsonObject.get(existKey));
     }

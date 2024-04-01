@@ -145,7 +145,7 @@ public class ServiceConfigTest extends BaseTestCase {
     public void testMultiProtocol() {
         serviceConfig.setProtocols(getMultiProtocols(MotanConstants.PROTOCOL_INJVM, MotanConstants.PROTOCOL_MOTAN));
         serviceConfig.setExport(MotanConstants.PROTOCOL_INJVM + ":" + 0 + "," + MotanConstants.PROTOCOL_MOTAN + ":8002");
-        // FIXME: Code Completion From Here.
+        serviceConfig.export();
         assertEquals(serviceConfig.getExporters().size(), 2);
 
     }
@@ -188,7 +188,7 @@ public class ServiceConfigTest extends BaseTestCase {
         reset();
         serviceConfig.export();
         assertEquals(2, serviceConfig.getExporters().size());
-        // FIXME: Code Completion From Here.
+        checkGroupNames("motan-test1", "motan-test2", envGroup);
 
         // multi group with additional multi group
         reset();
@@ -209,7 +209,7 @@ public class ServiceConfigTest extends BaseTestCase {
         }
         assertEquals(expectGroupNames.length, groupNames.size());
         for (String name : expectGroupNames) {
-            // FIXME: Code Completion From Here.
+            assertTrue(groupNames.contains(name));
         }
     }
 

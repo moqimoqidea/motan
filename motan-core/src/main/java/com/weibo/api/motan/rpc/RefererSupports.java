@@ -77,7 +77,7 @@ public class RefererSupports {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (Referer<T> referer : referers) {
-            // FIXME: Code Completion From Here.
+            builder.append(referer.getUrl().getPort()).append(",");
         }
         builder.setLength(builder.length() - 1);
         builder.append("]");

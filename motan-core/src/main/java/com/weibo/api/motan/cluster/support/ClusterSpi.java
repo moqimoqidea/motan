@@ -71,7 +71,7 @@ public class ClusterSpi<T> implements Cluster<T> {
     public Response call(Request request) {
         if (available.get()) {
             try {
-                // FIXME: Code Completion From Here.
+                return haStrategy.call(request, loadBalance);
             } catch (Exception e) {
                 return callFalse(request, e);
             }
@@ -141,7 +141,9 @@ public class ClusterSpi<T> implements Cluster<T> {
         }
 
         if (!delayDestroyReferers.isEmpty()) {
-            // FIXME: Code Completion From Here.
+            for (Referer<T> referer : delayDestroyReferers) {
+                referer.destroy();
+            }
         }
     }
 
@@ -195,7 +197,7 @@ public class ClusterSpi<T> implements Cluster<T> {
             }
         }
 
-        // FIXME: Code Completion From Here.
+        return null;
     }
 
 }

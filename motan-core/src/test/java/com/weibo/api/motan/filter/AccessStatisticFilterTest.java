@@ -147,6 +147,8 @@ public class AccessStatisticFilterTest extends BaseTestCase {
             }
         });
 
-        // FIXME: Code Completion From Here.
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_REGISTER_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(MotanConstants.REGISTRY_AVAILABLE_SWITCHER, true);
     }
 }

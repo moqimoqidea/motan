@@ -52,7 +52,9 @@ public abstract class AbstractAdminServer implements AdminServer {
             Request request = (Request) message;
             // process parameter, the parameter type is unified as Map<String, String>
             processLazyDeserialize(request);
-            // FIXME: Code Completion From Here.
+            // process request
+            Response response = adminHandler.handle(request);
+            // set response
             response.setSerializeNumber(request.getSerializeNumber());
             response.setRpcProtocolVersion(request.getRpcProtocolVersion());
             return response;

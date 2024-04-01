@@ -65,7 +65,7 @@ public class RequestIdGeneratorTest {
         Assert.assertEquals(threadNum, memory.size());
         for(Future<Boolean> future: futureList){
             try {
-                // FIXME: Code Completion From Here.
+                Assert.assertTrue(future.get());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (ExecutionException e) {

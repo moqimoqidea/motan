@@ -51,7 +51,9 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
     @Before
     public void setUp() throws Exception {
         rpcCodec = new CompressRpcCodec();
-        // FIXME: Code Completion From Here.
+        rpcCodec.setUrl(url);
+        rpcCodec.setNext(new DefaultRpcCodec());
+        // 关闭开关
         boolean isopen =
                 MotanSwitcherUtil.switcherIsOpenWithDefault(CompressRpcCodec.GROUP_CODEC_VERSION_SWITCHER + URLParamType.group.getValue(),
                         false);
@@ -72,7 +74,9 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         assertTrue(isCompressVersion(bytes));
         // 整体开关测试
         MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, true);
-        // FIXME: Code Completion From Here.
+        bytes = rpcCodec.encode(channel, request);
+        assertTrue(isCompressVersion(bytes));
+        // 整体开关测试
         assertTrue(isV1Version(bytes));
         // 分组开关测试
         MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, false);
@@ -90,7 +94,9 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         Codec v1Codec = new DefaultRpcCodec();
         byte[] bytes = v1Codec.encode(channel, request);
         assertTrue(isV1Version(bytes));
-        // FIXME: Code Completion From Here.
+        // 测试兼容性
+        MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, true);
+        MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.GROUP_CODEC_VERSION_SWITCHER + URLParamType.group.getValue(), false);
 
         Assert.assertTrue(equals(request, result));
     }
@@ -177,7 +183,8 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         int bodyLength = ByteUtil.bytes2int(bytes, 12);
         byte[] body = new byte[bodyLength];
         System.arraycopy(bytes, RpcProtocolVersion.VERSION_1.getHeaderLength(), body, 0, bodyLength);
-        // FIXME: Code Completion From Here.
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
+        InputStream inputStream = new GZIPInputStream(byteArrayInputStream);
         return inputStream instanceof GZIPInputStream;
     }
 

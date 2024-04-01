@@ -108,7 +108,8 @@ public class FailoverHaStrategyTest extends BaseTestCase {
         request.setArguments(new Object[]{});
         request.setInterfaceName(IHello.class.getSimpleName());
         request.setParamtersDesc("void");
-        // FIXME: Code Completion From Here.
+        final DefaultResponse response = new DefaultResponse();
+        response.setException(new MotanServiceException("mock throw exception when call"));
         final URL url = URL.valueOf("motan%3A%2F%2F10.209.128.244%3A8000%2Fcom.weibo.api.motan.protocol.example.IWorld%3Fprotocol%3Dmotan%26export%3Dmotan%3A8000%26application%3Dapi%26module%3Dtest%26check%3Dtrue%26refreshTimestamp%3D1373275099717%26methodconfig.world%28void%29.retries%3D1%26id%3Dmotan%26methodconfig.world%28java.lang.String%29.retries%3D1%26methodconfig.world%28java.lang.String%2Cboolean%29.retries%3D1%26nodeType%3Dservice%26group%3Dwangzhe-test-yf%26shareChannel%3Dtrue%26&");
 
         mockery.checking(new Expectations() {

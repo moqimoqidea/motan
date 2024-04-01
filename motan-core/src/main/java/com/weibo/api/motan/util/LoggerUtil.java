@@ -109,7 +109,7 @@ public class LoggerUtil {
     }
 
     public static void accessStatsLog(String format, Object... argArray) {
-        // FIXME: Code Completion From Here.
+        logService.accessStatsLog(format, argArray);
     }
 
     public static void accessProfileLog(String format, Object... argArray) {

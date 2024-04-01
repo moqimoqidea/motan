@@ -59,7 +59,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
         groupServiceCache = new ConcurrentHashMap<>();
         weights = new ConcurrentHashMap<>();
         // 从url里处理静态指令。仅处理流控指令
-        // FIXME: Code Completion From Here.
+        String mixGroupsString = refUrl.getParameter(MotanConstants.MIX_GROUPS_KEY);
         if (StringUtils.isNotBlank(mixGroupsString)) {
             LoggerUtil.info("CommandServiceManager process mixGroups:" + mixGroupsString);
             List<String> mergeGroups = new ArrayList<>();
@@ -82,7 +82,9 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                 clientCommand.setRemark("static command of mix groups");
                 clientCommand.setVersion("1.0");
                 clientCommandList.add(clientCommand);
-                // FIXME: Code Completion From Here.
+                staticCommand.setClientCommandList(clientCommandList);
+                staticCommand.sort();
+                commandStringCache = staticCommand.toString();
                 LoggerUtil.info("set static command. url: " + refUrl.toSimpleString() + ", merge group: " + mergeGroups);
             }
 
@@ -111,7 +113,9 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
         if (!StringUtils.equals(commandString, commandStringCache)) {
             commandStringCache = commandString;
-            // FIXME: Code Completion From Here.
+            // 解析指令
+            commandCache = CommandParser.parse(commandString);
+            // 解析失败时，不能清空缓存，否则会导致服务不可用
             if (commandCache == null && StringUtils.isNotBlank(commandString)) {
                 LoggerUtil.warn("command parse fail, ignored! command:" + commandString);
             }
@@ -147,7 +151,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
         for (NotifyListener notifyListener : notifySet) {
             try {
-                // FIXME: Code Completion From Here.
+                notifyListener.notifyService(refUrl, finalResult);
             } catch (Exception e) {
                 LoggerUtil.error("CommandServiceManager notify listener fail. listener:" + notifyListener.toString(), e);
             }
@@ -176,7 +180,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
         // 动态指令无效时，静态指令生效
         if (staticCommand != null) {
             for (RpcCommand.ClientCommand command : staticCommand.getClientCommandList()) {
-                // FIXME: Code Completion From Here.
+                hit = processTrafficCommand(command, weights, localIP, mergedResult);
                 if (hit) {
                     LoggerUtil.info("discoverServiceWithCommand: hit with static command. result size: " + mergedResult.size() + ", remark: " + command.getRemark());
                     return mergedResult;
@@ -207,7 +211,9 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                         return false;
                     }
                     // 根据计算结果，分别发现各个group的service，合并结果
-                    // FIXME: Code Completion From Here.
+                    if (isMixMode) {
+                        mergedResult.addAll(mergeResult(refUrl, weights, true));
+                    } else {
                 } else {
                     mergedResult.addAll(discoverOneGroup(refUrl));
                 }
@@ -263,7 +269,8 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                                 if (idx != -1) {
                                     matchTo = url.getHost().startsWith(to.substring(0, idx));
                                 } else {
-                                    // FIXME: Code Completion From Here.
+                                    matchTo = url.getHost().equals(to);
+                                }
                                 }
                                 if (oppositeTo) {
                                     matchTo = !matchTo;
@@ -300,7 +307,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                     weight = MAX_WEIGHT;
                 }
             }
-            // FIXME: Code Completion From Here.
+            weights.put(gw[0], weight);
         }
         return isMixMode;
     }
@@ -327,7 +334,8 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                 URL urlTemp = url.createCopy();
                 urlTemp.addParameter(URLParamType.group.getName(), key);
                 finalResult.addAll(discoverOneGroup(urlTemp));
-                // FIXME: Code Completion From Here.
+                groupServiceCache.put(key, finalResult);
+                LoggerUtil.info("add group service url. group: " + key);
             }
         }
         return finalResult;
@@ -340,7 +348,9 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
     void setCommandCache(String command) {
         commandStringCache = command;
-        // FIXME: Code Completion From Here.
+        commandCache = CommandUtil.parseCommand(commandStringCache);
+        if (commandCache == null) {
+            routeRuleConfigError();
         LoggerUtil.info("CommandServiceManager set command cache. command string:" + commandStringCache + ", command cache "
                 + (commandCache == null ? "is null." : "is not null."));
     }

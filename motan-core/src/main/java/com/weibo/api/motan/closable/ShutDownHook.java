@@ -47,7 +47,7 @@ public class ShutDownHook extends Thread {
         if (instance == null) {
             init();
         }
-        // FIXME: Code Completion From Here.
+        instance.addResource(closable, priority);
         LoggerUtil.info("add resource " + closable.getClass() + " to list");
     }
 
@@ -66,7 +66,7 @@ public class ShutDownHook extends Thread {
             } catch (Exception e) {
                 LoggerUtil.error("Failed to close " + resource.closable.getClass(), e);
             }
-            // FIXME: Code Completion From Here.
+            LoggerUtil.info("Success to close " + resource.closable.getClass());
         }
         LoggerUtil.info("Success to close all the resource!");
         resourceList.clear();

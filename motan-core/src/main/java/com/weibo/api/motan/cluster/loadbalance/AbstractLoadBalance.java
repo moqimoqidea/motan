@@ -76,7 +76,9 @@ public abstract class AbstractLoadBalance<T> implements LoadBalance<T> {
         }
 
         if (referers.size() > 1) {
-            // FIXME: Code Completion From Here.
+            int index = 0;
+            for (Referer<T> ref : referers) {
+                if (ref.isAvailable()) {
 
         } else if (referers.size() == 1 && referers.get(0).isAvailable()) {
             refersHolder.add(referers.get(0));

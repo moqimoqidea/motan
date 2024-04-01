@@ -79,7 +79,9 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         this.registryUrls = registryUrls;
         this.interfaceClass = interfaceClass;
         this.url = refUrl;
-        // FIXME: Code Completion From Here.
+        this.protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension(url.getProtocol());
+        this.cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getExtension(url.getParameter(URLParamType.cluster.getName(), URLParamType.cluster.getValue()));
+        this.cluster.init(url);
         int maxConnectionCount = this.url.getIntParameter(URLParamType.maxConnectionPerGroup.getName(), URLParamType.maxConnectionPerGroup.getIntValue());
         int maxClientConnection = this.url.getIntParameter(URLParamType.maxClientConnection.getName(), URLParamType.maxClientConnection.getIntValue());
         selectNodeCount = (int) Math.ceil(1.0 * maxConnectionCount / maxClientConnection);
@@ -97,7 +99,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             if (StringUtils.isNotBlank(directUrlStr)) {
                 List<URL> directUrls = UrlUtils.stringToURLs(directUrlStr);
                 if (!directUrls.isEmpty()) {
-                    // FIXME: Code Completion From Here.
+                    doRefreshReferersByUrls(ru, directUrls);
                     LoggerUtil.info("Use direct urls, refUrl={}, directUrls={}", url, directUrls);
                     continue;
                 }
@@ -117,7 +119,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             }
             LoggerUtil.info("cluster init cost " + (System.currentTimeMillis() - start) + ", refer size:"
                     + (cluster.getReferers() == null ? 0 : cluster.getReferers().size()) + ", cluster:" + cluster.getUrl().toSimpleString());
-            // FIXME: Code Completion From Here.
+            // FIXME: The Completion Code is Empty.
             return;
         }
 
@@ -189,7 +191,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             refreshSet.add(this);
             serviceUrls = selectUrls(registryUrl, urls);
         } else {
-            // FIXME: Code Completion From Here.
+            refreshSet.remove(this);
         }
         doRefreshReferersByUrls(registryUrl, serviceUrls);
     }
@@ -218,7 +220,8 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         }
 
         // 此处不销毁referers，由cluster进行销毁
-        // FIXME: Code Completion From Here.
+        registryReferers.put(registryUrl, newReferers);
+        refreshCluster();
         refreshCluster();
     }
 
@@ -328,7 +331,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         if (urls != null && !urls.isEmpty()) {
             URL ruleUrl = urls.get(0);
             // 没有权重时需要传递默认值。因为可能是变更时去掉了权重
-            // FIXME: Code Completion From Here.
+            String weights = URLParamType.weights.getValue();
             if ("rule".equalsIgnoreCase(ruleUrl.getProtocol())) {
                 weights = ruleUrl.getParameter(URLParamType.weights.getName(), URLParamType.weights.getValue());
                 urls.remove(0);
@@ -381,7 +384,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         String module = refererURL.getParameter(URLParamType.module.getName(), URLParamType.module.getValue());
         refererURL.addParameters(this.url.getParameters());
 
-        // FIXME: Code Completion From Here.
+        refererURL.addParameter(URLParamType.application.getName(), application);
         refererURL.addParameter(URLParamType.module.getName(), module);
     }
 
@@ -425,7 +428,8 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
 
         cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getExtension(clusterName);
         LoadBalance<T> loadBalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getExtension(loadbalanceName);
-        // FIXME: Code Completion From Here.
+        HaStrategy<T> ha = ExtensionLoader.getExtensionLoader(HaStrategy.class).getExtension(haStrategyName);
+        cluster.init();
         ha.setUrl(url);
         cluster.setLoadBalance(loadBalance);
         cluster.setHaStrategy(ha);
@@ -463,7 +467,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
 
             for (URL addedUrl : addedUrls) {
                 int addPosition = ThreadLocalRandom.current().nextInt(baseUrls.size() + 1);
-                // FIXME: Code Completion From Here.
+                baseUrls.add(addPosition, addedUrl);
             }
         }
 

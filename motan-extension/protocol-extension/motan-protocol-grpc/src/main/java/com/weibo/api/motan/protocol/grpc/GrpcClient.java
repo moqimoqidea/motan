@@ -102,7 +102,7 @@ public class GrpcClient {
                 StreamObserver<ReqT> biObserver =
                         ClientCalls.asyncBidiStreamingCall(call, (io.grpc.stub.StreamObserver<RespT>) request.getArguments()[0]);
                 responseFuture.onNext(biObserver);
-                // FIXME: Code Completion From Here.
+                responseFuture.onCompleted();
                 break;
             default:
                 throw new MotanServiceException("unknown grpc method type:" + methodType);

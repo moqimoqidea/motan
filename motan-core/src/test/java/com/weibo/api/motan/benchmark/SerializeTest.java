@@ -82,7 +82,7 @@ public class SerializeTest {
         start = System.nanoTime();
 
         for (int i = 0; i < loop; i++) {
-            // FIXME: Code Completion From Here.
+            serialization.deserialize(bytes, SerializeObject.class);
         }
 
         cost = System.nanoTime() - start;

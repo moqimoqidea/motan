@@ -40,7 +40,9 @@ public class ActivationComparator<T> implements Comparator<T> {
         } else if (p2 == null) {
             return -1;
         } else {
-            // FIXME: Code Completion From Here.
+            int s1 = p1.sequence();
+            int s2 = p2.sequence();
+            if (s1 == s2) {
         }
     }
 

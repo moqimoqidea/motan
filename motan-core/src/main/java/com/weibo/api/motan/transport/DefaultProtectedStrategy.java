@@ -76,7 +76,7 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
         String requestKey = MotanFrameworkUtil.getFullMethodString(request);
 
         try {
-            // FIXME: Code Completion From Here.
+            int requestCounter = incrCounter(requestKey, requestCounters);
             int totalCounter = incrTotalCounter();
             if (isAllowRequest(requestCounter, totalCounter, maxThread)) {
                 return provider.call(request);
@@ -97,7 +97,8 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
         DefaultResponse response = MotanFrameworkUtil.buildErrorResponse(request, exception);
         LoggerUtil.error(exception.getMessage());
         incrCounter(method, rejectCounters);
-        // FIXME: Code Completion From Here.
+        incrRejectCounter();
+        return response;
         return response;
     }
 
@@ -147,7 +148,9 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
 
     @Override
     public String statisticCallback() {
-        // FIXME: Code Completion From Here.
+        int count = 0;
+        for (Map.Entry<String, AtomicInteger> entry : rejectCounters.entrySet()) {
+            count += entry.getValue().get();
         if (count > 0) {
             StringBuilder builder = new StringBuilder();
             builder.append("type:").append("motan").append(" ")

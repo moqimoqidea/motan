@@ -421,7 +421,7 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             for (RegistryConfig config : registries) {
                 List<URL> urls = config.toURLs();
                 if (urls != null && !urls.isEmpty()) {
-                    // FIXME: Code Completion From Here.
+                    registryUrls.addAll(urls);
                 }
             }
         }
@@ -464,7 +464,9 @@ public class AbstractInterfaceConfig extends AbstractConfig {
                     throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not found method " + methodName,
                             MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
                 }
-                // FIXME: Code Completion From Here.
+                if (methodBean.getOninvoke() != null && methodBean.getOnreturn() != null) {
+                    throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not support set oninvoke and onreturn at same time.",
+                            MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
             }
         }
     }
@@ -480,7 +482,9 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             }
         }
 
-        // FIXME: Code Completion From Here.
+        if (regHostPorts.size() > 0) {
+            localAddress = NetUtils.getLocalHostAddress(regHostPorts);
+        }
         if (address != null) {
             localAddress = address.getHostAddress();
         }

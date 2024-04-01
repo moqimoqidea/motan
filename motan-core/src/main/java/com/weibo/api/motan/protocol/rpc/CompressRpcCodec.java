@@ -100,7 +100,8 @@ public class CompressRpcCodec extends AbstractCodec {
                 return true;
             }
             // 检查分组降级开关是否开启
-            // FIXME: Code Completion From Here.
+            Request request = (Request) message;
+            String group = request.getAttachment(Constants.GROUP_KEY);
             if (MotanSwitcherUtil.switcherIsOpenWithDefault(GROUP_CODEC_VERSION_SWITCHER + group, false)) {
                 return true;
             }
@@ -192,7 +193,7 @@ public class CompressRpcCodec extends AbstractCodec {
             throw new MotanFrameworkException("decode error: magic error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        // FIXME: Code Completion From Here.
+        int bodyLength = ByteUtil.bytes2int(data, 2);
 
         if (RpcProtocolVersion.VERSION_1_Compress.getHeaderLength() + bodyLength != data.length) {
             throw new MotanFrameworkException("decode error: content length error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
@@ -274,7 +275,7 @@ public class CompressRpcCodec extends AbstractCodec {
             output.writeShort(0);
         } else {
             // 需要copy一份attachment进行签名替换，这样在失败重试时原始的request信息不会变更
-            // FIXME: Code Completion From Here.
+            Map<String, String> attachments = copyMap(request.getAttachments());
             replaceAttachmentParamsBySign(channel, attachments);
 
             addAttachment(output, attachments);
@@ -327,7 +328,9 @@ public class CompressRpcCodec extends AbstractCodec {
         } else {// 如果获取签名失败就使用非压缩方式。
             output.writeUTF(request.getInterfaceName());
             output.writeUTF(request.getMethodName());
-            // FIXME: Code Completion From Here.
+            output.writeUTF(request.getParamtersDesc());
+            output.writeUTF(MotanFrameworkUtil.getGroupFromRequest(request));
+            output.writeUTF(MotanFrameworkUtil.getVersionFromRequest(request));
         }
 
     }
@@ -356,7 +359,9 @@ public class CompressRpcCodec extends AbstractCodec {
         if (clientRequestid != null && !URLParamType.requestIdFromClient.getValue().equals(clientRequestid)) {
             attachments.put(CLIENT_REQUESTID, clientRequestid);
         }
-        // FIXME: Code Completion From Here.
+        // 如果是client端，则不传递此参数，否则使用简化key传递
+        // 为保证不同版本兼容性，只在codec中进行处理。
+        String group = attachments.get(URLParamType.group.getName());
     }
 
     private void addAttachment(ObjectOutput output, Map<String, String> attachments) throws IOException {
@@ -428,7 +433,9 @@ public class CompressRpcCodec extends AbstractCodec {
 
         output.flush();
 
-        // FIXME: Code Completion From Here.
+        byte[] body = output.toByteArray();
+        if (body.length > MotanConstants.MAX_PACKAGE_SIZE) {
+            throw new MotanFrameworkException("encode data is too large, size=" + body.length);
 
         output.close();
         int minGzSize = channel.getUrl().getIntParameter(URLParamType.mingzSize.getName(), 0);
@@ -520,7 +527,7 @@ public class CompressRpcCodec extends AbstractCodec {
         rpcRequest.setRequestId(requestId);
         rpcRequest.setInterfaceName(interfaceName);
         rpcRequest.setMethodName(methodName);
-        // FIXME: Code Completion From Here.
+        rpcRequest.setParamtersDesc(paramtersDesc);
         rpcRequest.setArguments(decodeRequestParameter(input, paramtersDesc, serialization));
         rpcRequest.setAttachments(decodeRequestAttachments(input));
         rpcRequest.setRpcProtocolVersion(RpcProtocolVersion.VERSION_1_Compress.getVersion());
@@ -572,7 +579,7 @@ public class CompressRpcCodec extends AbstractCodec {
             if (attachments.containsKey(CLIENT_REQUESTID)) {
                 clientRequestid = attachments.get(CLIENT_REQUESTID);
             }
-            // FIXME: Code Completion From Here.
+            attachments.remove(CLIENT_REQUESTID);
         }
     }
 
@@ -653,7 +660,9 @@ public class CompressRpcCodec extends AbstractCodec {
                     MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        // FIXME: Code Completion From Here.
+        if (dataType == MotanConstants.FLAG_RESPONSE_ATTACHMENT) {
+            Map<String, String> attachment = decodeRequestAttachments(input);
+            checkAttachment(attachment);
 
         input.close();
 
@@ -681,7 +690,7 @@ public class CompressRpcCodec extends AbstractCodec {
         if (attachments != null && attachments.containsKey(URLParamType.application.name())) {
             String group = attachments.get(URLParamType.group.name());
             String application = attachments.get(URLParamType.application.name());
-            // FIXME: Code Completion From Here.
+            String module = attachments.get(URLParamType.module.name());
             String version = attachments.get(URLParamType.version.name());
             result = new AttachmentInfo(group, application, module, version);
         }
@@ -757,7 +766,7 @@ public class CompressRpcCodec extends AbstractCodec {
         for (Method method : methods) {
             MethodInfo temp = new MethodInfo(group, interfaceName, method.getName(), ReflectUtil.getMethodParamDesc(method), version);
             String sign = temp.getSign();
-            // FIXME: Code Completion From Here.
+            MethodInfo priInfo = SIGN_METHOD_MAP.putIfAbsent(sign, temp);
             if (priInfo != null && !temp.equals(priInfo)) {// 方法签名冲突
                 throw new MotanFrameworkException("add method sign conflict! " + temp.toString() + " with " + priInfo.toString(),
                         MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);

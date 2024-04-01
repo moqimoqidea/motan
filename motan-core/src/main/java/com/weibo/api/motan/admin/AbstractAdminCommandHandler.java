@@ -34,7 +34,7 @@ public abstract class AbstractAdminCommandHandler implements AdminCommandHandler
     public Response handle(Request request) {
         JSONObject result = new JSONObject();
         result.put("result", "ok"); // default result.
-        // FIXME: Code Completion From Here.
+        process(request.getInterfaceName(), request.getParamtersDesc(), request.getAttachments(), result);
         return AdminUtil.buildResponse(request, result.toJSONString());
     }
 

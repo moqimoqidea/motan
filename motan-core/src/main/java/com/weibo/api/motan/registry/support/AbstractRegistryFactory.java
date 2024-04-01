@@ -49,7 +49,7 @@ public abstract class AbstractRegistryFactory implements RegistryFactory {
         String registryUri = getRegistryUri(url);
         try {
             lock.lock();
-            // FIXME: Code Completion From Here.
+            Registry registry = registries.get(registryUri);
             if (registry != null) {
                 return registry;
             }
