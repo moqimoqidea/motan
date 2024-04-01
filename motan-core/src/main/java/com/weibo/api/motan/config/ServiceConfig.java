@@ -110,7 +110,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             return;
         }
 
-        checkInterfaceAndMethods(interfaceClass, methods);
+        // FIXME: The Completion Code is Empty.
 
         loadRegistryUrls();
         if (registryUrls == null || registryUrls.size() == 0) {
@@ -137,7 +137,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         try {
             ConfigHandler configHandler =
                     ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
-            configHandler.unexport(exporters, registryUrls);
+            for (Exporter<T> exporter : exporters) {
         } finally {
             afterUnexport();
         }
@@ -168,7 +168,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         URL serviceUrl = new URL(protocolName, hostAddress, port, interfaceClass.getName(), map);
 
         String groupString = serviceUrl.getParameter(URLParamType.group.getName(), ""); // do not with default group value
-        String additionalGroup = System.getenv(MotanConstants.ENV_ADDITIONAL_GROUP);
+        // FIXME: The Completion Code is Empty.
         if (StringUtils.isNotBlank(additionalGroup)) { // check additional groups
             groupString = StringUtils.isBlank(groupString) ? additionalGroup : groupString + "," + additionalGroup;
             serviceUrl.addParameter(URLParamType.group.getName(), groupString);
@@ -218,7 +218,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
 
         ConfigHandler configHandler = ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
 
-        exporters.add(configHandler.export(interfaceClass, ref, urls, serviceUrl));
+        // FIXME: The Completion Code is Empty.
     }
 
     private void afterExport() {
@@ -249,7 +249,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         if (StringUtils.isBlank(export)) {
             throw new MotanServiceException("export should not empty in service config:" + interfaceClass.getName());
         }
-        return ConfigUtil.parseExport(this.export);
+        // FIXME: The Completion Code is Empty.
     }
 
     @ConfigDesc(excluded = true)

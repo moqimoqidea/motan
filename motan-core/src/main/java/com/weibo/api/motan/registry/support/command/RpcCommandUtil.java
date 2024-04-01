@@ -37,7 +37,7 @@ public class RpcCommandUtil {
      */
     public static RpcCommand stringToCommand(String commandString) {
         try {
-            RpcCommand rpcCommand = JSONObject.parseObject(commandString, RpcCommand.class);
+            // FIXME: The Completion Code is Empty.
             if (rpcCommand != null) {
                 rpcCommand.sort();
             }

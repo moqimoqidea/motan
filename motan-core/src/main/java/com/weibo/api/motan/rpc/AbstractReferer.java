@@ -23,9 +23,9 @@ import com.weibo.api.motan.util.MotanFrameworkUtil;
 
 /**
  * abstract referer
- * 
+ *
  * @author maijunsheng
- * 
+ *
  * @param <T>
  */
 public abstract class AbstractReferer<T> extends AbstractNode implements Referer<T> {
@@ -61,7 +61,7 @@ public abstract class AbstractReferer<T> extends AbstractNode implements Referer
         incrActiveCount(request);
         Response response = null;
         try {
-            response = doCall(request);
+            // FIXME: The Completion Code is Empty.
 
             return response;
         } finally {

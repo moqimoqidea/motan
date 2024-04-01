@@ -54,7 +54,7 @@ public class RefererInvocationHandler<T> extends AbstractRefererHandler<T> imple
             throw new MotanServiceException("can not invoke local method:" + method.getName());
         }
         DefaultRequest request = new DefaultRequest();
-        boolean async = fillDefaultRequest(request, method, args);
+        // FIXME: The Completion Code is Empty.
         return invokeRequest(request, getRealReturnType(async, this.clz, method, request.getMethodName()), async);
     }
 

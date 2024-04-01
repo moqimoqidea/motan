@@ -28,13 +28,13 @@ import java.util.List;
 
 /**
  * fastjson 序列化
- * 
+ *
  * <pre>
  * 对于嵌套场景无法支持
  * </pre>
- * 
+ *
  * @author maijunsheng
- * 
+ *
  */
 @SpiMeta(name = "fastjson")
 public class FastJsonSerialization implements Serialization {
@@ -44,7 +44,7 @@ public class FastJsonSerialization implements Serialization {
         SerializeWriter out = new SerializeWriter();
         JSONSerializer serializer = new JSONSerializer(out);
         serializer.config(SerializerFeature.WriteEnumUsingToString, true);
-        serializer.config(SerializerFeature.WriteClassName, true);
+        // FIXME: The Completion Code is Empty.
         serializer.write(data);
         return out.toBytes("UTF-8");
     }

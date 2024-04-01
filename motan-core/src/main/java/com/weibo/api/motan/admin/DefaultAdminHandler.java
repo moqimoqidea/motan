@@ -34,7 +34,7 @@ public class DefaultAdminHandler implements AdminHandler {
         if (!pass) {
             return AdminUtil.notAllowed(request);
         }
-        AdminCommandHandler handler = routeHandlers.get(request.getMethodName());
+        String command = request.getAttachment(AdminConstants.CMD);
         if (handler == null) {
             return AdminUtil.unknownCommand(request);
         }

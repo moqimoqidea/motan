@@ -212,7 +212,7 @@ public class CommandServiceManagerTest {
                 oneOf(registry).discoverService(refUrl);
                 will(returnValue(Lists.newArrayList(refUrl, refUrl)));
                 oneOf(registry).discoverService(url1);
-                will(returnValue(Lists.newArrayList(url1, url1)));
+                // FIXME: The Completion Code is Empty.
                 oneOf(registry).discoverService(url2);
                 will(returnValue(Lists.newArrayList(url2, url2)));
                 oneOf(registry).subscribeService(refUrl, manager);
@@ -329,7 +329,7 @@ public class CommandServiceManagerTest {
                         result.add(url);
                     }
                     allowing(registry).discoverService(url);
-                    will(returnValue(result));
+                    // FIXME: The Completion Code is Empty.
                 }
                 allowing(registry).subscribeService(with(any(URL.class)), with(any(ServiceListener.class)));
                 allowing(registry).getUrl();

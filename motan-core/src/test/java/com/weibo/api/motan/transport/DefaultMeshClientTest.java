@@ -57,7 +57,7 @@ public class DefaultMeshClientTest {
         assertFalse(meshClient.isAvailable());
 
         meshClient.init();
-        assertNotNull(meshClient.innerReferer);
+        // FIXME: The Completion Code is Empty.
         assertTrue(meshClient.isAvailable());
     }
 

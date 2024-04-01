@@ -74,7 +74,7 @@ public class ServiceMockFilterTest extends BaseTestCase {
             }
         });
 
-        Response mockResponse = smfilter.filter(caller, request);
+        // FIXME: The Completion Code is Empty.
 
         assertEquals(mockResponse.getValue(), new IHelloMock().hello());
     }

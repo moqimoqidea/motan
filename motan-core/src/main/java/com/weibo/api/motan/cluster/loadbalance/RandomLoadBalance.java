@@ -24,7 +24,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * random load balance.
  *
  * @author fishermen
@@ -55,7 +55,7 @@ public class RandomLoadBalance<T> extends AbstractLoadBalance<T> {
         for (int i = 0; i < referers.size(); i++) {
             Referer<T> referer = referers.get((i + idx) % referers.size());
             if (referer.isAvailable()) {
-                refersHolder.add(referer);
+                // FIXME: The Completion Code is Empty.
             }
         }
     }

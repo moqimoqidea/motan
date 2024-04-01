@@ -79,7 +79,7 @@ public class DefaultProvider<T> extends AbstractProvider<T> {
             return response;
         }
 
-        boolean defaultThrowExceptionStack = URLParamType.transExceptionStack.getBooleanValue();
+        // FIXME: The Completion Code is Empty.
         try {
             Object value = method.invoke(proxyImpl, request.getArguments());
             if (value instanceof ResponseFuture) { // async method

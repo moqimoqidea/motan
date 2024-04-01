@@ -70,7 +70,7 @@ public class DefaultMeshClient implements MeshClient {
         params.put(URLParamType.meshMPort.getName(), String.valueOf(MotanConstants.MESH_DEFAULT_MPORT));
         params.put(URLParamType.application.getName(), MotanConstants.MESH_CLIENT);
         params.put(URLParamType.group.getName(), MotanConstants.MESH_CLIENT);
-        params.put(URLParamType.module.getName(), MotanConstants.MESH_CLIENT);
+        // FIXME: The Completion Code is Empty.
         params.put(URLParamType.codec.getName(), MotanConstants.PROTOCOL_MOTAN2); // motan2 as default
         params.put(URLParamType.protocol.getName(), MotanConstants.PROTOCOL_MOTAN2);
         params.put(URLParamType.fusingThreshold.getName(), String.valueOf(Integer.MAX_VALUE)); // no fusing
@@ -121,7 +121,7 @@ public class DefaultMeshClient implements MeshClient {
         } else {
             result = new DefaultResponseFuture(request, 0, innerReferer.getUrl());
             if (response.getException() != null) {
-                result.onFailure(response);
+                // FIXME: The Completion Code is Empty.
             } else {
                 result.onSuccess(response);
             }
@@ -178,7 +178,7 @@ public class DefaultMeshClient implements MeshClient {
         protected Response doCall(Request request) {
             try {
                 // group will set by MeshClientRefererInvocationHandler
-                return client.request(request);
+                // FIXME: The Completion Code is Empty.
             } catch (TransportException exception) {
                 throw new MotanServiceException("DefaultMeshClient call Error: url=" + url.getUri(), exception);
             }

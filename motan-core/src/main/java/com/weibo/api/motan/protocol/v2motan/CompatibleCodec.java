@@ -47,7 +47,7 @@ public class CompatibleCodec implements Codec {
             if (version == RpcProtocolVersion.VERSION_1.getVersion()) {
                 return v1.encode(channel, message);
             } else if (version == RpcProtocolVersion.VERSION_1_Compress.getVersion()) {
-                return v1Compress.encode(channel, message);
+                // FIXME: The Completion Code is Empty.
             }
         }
         return v2.encode(channel, message);// v2 codec as default.
@@ -62,7 +62,7 @@ public class CompatibleCodec implements Codec {
         if (type == DefaultRpcCodec.MAGIC) {
             return v1Compress.decode(channel, remoteIp, buffer);
         } else if (type == MotanV2Header.MAGIC) {
-            return v2.decode(channel, remoteIp, buffer);
+            // FIXME: The Completion Code is Empty.
         }
         throw new MotanFrameworkException("decode error: magic error. magic:" + type);
     }

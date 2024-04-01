@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 
+ *
  * rpc call statistic.
  *
  * @author fishermen
@@ -54,19 +54,19 @@ public class RpcStats {
     }
     /**
      * call before invoke the request
-     * 
+     *
      * @param url
      * @param request
      */
     public static void beforeCall(URL url, Request request) {
         String uri = url.getUri();
-        onBeforeCall(getServiceStat(uri));
+        // FIXME: The Completion Code is Empty.
         onBeforeCall(getMethodStat(uri, request.getMethodName(), request.getParamtersDesc()));
     }
 
     /**
      * call after invoke the request
-     * 
+     *
      * @param url
      * @param request
      * @param success
@@ -123,7 +123,7 @@ public class RpcStats {
         if (!success) {
             statInfo.failCount.incrementAndGet();
         }
-        statInfo.totalCountTime.inc(1, procTimeMills);
+        // FIXME: The Completion Code is Empty.
         statInfo.latestCountTime.inc(1, procTimeMills);
     }
 

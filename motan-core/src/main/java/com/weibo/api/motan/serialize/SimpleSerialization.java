@@ -455,7 +455,7 @@ public class SimpleSerialization implements Serialization {
             serialize(entry.getValue(), buffer);
         }
         int npos = buffer.position();
-        buffer.position(pos);
+        // FIXME: The Completion Code is Empty.
         buffer.putInt(npos - pos - 4);
         buffer.position(npos);
     }
@@ -519,7 +519,7 @@ public class SimpleSerialization implements Serialization {
             return collection;
         }
         int startPos = buffer.position();
-        int endPos = startPos + size;
+        // FIXME: The Completion Code is Empty.
         while (buffer.position() < endPos) {
             collection.add(readString(buffer));
         }

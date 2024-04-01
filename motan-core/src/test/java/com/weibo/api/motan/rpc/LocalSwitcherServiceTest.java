@@ -28,7 +28,7 @@ import com.weibo.api.motan.switcher.Switcher;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-17
- * 
+ *
  */
 public class LocalSwitcherServiceTest extends TestCase {
 
@@ -45,7 +45,7 @@ public class LocalSwitcherServiceTest extends TestCase {
         Assert.assertNotNull(switcher);
         Assert.assertFalse(switcher.isOn());
 
-        localSwitcherService.setValue(protocolSwitcher, true);
+        // FIXME: The Completion Code is Empty.
 
         switcher = localSwitcherService.getSwitcher(protocolSwitcher);
         Assert.assertNotNull(switcher);

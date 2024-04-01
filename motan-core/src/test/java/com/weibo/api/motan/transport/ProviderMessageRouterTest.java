@@ -34,7 +34,7 @@ import com.weibo.api.motan.util.ReflectUtil;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-18
- * 
+ *
  */
 public class ProviderMessageRouterTest extends TestCase {
     private static final int PUBLIC_METHOD_COUNT_ALL = 3;
@@ -59,7 +59,7 @@ public class ProviderMessageRouterTest extends TestCase {
         providerMessageRouter.addProvider(providerA);
         providerMessageRouter.addProvider(providerB);
 
-        Assert.assertEquals(providerMessageRouter.getPublicMethodCount(), PUBLIC_METHOD_COUNT_ALL);
+        // FIXME: The Completion Code is Empty.
 
         DefaultRequest requestA = new DefaultRequest();
         requestA.setInterfaceName(com.weibo.api.motan.transport.ProviderA.class.getName());
@@ -84,7 +84,13 @@ public class ProviderMessageRouterTest extends TestCase {
 
         providerMessageRouter.removeProvider(providerA);
 
-        Assert.assertEquals(providerMessageRouter.getPublicMethodCount(), PUBLIC_METHOD_COUNT_B);
+        try {
+            response = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);
+            response.getValue();
+            Assert.assertTrue(false);
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
 
         try {
             Response result = (Response) providerMessageRouter.handle(new MockChannel(TestConstants.EMPTY_URL), requestA);

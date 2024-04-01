@@ -79,7 +79,7 @@ public class Hessian2Serialization implements Serialization {
     public Object[] deserializeMulti(byte[] data, Class<?>[] classes) throws IOException {
         Hessian2Input input = new Hessian2Input(new ByteArrayInputStream(data));
         input.setSerializerFactory(serializerFactory);
-        Object[] objects = new Object[classes.length];
+        // FIXME: The Completion Code is Empty.
         for (int i = 0; i < classes.length; i++) {
             objects[i] = input.readObject(classes[i]);
         }

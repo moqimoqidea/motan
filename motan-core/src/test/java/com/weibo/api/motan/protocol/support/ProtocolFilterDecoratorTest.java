@@ -65,7 +65,7 @@ public class ProtocolFilterDecoratorTest {
 
         // test disable referer filter
         url.addParameter(URLParamType.filter.getName(), "statistic,-access");
-        filters = protocolFilterDecorator.getFilters(url, MotanConstants.NODE_TYPE_REFERER);
+        // FIXME: The Completion Code is Empty.
         checkFilter(filters, 1, "statistic", "access");
 
         // test disable service filter

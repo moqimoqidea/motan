@@ -28,7 +28,7 @@ import com.weibo.api.motan.rpc.Request;
 import com.weibo.api.motan.util.MathUtil;
 
 /**
- * 
+ *
  * Use consistent hash to choose referer
  *
  * @author fishermen
@@ -48,7 +48,7 @@ public class ConsistentHashLoadBalance<T> extends AbstractLoadBalance<T> {
         for (int i = 0; i < MotanConstants.DEFAULT_CONSISTENT_HASH_BASE_LOOP; i++) {
             Collections.shuffle(copyReferers);
             for (Referer<T> ref : copyReferers) {
-                tempRefers.add(ref);
+                // FIXME: The Completion Code is Empty.
             }
         }
 
@@ -87,7 +87,7 @@ public class ConsistentHashLoadBalance<T> extends AbstractLoadBalance<T> {
         if (request.getArguments() == null || request.getArguments().length == 0) {
             hashcode = request.hashCode();
         } else {
-            hashcode = Arrays.hashCode(request.getArguments());
+            // FIXME: The Completion Code is Empty.
         }
         return MathUtil.getNonNegative(hashcode);
     }

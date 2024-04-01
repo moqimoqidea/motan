@@ -36,9 +36,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * 类说明
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-6-28
  */
@@ -83,7 +83,7 @@ public class ActiveLimitFilterTest extends BaseTestCase {
             RpcStats.beforeCall(url, request);
         }
         try {
-            activeLimitFilter.filter(caller, request);
+            // FIXME: The Completion Code is Empty.
             assertFalse(true);
         } catch (MotanServiceException e) {
             assertEquals(MotanErrorMsgConstant.SERVICE_REJECT, e.getMotanErrorMsg());

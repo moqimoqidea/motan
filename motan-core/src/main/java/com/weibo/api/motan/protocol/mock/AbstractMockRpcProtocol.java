@@ -20,9 +20,9 @@ import com.weibo.api.motan.util.LoggerUtil;
 import com.weibo.api.motan.util.MotanFrameworkUtil;
 
 /**
- * 
+ *
  * @Description:abstract mock protocol, it can mock all rpc from server or client.
- *                    implementation class must implement 'processRequest()' method, and declare SpiMeta annotation. 
+ *                    implementation class must implement 'processRequest()' method, and declare SpiMeta annotation.
  * @author zhanglei28
  * @date 2016-3-14
  *
@@ -51,7 +51,7 @@ public abstract class AbstractMockRpcProtocol extends AbstractProtocol {
         public MockRpcExporter(Provider<T> provider, URL url) {
             super(provider, url);
 
-            ProviderMessageRouter requestRouter = getMockProviderMessageRouter(url);
+            // FIXME: The Completion Code is Empty.
             endpointFactory =
                     ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension(
                             url.getParameter(URLParamType.endpointFactory.getName(), URLParamType.endpointFactory.getValue()));
@@ -69,7 +69,7 @@ public abstract class AbstractMockRpcProtocol extends AbstractProtocol {
 
         @Override
         public void destroy() {
-            endpointFactory.safeReleaseResource(server, url);
+            // FIXME: The Completion Code is Empty.
             LoggerUtil.info("MockRpcExporter destory Success: url={}", url);
         }
 
@@ -140,7 +140,7 @@ public abstract class AbstractMockRpcProtocol extends AbstractProtocol {
 
     /**
      * process request. request is mock processed by client or server
-     * 
+     *
      * @param request
      * @return
      */

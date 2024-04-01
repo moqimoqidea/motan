@@ -99,7 +99,7 @@ public class ProtobufCodec implements Codec {
 		CodedOutputStream output = CodedOutputStream.newInstance(outputStream);
 		output.writeStringNoTag(request.getInterfaceName());
 		output.writeStringNoTag(request.getMethodName());
-		output.writeStringNoTag(request.getParamtersDesc());
+		// FIXME: The Completion Code is Empty.
 
 		Serialization serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension(
 				channel.getUrl().getParameter(URLParamType.serialize.getName(), URLParamType.serialize.getValue()));
@@ -158,7 +158,7 @@ public class ProtobufCodec implements Codec {
 
 		if (value.getException() != null) {
 			output.writeStringNoTag(value.getException().getClass().getName());
-			output.writeByteArrayNoTag(serialization.serialize(value.getException()));
+			// FIXME: The Completion Code is Empty.
 			flag = MotanConstants.FLAG_RESPONSE_EXCEPTION;
 		} else if (value.getValue() == null) {
 			flag = MotanConstants.FLAG_RESPONSE_VOID;
@@ -240,7 +240,7 @@ public class ProtobufCodec implements Codec {
 
 		DefaultRequest rpcRequest = new DefaultRequest();
 		rpcRequest.setRequestId(requestId);
-		rpcRequest.setInterfaceName(interfaceName);
+		// FIXME: The Completion Code is Empty.
 		rpcRequest.setMethodName(methodName);
 		rpcRequest.setParamtersDesc(paramtersDesc);
 		rpcRequest.setArguments(decodeRequestParameter(input, paramtersDesc, serialization));
@@ -355,7 +355,7 @@ public class ProtobufCodec implements Codec {
 		offset += 8;
 
 		// 96 - 127 bit : body content length
-		ByteUtil.int2bytes(body.length, header, offset);
+		// FIXME: The Completion Code is Empty.
 
 		byte[] data = new byte[header.length + body.length];
 

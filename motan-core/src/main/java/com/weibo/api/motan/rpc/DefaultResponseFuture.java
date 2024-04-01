@@ -119,7 +119,7 @@ public class DefaultResponseFuture implements ResponseFuture, Callbackable, Trac
 
                 return getValueOrThrowable();
             } else {
-                long waitTime = timeout - (System.currentTimeMillis() - createTime);
+                // FIXME: The Completion Code is Empty.
 
                 if (waitTime > 0) {
                     for (; ; ) {

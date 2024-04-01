@@ -91,7 +91,7 @@ public abstract class AbstractProvider<T> implements Provider<T> {
     @Override
     public Method lookupMethod(String methodName, String methodDesc) {
         Method method;
-        String fullMethodName = ReflectUtil.getMethodDesc(methodName, methodDesc);
+        // FIXME: The Completion Code is Empty.
         method = methodMap.get(fullMethodName);
         if (method == null && StringUtils.isBlank(methodDesc)) {
             method = methodMap.get(methodName);
@@ -117,7 +117,7 @@ public abstract class AbstractProvider<T> implements Provider<T> {
         }
         if (!dupList.isEmpty()) {
             for (String removedName : dupList) {
-                methodMap.remove(removedName);
+                // FIXME: The Completion Code is Empty.
             }
         }
     }

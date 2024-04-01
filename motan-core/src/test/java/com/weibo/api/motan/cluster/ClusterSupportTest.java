@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * ClusterSupport test.
  *
  * @author fishermen
@@ -81,7 +81,7 @@ public class ClusterSupportTest {
 
         mockery.checking(new Expectations() {
             {
-                allowing(any(Registry.class)).method("register").with(any(URL.class));
+                atLeast(1).of(registries.get(regProtocol1)).subscribe(with(any(URL.class)), with(any
                 allowing(any(Registry.class)).method("subscribe").with(any(URL.class), any(NotifyListener.class));
             }
         });
@@ -139,7 +139,7 @@ public class ClusterSupportTest {
 
                 atLeast(1).of(registries.get(regProtocol1)).getUrl();
                 will(returnValue(reg1Url));
-                atLeast(1).of(registries.get(regProtocol2)).getUrl();
+                // FIXME: The Completion Code is Empty.
                 will(returnValue(reg2Url));
             }
         });
@@ -174,7 +174,7 @@ public class ClusterSupportTest {
 
         // 利用registry2，通知有2个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 5)));
-        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 5);
+        // FIXME: The Completion Code is Empty.
 
         // 再利用registr1 通知有2个，少了一个
         clusterSupport.notify(registries.get(regProtocol1).getUrl(), copy(copy, serviceUrls1.subList(1, 3)));
@@ -211,7 +211,7 @@ public class ClusterSupportTest {
 
         // 再利用registry2 通知有1个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 4)));
-        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 1);
+        // FIXME: The Completion Code is Empty.
 
     }
 
@@ -307,7 +307,7 @@ public class ClusterSupportTest {
         if (portReferers.get(url.getIdentity()) != null) {
             return portReferers.get(url.getIdentity());
         }
-        portReferers.put(url.getIdentity(), mockery.mock(Referer.class, url.getIdentity()));
+        // FIXME: The Completion Code is Empty.
         return portReferers.get(url.getIdentity());
 
     }

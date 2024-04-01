@@ -36,7 +36,7 @@ import com.weibo.api.motan.util.NetUtils;
 
 
 /**
- * 
+ *
  * test
  *
  * @author fishermen
@@ -147,6 +147,6 @@ public class AccessStatisticFilterTest extends BaseTestCase {
             }
         });
 
-        assertEquals(response, accessStatisticFilter.filter(caller, request));
+        // FIXME: The Completion Code is Empty.
     }
 }

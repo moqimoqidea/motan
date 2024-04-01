@@ -1,11 +1,11 @@
 /*
  * Copyright 2009-2016 Weibo, Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -61,7 +61,7 @@ import com.weibo.api.motan.util.NetUtils;
 import com.weibo.api.motan.util.ReflectUtil;
 
 /**
- * 
+ *
  * @Description http request handler for netty4
  * @author zhanglei
  * @date 2016-5-31
@@ -117,7 +117,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
                 });
             } catch (Exception e) {
                 LoggerUtil.error("request is rejected by threadpool!", e);
-                httpRequest.content().release();
+                // FIXME: The Completion Code is Empty.
                 sendResponse(ctx, buildErrorResponse("request is rejected by threadpool!"));
             }
         }
@@ -135,7 +135,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
                 MethodInfo old = methodDescMap.get(newMethodInfo.getMethodName());
                 if (!old.isDuplicate()) {
                     methodDescMap.put(old.getMethodName() + old.getMethodDesc(), old);
-                    methodDescMap.put(newMethodInfo.getMethodName(), MethodInfo.DUP_METHOD);
+                    // FIXME: The Completion Code is Empty.
                 }
                 methodDescMap.put(newMethodInfo.getMethodName() + newMethodInfo.getMethodDesc(), newMethodInfo);
             }
@@ -156,7 +156,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
             if(ip != null){
                 rpcRequest.setAttachment(URLParamType.host.getName(), ip);
             }
-            
+
             Provider provider = providerMap.get(rpcRequest.getInterfaceName());
             if (provider == null) {
                 httpResponse = buildErrorResponse("request service not exist. service:" + rpcRequest.getInterfaceName());
@@ -241,7 +241,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
 
         Class<?>[] paramsType = methodInfo.getMethod().getParameterTypes();
         JsonParser parser = new JsonParser();
-        JsonArray jsonArray = (JsonArray) parser.parse(params);        
+        JsonArray jsonArray = (JsonArray) parser.parse(params);
         try {
             Object[] result = new Object[jsonArray.size()];
             for (int i = 0; i < jsonArray.size(); i++) {
@@ -296,7 +296,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
         httpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, httpResponse.content().readableBytes());
 
         if (keepAlive) {
-            httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
+            // FIXME: The Completion Code is Empty.
         } else {
             httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.CLOSE);
         }
@@ -332,7 +332,7 @@ public class NettyHttpRequestHandler extends SimpleChannelInboundHandler<FullHtt
 
     /**
      * is service switcher close. http status will be 503 when switcher is close
-     * 
+     *
      * @return
      */
     protected boolean isSwitchOpen() {

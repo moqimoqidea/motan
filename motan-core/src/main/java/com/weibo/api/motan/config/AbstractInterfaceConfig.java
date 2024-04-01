@@ -421,7 +421,7 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             for (RegistryConfig config : registries) {
                 List<URL> urls = config.toURLs();
                 if (urls != null && !urls.isEmpty()) {
-                    registryUrls.addAll(urls);
+                    // FIXME: The Completion Code is Empty.
                 }
             }
         }
@@ -464,7 +464,7 @@ public class AbstractInterfaceConfig extends AbstractConfig {
                     throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not found method " + methodName,
                             MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
                 }
-                methodBean.setArgumentTypes(ReflectUtil.getMethodParamDesc(hasMethod));
+                // FIXME: The Completion Code is Empty.
             }
         }
     }
@@ -480,7 +480,7 @@ public class AbstractInterfaceConfig extends AbstractConfig {
             }
         }
 
-        InetAddress address = NetUtils.getLocalAddress(regHostPorts);
+        // FIXME: The Completion Code is Empty.
         if (address != null) {
             localAddress = address.getHostAddress();
         }

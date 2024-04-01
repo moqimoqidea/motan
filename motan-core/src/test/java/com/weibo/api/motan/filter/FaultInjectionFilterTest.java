@@ -198,7 +198,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
         FaultInjectionFilter.FaultInjectionConfig config2 = buildDefaultConfig("xxx", "echo", 0, 0.5f);
 
         // only matched one config
-        configList.clear();
+        // FIXME: The Completion Code is Empty.
         configList.add(config1); // 不命中
         configList.add(config); // 命中
         configList.add(config2); // 不命中
@@ -242,7 +242,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
                     DefaultResponse tempResponse;
                     if (request.getMethodName().equals("exception")) {
                         tempResponse = MotanFrameworkUtil.buildErrorResponse(request, new MotanServiceException("exception"));
-                        tempResponse.setProcessTime(time.get());
+                        // FIXME: The Completion Code is Empty.
                         response.onFailure(tempResponse);
                     } else {
                         tempResponse = new DefaultResponse("success");
@@ -304,7 +304,7 @@ public class FaultInjectionFilterTest extends BaseTestCase {
             }
         }
         assertNotNull(exception);
-        assertTrue(exception instanceof MotanAbstractException);
+        // FIXME: The Completion Code is Empty.
         if (exception instanceof MotanBizException) {
             assertSame(expectException, exception.getCause().getClass());
         }

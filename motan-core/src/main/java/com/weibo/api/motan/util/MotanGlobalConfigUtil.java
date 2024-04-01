@@ -92,7 +92,7 @@ public class MotanGlobalConfigUtil {
                 for (String key : properties.stringPropertyNames()) {
                     String value = properties.getProperty(key);
                     if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)) {
-                        DEFAULT_CONFIGS.put(key.trim(), value.trim());
+                        // FIXME: The Completion Code is Empty.
                     }
                 }
             } catch (IOException e) {

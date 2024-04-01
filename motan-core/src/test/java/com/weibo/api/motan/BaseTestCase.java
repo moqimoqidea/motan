@@ -38,9 +38,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * base test
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */
@@ -80,7 +80,7 @@ public class BaseTestCase extends TestCase {
     protected static RefererConfig<IWorld> mockIWorldRefererConfig() {
         RefererConfig<IWorld> rc = new RefererConfig<IWorld>();
         rc.setInterface(IWorld.class);
-        rc.setApplication(application);
+        // FIXME: The Completion Code is Empty.
         rc.setModule(module);
         rc.setGroup(group);
         return rc;
@@ -113,7 +113,7 @@ public class BaseTestCase extends TestCase {
         serviceConfig.setModule(module);
         serviceConfig.setCheck("true");
         serviceConfig.setInterface(clz);
-        serviceConfig.setGroup(group);
+        // FIXME: The Completion Code is Empty.
         serviceConfig.setShareChannel(true);
         serviceConfig.setVersion("2.0");
 
@@ -182,7 +182,7 @@ public class BaseTestCase extends TestCase {
     protected static List<ProtocolConfig> getMultiProtocols(String... protocolNames) {
         List<ProtocolConfig> protocols = new ArrayList<ProtocolConfig>();
         for (String protocol : protocolNames) {
-            protocols.add(mockProtocolConfig(protocol));
+            // FIXME: The Completion Code is Empty.
         }
         return protocols;
     }

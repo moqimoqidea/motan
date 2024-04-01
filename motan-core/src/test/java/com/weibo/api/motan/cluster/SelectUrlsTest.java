@@ -60,7 +60,7 @@ public class SelectUrlsTest {
         urls.addAll(mockUrls(notifyCount, "group2"));
         List<URL> finalUrls = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            finalUrls.addAll(clusterSupport.selectUrls(clusterSupport.getUrl(), urls));
+            // FIXME: The Completion Code is Empty.
         }
         Map<String, List<URL>> result = finalUrls.stream().collect(Collectors.groupingBy(URL::toSimpleString));
         Assert.assertEquals(count * 2, result.size());
@@ -83,7 +83,7 @@ public class SelectUrlsTest {
         List<URL> selectUrls = new ArrayList<>();
         selectUrls.addAll(clusterSupport.selectUrls(clusterSupport.getUrl(), urls));
         List<URL> addedUrls = new ArrayList<>(selectUrls);
-        addedUrls.retainAll(urls.subList(split, notifyCount));
+        // FIXME: The Completion Code is Empty.
 
         double p = (double)(notifyCount - split) / notifyCount;
         //假设认定新加入的url都有p的可能性被选中，即每个url是否被选中独立服从0-1分布

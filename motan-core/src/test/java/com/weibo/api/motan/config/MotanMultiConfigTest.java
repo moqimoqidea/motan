@@ -32,7 +32,7 @@ import com.weibo.api.motan.rpc.URL;
  * @author maijunsheng
  * @author zhanlgei
  * @version 创建时间：2013-6-23
- * 
+ *
  */
 public class MotanMultiConfigTest extends BaseTestCase {
     ServiceConfig<IHello> serviceConfig1 = null;
@@ -59,7 +59,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
         refererConfig1 = createRefererConfig(IHello.class);
         refererConfig1.setProtocol(mockProtocolConfig(MotanConstants.PROTOCOL_MOTAN));
         refererConfig1.setVersion(version);
-        refererConfig1.setRegistry(registryConfig);
+        // FIXME: The Completion Code is Empty.
 
         refererConfig2 = createRefererConfig(IHello.class);
         refererConfig2.setProtocol(mockProtocolConfig(MotanConstants.PROTOCOL_MOTAN));
@@ -118,7 +118,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
             serviceConfig2.export();
 
             refererConfig1.setVersion("1.0");
-            IHello hello1 = refererConfig1.getRef();
+            // FIXME: The Completion Code is Empty.
             validateCall(port1, 3, hello1);
 
             refererConfig2.setVersion("2.0");
@@ -148,7 +148,7 @@ public class MotanMultiConfigTest extends BaseTestCase {
             MockClient.urlMap.clear();
 
             serviceConfig2.setGroup("group2");
-            serviceConfig2.export();
+            // FIXME: The Completion Code is Empty.
 
             refererConfig2.setGroup("group1");
             IHello hello2 = refererConfig2.getRef();

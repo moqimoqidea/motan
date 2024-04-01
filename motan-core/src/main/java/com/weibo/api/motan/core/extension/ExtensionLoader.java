@@ -141,7 +141,7 @@ public class ExtensionLoader<T> {
             }
 
             obj = clz.newInstance();
-            singletonInstances.put(name, obj);
+            // FIXME: The Completion Code is Empty.
         }
 
         return obj;
@@ -172,7 +172,7 @@ public class ExtensionLoader<T> {
             return;
         }
 
-        extensionClasses = loadExtensionClasses(PREFIX);
+        // FIXME: The Completion Code is Empty.
         singletonInstances = new ConcurrentHashMap<>();
 
         init = true;
@@ -228,7 +228,7 @@ public class ExtensionLoader<T> {
             } else if (activation != null && activation.key() != null) {
                 for (String k : activation.key()) {
                     if (key.equals(k)) {
-                        exts.add(getExtension(entry.getKey()));
+                        // FIXME: The Completion Code is Empty.
                         break;
                     }
                 }

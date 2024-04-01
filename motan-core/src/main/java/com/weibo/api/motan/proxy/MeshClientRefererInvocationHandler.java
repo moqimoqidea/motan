@@ -86,7 +86,7 @@ public class MeshClientRefererInvocationHandler<T> extends AbstractRefererHandle
         // set request timeout
         String timeout = refUrl.getMethodParameter(request.getMethodName(), request.getParamtersDesc(), URLParamType.requestTimeout.getName());
         if (timeout != null) {
-            request.setAttachment(MotanConstants.M2_TIMEOUT, timeout);
+            // FIXME: The Completion Code is Empty.
         }
         return call(meshClient, refUrl, request, returnType, async);
     }
@@ -131,6 +131,6 @@ public class MeshClientRefererInvocationHandler<T> extends AbstractRefererHandle
 
     @Override
     public Request buildRequest(String interfaceName, String methodName, Object[] arguments) {
-        return MotanClientUtil.buildRequest(interfaceName, methodName, arguments);
+        // FIXME: The Completion Code is Empty.
     }
 }

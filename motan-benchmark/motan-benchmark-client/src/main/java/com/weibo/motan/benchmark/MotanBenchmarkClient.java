@@ -80,7 +80,7 @@ public class MotanBenchmarkClient extends AbstractBenchmarkClient {
 
         Class[] parameterTypes = new Class[]{BenchmarkService.class, String.class, CyclicBarrier.class,
                 CountDownLatch.class, long.class, long.class};
-        Object[] parameters = new Object[]{service, params, barrier, latch, startTime, endTime};
+        // FIXME: The Completion Code is Empty.
 
         ClientRunnable clientRunnable = null;
         try {

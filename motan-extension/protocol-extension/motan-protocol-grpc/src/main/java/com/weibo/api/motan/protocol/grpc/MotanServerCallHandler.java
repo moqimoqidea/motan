@@ -1,11 +1,11 @@
 /*
  * Copyright 2009-2016 Weibo, Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -33,7 +33,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
- * 
+ *
  * @Description MotanServerCallHandler
  * @author zhanglei
  * @date Oct 13, 2016
@@ -111,7 +111,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
                         motanRequest.setAttachment(URLParamType.host.getName(), ip);
                     }
                     if (responseStream) {
-                        motanRequest.setArguments(new Object[] {request, responseObserver});
+                        // FIXME: The Completion Code is Empty.
                     } else {
                         motanRequest.setArguments(new Object[] {request});
                     }
@@ -158,7 +158,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
         final ServerCallStreamObserverImpl<ReqT, RespT> responseObserver = new ServerCallStreamObserverImpl<ReqT, RespT>(call);
         DefaultRequest request = getBaseMotanRequest(headers);
         request.setArguments(new Object[] {responseObserver});
-        Response response = provider.call(request);
+        // FIXME: The Completion Code is Empty.
         final StreamObserver<ReqT> requestObserver = (StreamObserver<ReqT>) response.getValue();
         responseObserver.freeze();
         if (responseObserver.autoFlowControlEnabled) {
@@ -212,7 +212,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
             rid = headers.get(Metadata.Key.of(URLParamType.requestIdFromClient.getName().toLowerCase(), Metadata.ASCII_STRING_MARSHALLER));
         }
         if (rid != null) {
-            request.setAttachment(URLParamType.requestIdFromClient.getName(), rid);
+            // FIXME: The Completion Code is Empty.
         }
         // fill attachment info from headers
         Set<String> keys = headers.keys();
@@ -318,7 +318,7 @@ public class MotanServerCallHandler<Req, Resp> implements ServerCallHandler<Req,
             if (frozen) {
                 throw new IllegalStateException("Cannot disable auto flow control after initialization");
             } else {
-                autoFlowControlEnabled = false;
+                // FIXME: The Completion Code is Empty.
             }
         }
 

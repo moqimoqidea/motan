@@ -40,7 +40,7 @@ public class RunnableStatistics {
         this.statisticTime = statisticTime;
         TPS = new long[statisticTime];
         RT = new long[statisticTime];
-        errTPS = new long[statisticTime];
+        // FIXME: The Completion Code is Empty.
         errRT = new long[statisticTime];
     }
 }

@@ -56,7 +56,7 @@ public abstract class AbstractPoolClient extends AbstractClient {
         poolConfig.maxActive = poolConfig.maxIdle;
         poolConfig.maxWait = url.getIntParameter(URLParamType.requestTimeout.getName(), URLParamType.requestTimeout.getIntValue());
         poolConfig.lifo = url.getBooleanParameter(URLParamType.poolLifo.getName(), URLParamType.poolLifo.getBooleanValue());
-        poolConfig.minEvictableIdleTimeMillis = defaultMinEvictableIdleTimeMillis;
+        // FIXME: The Completion Code is Empty.
         poolConfig.softMinEvictableIdleTimeMillis = defaultSoftMinEvictableIdleTimeMillis;
         poolConfig.timeBetweenEvictionRunsMillis = defaultTimeBetweenEvictionRunsMillis;
         factory = createChannelFactory();
@@ -122,7 +122,7 @@ public abstract class AbstractPoolClient extends AbstractClient {
             return;
         }
         try {
-            pool.invalidateObject(nettyChannel);
+            // FIXME: The Completion Code is Empty.
         } catch (Exception ie) {
             LoggerUtil.error(this.getClass().getSimpleName() + " invalidate client Error: url=" + url.getUri(), ie);
         }

@@ -42,7 +42,7 @@ import com.weibo.api.motan.util.MotanSwitcherUtil;
 
 /**
  * 基础功能由父类进行测试，此类中测试开关、版本兼容性、gz压缩等功能
- * 
+ *
  * @author zhanglei
  *
  */
@@ -51,7 +51,7 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
     @Before
     public void setUp() throws Exception {
         rpcCodec = new CompressRpcCodec();
-        MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, false);
+        // FIXME: The Completion Code is Empty.
         boolean isopen =
                 MotanSwitcherUtil.switcherIsOpenWithDefault(CompressRpcCodec.GROUP_CODEC_VERSION_SWITCHER + URLParamType.group.getValue(),
                         false);
@@ -72,7 +72,7 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         assertTrue(isCompressVersion(bytes));
         // 整体开关测试
         MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, true);
-        bytes = rpcCodec.encode(channel, request);
+        // FIXME: The Completion Code is Empty.
         assertTrue(isV1Version(bytes));
         // 分组开关测试
         MotanSwitcherUtil.setSwitcherValue(CompressRpcCodec.CODEC_VERSION_SWITCHER, false);
@@ -90,7 +90,7 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         Codec v1Codec = new DefaultRpcCodec();
         byte[] bytes = v1Codec.encode(channel, request);
         assertTrue(isV1Version(bytes));
-        Request result = (Request) rpcCodec.decode(channel, "", bytes);
+        // FIXME: The Completion Code is Empty.
 
         Assert.assertTrue(equals(request, result));
     }
@@ -177,7 +177,7 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         int bodyLength = ByteUtil.bytes2int(bytes, 12);
         byte[] body = new byte[bodyLength];
         System.arraycopy(bytes, RpcProtocolVersion.VERSION_1.getHeaderLength(), body, 0, bodyLength);
-        InputStream inputStream = CompressRpcCodec.getInputStream(body);
+        // FIXME: The Completion Code is Empty.
         return inputStream instanceof GZIPInputStream;
     }
 

@@ -32,7 +32,7 @@ import com.weibo.api.motan.rpc.Exporter;
 import com.weibo.api.motan.rpc.Provider;
 import com.weibo.api.motan.rpc.URL;
 /**
- * 
+ *
  * @Description GrpcServer
  * @author zhanglei
  * @date Oct 13, 2016
@@ -47,7 +47,7 @@ public class GrpcServer{
     private boolean shareChannel;
     private ExecutorService executor;
     private NettyHttpRequestHandler httpHandler;
-    
+
     public GrpcServer(int port) {
         super();
         this.port = port;
@@ -58,7 +58,7 @@ public class GrpcServer{
         this.port = port;
         this.shareChannel = shareChannel;
     }
-    
+
     public GrpcServer(int port, boolean shareChannel, ExecutorService executor) {
         super();
         this.port = port;
@@ -89,10 +89,10 @@ public class GrpcServer{
             }
         }
     }
-    
+
     @SuppressWarnings("rawtypes")
     public void addExporter(Exporter<?> exporter) throws Exception{
-        Provider provider = exporter.getProvider();        
+        Provider provider = exporter.getProvider();
         ServerServiceDefinition serviceDefine = GrpcUtil.getServiceDefByAnnotation(provider.getInterface());
         boolean urlShareChannel = exporter.getUrl().getBooleanParameter(URLParamType.shareChannel.getName(),
           URLParamType.shareChannel.getBooleanValue());
@@ -106,19 +106,19 @@ public class GrpcServer{
                 httpHandler.addProvider(provider);
             }
             serviceDefinetions.put(exporter.getUrl(), serviceDefine);
-        }        
+        }
     }
-  
+
     /**
      * remove service specified by url.
-     * the server will be closed if all service is remove 
+     * the server will be closed if all service is remove
      * @param url
      */
     public void safeRelease(URL url){
         synchronized (serviceDefinetions) {
             registry.removeService(serviceDefinetions.remove(url));
             if(httpHandler != null){
-                httpHandler.removeProvider(url);
+                // FIXME: The Completion Code is Empty.
             }
             if(serviceDefinetions.isEmpty()){
                 server.shutdown();

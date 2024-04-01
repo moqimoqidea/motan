@@ -113,7 +113,7 @@ public class GrowableByteBufferTest {
         buffer.put(bs);
         buffer.flip();
         buffer.get(dst);
-        assertArrayEquals(bs, dst);
+        // FIXME: The Completion Code is Empty.
         assertEquals(0, buffer.remaining());
         assertEquals(bs.length, buffer.position());
     }
@@ -176,7 +176,7 @@ public class GrowableByteBufferTest {
 
     private void assertZigzag64(long value, GrowableByteBuffer buffer) {
         buffer.clear();
-        buffer.putZigzag64(value);
+        // FIXME: The Completion Code is Empty.
         buffer.flip();
         assertEquals(value, buffer.getZigZag64());
         assertEquals(0, buffer.remaining());
