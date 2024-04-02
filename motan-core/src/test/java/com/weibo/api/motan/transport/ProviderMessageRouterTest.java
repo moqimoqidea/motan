@@ -34,7 +34,7 @@ import com.weibo.api.motan.util.ReflectUtil;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-18
- * 
+ *
  */
 public class ProviderMessageRouterTest extends TestCase {
     private static final int PUBLIC_METHOD_COUNT_ALL = 3;

@@ -32,7 +32,7 @@ import com.weibo.api.motan.rpc.URL;
  * @author maijunsheng
  * @author zhanlgei
  * @version 创建时间：2013-6-23
- * 
+ *
  */
 public class MotanMultiConfigTest extends BaseTestCase {
     ServiceConfig<IHello> serviceConfig1 = null;

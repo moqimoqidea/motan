@@ -160,7 +160,7 @@ public class ConfigurableWeightLoadBalance<T> extends ActiveWeightLoadBalance<T>
             LoggerUtil.info("ConfigurableWeightLoadBalance build new MultiGroupHolder. weights:" + weights);
             String[] groupsAndWeights = weights.split(",");
             int[] weightsArr = new int[groupsAndWeights.length];
-            Map<String, Integer> weightsMap = new HashMap<String, Integer>(groupsAndWeights.length);
+            Map<String, Integer> weightsMap = new HashMap<String, Integer>();
             int i = 0;
             for (String groupAndWeight : groupsAndWeights) {
                 String[] gw = groupAndWeight.split(":");

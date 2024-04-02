@@ -464,7 +464,7 @@ public class AbstractInterfaceConfig extends AbstractConfig {
                     throw new MotanFrameworkException("The interface " + interfaceClass.getName() + " not found method " + methodName,
                             MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
                 }
-                methodBean.setArgumentTypes(ReflectUtil.getMethodParamDesc(hasMethod));
+                methodBean.setMethod(hasMethod);
             }
         }
     }

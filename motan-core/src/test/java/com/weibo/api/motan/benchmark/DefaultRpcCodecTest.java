@@ -28,7 +28,7 @@ import com.weibo.api.motan.transport.Channel;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-21
- * 
+ *
  */
 public class DefaultRpcCodecTest {
     private static final int loop = 100000;
@@ -67,7 +67,7 @@ public class DefaultRpcCodecTest {
 
         long start = System.nanoTime();
         for (int i = 0; i < loop; i++) {
-            data = requestSize(codec, channel, sets);
+            data = requestSize(codec, channel, null);
         }
         System.out.println("request encode performance: " + (System.nanoTime() - start) / loop + " ns");
 

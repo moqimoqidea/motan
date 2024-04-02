@@ -70,7 +70,9 @@ public abstract class AbstractSharedPoolClient extends AbstractClient {
     protected void initConnections(boolean async) {
         if (async) {
             EXECUTOR.execute(() -> {
-                createConnections();
+                try {
+                    createConnections();
+                }
                 LoggerUtil.info("async initPool {}. url:{}", state == ChannelState.ALIVE ? "success" : "fail", getUrl().getUri());
             });
         } else {

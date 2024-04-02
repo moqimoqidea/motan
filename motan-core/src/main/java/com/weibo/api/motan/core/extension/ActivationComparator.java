@@ -19,7 +19,7 @@ package com.weibo.api.motan.core.extension;
 import java.util.Comparator;
 
 /**
- * 
+ *
  * Priority comparator
  *
  * @author fishermen

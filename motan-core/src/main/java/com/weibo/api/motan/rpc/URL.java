@@ -88,7 +88,9 @@ public class URL {
                     if (j >= 0) {
                         parameters.put(StringTools.urlDecode(part.substring(0, j)), StringTools.urlDecode(part.substring(j + 1)));
                     } else {
-                        part = StringTools.urlDecode(part);
+                        if (StringUtils.isBlank(part)) {
+                            continue;
+                        }
                         parameters.put(part, part);
                     }
                 }

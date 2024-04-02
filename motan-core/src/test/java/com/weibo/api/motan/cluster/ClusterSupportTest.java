@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * ClusterSupport test.
  *
  * @author fishermen
@@ -81,7 +81,13 @@ public class ClusterSupportTest {
 
         mockery.checking(new Expectations() {
             {
-                allowing(any(Registry.class)).method("register").with(any(URL.class));
+                allowing(any(Registry.class)).method("available").with(any(URL.class)).will(new Action() {
+                    @Override
+                    public Object invoke(Invocation invocation) throws Throwable {
+                        URL url = (URL) invocation.getParameter(0);
+                        return availableMap.get(url.getProtocol());
+                    }
+                });
                 allowing(any(Registry.class)).method("subscribe").with(any(URL.class), any(NotifyListener.class));
             }
         });
@@ -211,7 +217,7 @@ public class ClusterSupportTest {
 
         // 再利用registry2 通知有1个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 4)));
-        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 1);
+        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 3);
 
     }
 
@@ -307,7 +313,11 @@ public class ClusterSupportTest {
         if (portReferers.get(url.getIdentity()) != null) {
             return portReferers.get(url.getIdentity());
         }
-        portReferers.put(url.getIdentity(), mockery.mock(Referer.class, url.getIdentity()));
+        if (url.getPort() == 18081) {
+            portReferers.put(url.getIdentity(), mockReferer1);
+        } else if (url.getPort() == 18082) {
+            portReferers.put(url.getIdentity(), mockReferer2);
+        } else
         return portReferers.get(url.getIdentity());
 
     }

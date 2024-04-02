@@ -119,6 +119,9 @@ public class MotanV2CodecTest {
             throw new RuntimeException("map size not equals!");
         }
         for(Map.Entry<String, String> entry : map1.entrySet()){
+            if(!map2.containsKey(entry.getKey())){
+                throw new RuntimeException("map2 not contains key: " + entry.getKey());
+            }
             assertEquals(entry.getValue(), map2.get(entry.getKey()));
         }
     }

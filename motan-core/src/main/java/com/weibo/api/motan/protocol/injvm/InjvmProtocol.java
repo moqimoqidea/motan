@@ -33,14 +33,14 @@ import com.weibo.api.motan.util.MotanFrameworkUtil;
 
 /**
  * JVM 节点内部的调用
- * 
+ *
  * <pre>
- * 		1) provider 和 referer 相对应 
+ * 		1) provider 和 referer 相对应
  * 		2) provider 需要在被consumer refer 之前需要 export
  * </pre>
- * 
+ *
  * @author maijunsheng
- * 
+ *
  */
 @SpiMeta(name = "injvm")
 public class InjvmProtocol extends AbstractProtocol {
@@ -57,9 +57,9 @@ public class InjvmProtocol extends AbstractProtocol {
 
     /**
      * injvm provider
-     * 
+     *
      * @author maijunsheng
-     * 
+     *
      * @param <T>
      */
     class InJvmExporter<T> extends AbstractExporter<T> {
@@ -92,9 +92,9 @@ public class InjvmProtocol extends AbstractProtocol {
 
     /**
      * injvm consumer
-     * 
+     *
      * @author maijunsheng
-     * 
+     *
      * @param <T>
      */
     class InjvmReferer<T> extends AbstractReferer<T> {

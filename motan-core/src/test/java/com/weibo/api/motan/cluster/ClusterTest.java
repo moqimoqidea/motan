@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * Cluster test。
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */

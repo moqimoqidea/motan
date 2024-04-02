@@ -105,7 +105,7 @@ public class DefaultRpcCodec extends AbstractCodec {
 
         byte flag = data[3];
         byte dataType = (byte) (flag & MASK);
-        boolean isResponse = (dataType != MotanConstants.FLAG_REQUEST);
+        boolean isResponse = (flag & 0x08) == 0x08;
 
         byte[] body = new byte[bodyLength];
 

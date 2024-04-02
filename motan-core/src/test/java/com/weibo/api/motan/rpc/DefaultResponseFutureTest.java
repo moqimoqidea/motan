@@ -115,7 +115,7 @@ public class DefaultResponseFutureTest {
         String key = "ddd";
         String value = "xxx";
         responseFuture.getTraceableContext().setReceiveTime(receiveTime);
-        responseFuture.getTraceableContext().addTraceInfo(key, value);
+        responseFuture.getTraceableContext().setTraceInfo(key, value);
 
         // add attachment
         responseFuture.setAttachment("aaa", "bbb");

@@ -110,7 +110,10 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             return;
         }
 
-        checkInterfaceAndMethods(interfaceClass, methods);
+        if (serviceExists(getExportUrl())) {
+            LoggerUtil.warn(String.format("%s has already been exported, so ignore the export request!", interfaceClass.getName()));
+            return;
+        }
 
         loadRegistryUrls();
         if (registryUrls == null || registryUrls.size() == 0) {
@@ -168,7 +171,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         URL serviceUrl = new URL(protocolName, hostAddress, port, interfaceClass.getName(), map);
 
         String groupString = serviceUrl.getParameter(URLParamType.group.getName(), ""); // do not with default group value
-        String additionalGroup = System.getenv(MotanConstants.ENV_ADDITIONAL_GROUP);
+        String additionalGroup = serviceUrl.getParameter(URLParamType.additionalGroup.getName(), "");
         if (StringUtils.isNotBlank(additionalGroup)) { // check additional groups
             groupString = StringUtils.isBlank(groupString) ? additionalGroup : groupString + "," + additionalGroup;
             serviceUrl.addParameter(URLParamType.group.getName(), groupString);
@@ -249,7 +252,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         if (StringUtils.isBlank(export)) {
             throw new MotanServiceException("export should not empty in service config:" + interfaceClass.getName());
         }
-        return ConfigUtil.parseExport(this.export);
+        return StringTools.parseProtocolAndPort(export);
     }
 
     @ConfigDesc(excluded = true)

@@ -36,9 +36,9 @@ import com.weibo.api.motan.rpc.URL;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * 类说明
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-6-28
  */

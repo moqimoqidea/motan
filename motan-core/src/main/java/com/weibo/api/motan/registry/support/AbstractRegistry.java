@@ -52,7 +52,8 @@ public abstract class  AbstractRegistry implements Registry {
     public AbstractRegistry(URL url) {
         this.registryUrl = url.createCopy();
         // register a heartbeat switcher to perceive service state change and change available state
-        MotanSwitcherUtil.initSwitcher(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, false);
+        MotanSwitcherUtil.registerSwitcherListener(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, new SwitcherListener() {
+        });
         MotanSwitcherUtil.registerSwitcherListener(MotanConstants.REGISTRY_HEARTBEAT_SWITCHER, new SwitcherListener() {
 
             @Override
@@ -224,7 +225,7 @@ public abstract class  AbstractRegistry implements Registry {
      */
     private URL removeUnnecessaryParmas(URL url) {
         // codec参数不能提交到注册中心，如果client端没有对应的codec会导致client端不能正常请求。
-        url.getParameters().remove(URLParamType.codec.getName());
+        url.removeParameter(URLParamType.codec.getName());
         return url;
     }
 

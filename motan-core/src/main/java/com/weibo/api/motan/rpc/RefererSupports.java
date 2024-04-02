@@ -28,7 +28,7 @@ import com.weibo.api.motan.util.LoggerUtil;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-19
- * 
+ *
  */
 public class RefererSupports {
 
@@ -77,7 +77,7 @@ public class RefererSupports {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (Referer<T> referer : referers) {
-            builder.append(referer.getUrl().getServerPortStr()).append(",");
+            builder.append(referer.getUrl().getHost()).append(":").append(referer.getUrl().getPort()).append(",");
         }
         builder.setLength(builder.length() - 1);
         builder.append("]");

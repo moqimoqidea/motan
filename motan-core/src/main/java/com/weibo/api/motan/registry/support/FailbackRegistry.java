@@ -37,9 +37,9 @@ import com.weibo.api.motan.util.ConcurrentHashSet;
 import com.weibo.api.motan.util.LoggerUtil;
 
 /**
- * 
+ *
  * Failback registry
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-28
  */

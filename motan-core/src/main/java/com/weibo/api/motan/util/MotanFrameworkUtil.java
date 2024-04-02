@@ -58,7 +58,7 @@ public class MotanFrameworkUtil {
     public static String getRemoteIpFromRequest(Request request) {
         String rip = getValueFromRequest(request, MotanConstants.X_FORWARDED_FOR, null);
         if (rip == null) {
-            rip = getValueFromRequest(request, URLParamType.host.getName(), null);
+            rip = request.getRemoteIp();
         }
         return rip;
     }
@@ -143,7 +143,7 @@ public class MotanFrameworkUtil {
         if (map != null) {
             String module = map.get(URLParamType.module.getName());
             if (module == null) {
-                module = map.get(URLParamType.group.getName());
+                return getGroupFromRequest(map);
             }
             if (module != null) {
                 return module;

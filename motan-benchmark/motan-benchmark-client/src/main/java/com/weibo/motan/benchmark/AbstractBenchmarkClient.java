@@ -55,7 +55,7 @@ public abstract class AbstractBenchmarkClient {
         long endTime = currentTime + runTime * 1000 * 1000L;
 
         List<ClientRunnable> runnables = new ArrayList<>();
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(this.concurrents);
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(this.concurrents + 1);
         CountDownLatch countDownLatch = new CountDownLatch(this.concurrents);
         for (int i = 0; i < this.concurrents; i++) {
             ClientRunnable runnable = getClientRunnable(classname, params, cyclicBarrier, countDownLatch, startTime, endTime);

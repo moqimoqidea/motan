@@ -100,7 +100,7 @@ public class CompressRpcCodec extends AbstractCodec {
                 return true;
             }
             // 检查分组降级开关是否开启
-            String group = MotanFrameworkUtil.getGroupFromRequest((Request) message);
+            String group = ((Request) message).getInterfaceName();
             if (MotanSwitcherUtil.switcherIsOpenWithDefault(GROUP_CODEC_VERSION_SWITCHER + group, false)) {
                 return true;
             }
@@ -192,7 +192,7 @@ public class CompressRpcCodec extends AbstractCodec {
             throw new MotanFrameworkException("decode error: magic error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        int bodyLength = ByteUtil.bytes2int(data, 12);
+        int bodyLength = ByteUtil.bytes2int(data, 4);
 
         if (RpcProtocolVersion.VERSION_1_Compress.getHeaderLength() + bodyLength != data.length) {
             throw new MotanFrameworkException("decode error: content length error", MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
@@ -356,7 +356,9 @@ public class CompressRpcCodec extends AbstractCodec {
         if (clientRequestid != null && !URLParamType.requestIdFromClient.getValue().equals(clientRequestid)) {
             attachments.put(CLIENT_REQUESTID, clientRequestid);
         }
-        attachments.remove(URLParamType.requestIdFromClient.getName());
+        if (channel.getUrl().getParameter(URLParamType.requestIdFromClient.getName(), false)) {
+            attachments.put(URLParamType.requestIdFromClient.getName(), channel.getUrl().getParameter(URLParamType.requestIdFromClient.getName(), "0"));
+        }
     }
 
     private void addAttachment(ObjectOutput output, Map<String, String> attachments) throws IOException {
@@ -572,7 +574,7 @@ public class CompressRpcCodec extends AbstractCodec {
             if (attachments.containsKey(CLIENT_REQUESTID)) {
                 clientRequestid = attachments.get(CLIENT_REQUESTID);
             }
-            attachments.put(URLParamType.requestIdFromClient.getName(), clientRequestid);
+            URLParamType.requestIdFromClient.setValue(clientRequestid);
         }
     }
 
@@ -653,7 +655,12 @@ public class CompressRpcCodec extends AbstractCodec {
                     MotanErrorMsgConstant.FRAMEWORK_DECODE_ERROR);
         }
 
-        response.setRequestId(requestId);
+        if (rpcProtocolVersion == MotanConstants.MOTAN_PROTOCOL_VERSION_V1) {
+            response.setAttachments(decodeRequestAttachments(input));
+        } else if (rpcProtocolVersion == MotanConstants.MOTAN_PROTOCOL_VERSION_V2) {
+            response.setAttachments(decodeRequestAttachments(input));
+            response.setSerializeNumber(input.readInt());
+        }
 
         input.close();
 

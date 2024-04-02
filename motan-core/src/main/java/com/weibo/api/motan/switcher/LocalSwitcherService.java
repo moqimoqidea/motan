@@ -95,7 +95,7 @@ public class LocalSwitcherService implements SwitcherService {
     @Override
     public void registerListener(String switcherName, SwitcherListener listener) {
         List listeners = Collections.synchronizedList(new ArrayList());
-        List preListeners= listenerMap.putIfAbsent(switcherName, listeners);
+        List<SwitcherListener> preListeners = listenerMap.putIfAbsent(switcherName, listeners);
         if (preListeners == null) {
             listeners.add(listener);
         } else {

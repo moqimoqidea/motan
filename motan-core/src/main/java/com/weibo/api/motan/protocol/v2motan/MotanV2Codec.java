@@ -114,7 +114,10 @@ public class MotanV2Codec extends AbstractCodec {
                     putString(buf, ExceptionUtil.toMessage(response.getException()));
                     header.setStatus(MotanV2Header.MessageStatus.EXCEPTION.getStatus());
                 }
-                putMap(buf, response.getAttachments());
+                if (response.getException() == null && response.getValue() instanceof DeserializableObject) {
+                    putString(buf, M2_VALUE);
+                    putString(buf, ((DeserializableObject) response.getValue()).getClassName());
+                }
 
                 header.setRequestId(response.getRequestId());
                 header.setRequest(false);
@@ -249,7 +252,7 @@ public class MotanV2Codec extends AbstractCodec {
                 request.setRequestId(header.getRequestId());
                 request.setInterfaceName(metaMap.remove(M2_PATH));
                 request.setMethodName(metaMap.remove(M2_METHOD));
-                request.setParamtersDesc(metaMap.remove(M2_METHOD_DESC));
+                request.setParamtersDesc(metaMap.remove(M2_PARAMETERS));
                 request.setAttachments(metaMap);
                 request.setRpcProtocolVersion(RpcProtocolVersion.VERSION_2.getVersion());
                 request.setSerializeNumber(header.getSerialize());

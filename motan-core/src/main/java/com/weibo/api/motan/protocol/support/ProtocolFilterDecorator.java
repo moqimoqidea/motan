@@ -56,7 +56,7 @@ public class ProtocolFilterDecorator implements Protocol {
 
     @Override
     public <T> Exporter<T> export(Provider<T> provider, URL url) {
-        return protocol.export(decorateWithFilter(provider, url), url);
+        return decorateWithFilter(protocol.export(provider, url), url);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ProtocolFilterDecorator implements Protocol {
     }
 
     public <T> Referer<T> decorateRefererFilter(Referer<T> referer, URL url) {
-        return decorateWithFilter(referer, url);
+        return decorateWithFilter(referer, url, MotanConstants.NODE_TYPE_REFERER);
     }
 
     private <T> Referer<T> decorateWithFilter(Referer<T> referer, URL url) {

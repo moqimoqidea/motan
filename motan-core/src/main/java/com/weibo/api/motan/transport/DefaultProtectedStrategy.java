@@ -76,7 +76,7 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
         String requestKey = MotanFrameworkUtil.getFullMethodString(request);
 
         try {
-            int requestCounter = incrCounter(requestKey, requestCounters);
+            incrCounter(requestKey, requestCounters);
             int totalCounter = incrTotalCounter();
             if (isAllowRequest(requestCounter, totalCounter, maxThread)) {
                 return provider.call(request);
@@ -97,7 +97,7 @@ public class DefaultProtectedStrategy implements ProviderProtectedStrategy, Stat
         DefaultResponse response = MotanFrameworkUtil.buildErrorResponse(request, exception);
         LoggerUtil.error(exception.getMessage());
         incrCounter(method, rejectCounters);
-        rejectCounter.incrementAndGet();
+        LoggerUtil.accessStatsLog(message);
         return response;
     }
 

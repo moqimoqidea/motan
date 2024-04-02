@@ -67,7 +67,9 @@ public class AccessLogFilter implements Filter {
                 }
                 return response;
             } finally {
-                processFinalLog(caller, request, response, start, success);
+                if (MotanSwitcherUtil.isOpen(ACCESS_LOG_SWITCHER_NAME)) {
+                    processFinalLog(caller, request, response, start, success);
+                }
             }
         } else {
             return caller.call(request);
@@ -126,7 +128,7 @@ public class AccessLogFilter implements Filter {
         append(builder, NetUtils.getLocalAddress().getHostAddress());
         append(builder, request.getInterfaceName());
         append(builder, request.getMethodName());
-        append(builder, request.getParamtersDesc());
+        append(builder, MotanFrameworkUtil.getGroupMethodString(request));
         // 对于client，url中的remote ip 和 service获取的地方不同
         if (MotanConstants.NODE_TYPE_REFERER.equals(side)) {
             append(builder, caller.getUrl().getHost()); // direct

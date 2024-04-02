@@ -38,7 +38,7 @@ import com.weibo.api.motan.transport.Channel;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-5-26
- * 
+ *
  */
 public class DefaultRpcCodecTest extends TestCase {
     protected Codec rpcCodec = new DefaultRpcCodec();

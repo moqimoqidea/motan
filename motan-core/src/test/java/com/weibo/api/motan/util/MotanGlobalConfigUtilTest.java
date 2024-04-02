@@ -57,7 +57,7 @@ public class MotanGlobalConfigUtilTest {
         Map<String, String> defaultConfig2 = MotanGlobalConfigUtil.getDefaultConfigCopy();
         assertNotSame(defaultConfig, defaultConfig2);
         assertEquals(2, defaultConfig2.size());
-        String value = defaultConfig2.get(testKey1);
+        assertEquals(testValue1, defaultConfig2.get(testKey1));
         assertEquals(testValue1, value);
         value = defaultConfig2.get(testKey2);
         assertEquals(testValue2, value);

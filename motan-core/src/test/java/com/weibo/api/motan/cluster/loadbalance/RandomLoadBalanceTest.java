@@ -26,7 +26,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * RandomLoadbalance test
  *
  * @author fishermen

@@ -42,7 +42,7 @@ import com.weibo.api.motan.util.MotanSwitcherUtil;
 
 /**
  * 基础功能由父类进行测试，此类中测试开关、版本兼容性、gz压缩等功能
- * 
+ *
  * @author zhanglei
  *
  */
@@ -90,7 +90,7 @@ public class CompressRpcCodecTest extends DefaultRpcCodecTest {
         Codec v1Codec = new DefaultRpcCodec();
         byte[] bytes = v1Codec.encode(channel, request);
         assertTrue(isV1Version(bytes));
-        Request result = (Request) rpcCodec.decode(channel, "", bytes);
+        Response result = v1Codec.decode(channel, "127.0.0.1", bytes);
 
         Assert.assertTrue(equals(request, result));
     }

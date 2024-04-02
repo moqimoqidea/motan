@@ -129,7 +129,14 @@ public class RefererConfig<T> extends AbstractRefererConfig {
         List<Cluster<T>> clusters = new ArrayList<>(protocols.size());
         String proxy = null;
 
-        ConfigHandler configHandler = ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
+        for (ProtocolConfig protocol : protocols) {
+            Map<String, String> params = new HashMap<>();
+            params.put(URLParamType.nodeType.getName(), MotanConstants.NODE_TYPE_REFERER);
+            params.put(URLParamType.version.getName(), URLParamType.version.getValue());
+            params.put(URLParamType.refreshTimestamp.getName(), String.valueOf(System.currentTimeMillis()));
+
+            collectConfigParams(params, protocol, basicReferer, extConfig, this);
+        }
 
         loadRegistryUrls();
         String localIp = getLocalHostAddress();
@@ -140,7 +147,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
             params.put(URLParamType.refreshTimestamp.getName(), String.valueOf(System.currentTimeMillis()));
 
             collectConfigParams(params, protocol, basicReferer, extConfig, this);
-            collectMethodConfigParams(params, this.getMethods());
+            configHandler = ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(protocol.getName());
 
             String path = StringUtils.isBlank(serviceInterface) ? interfaceClass.getName() : serviceInterface;
             URL refUrl = new URL(protocol.getName(), localIp, MotanConstants.DEFAULT_INT_VALUE, path, params);
@@ -185,7 +192,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
                             RegistryService.class.getName());
             if (StringUtils.isNotBlank(directUrl)) {
                 List<URL> directUrls = new ArrayList<>();
-                String[] dus = MotanConstants.COMMA_SPLIT_PATTERN.split(directUrl);
+                List<String> dus = StringUtils.split(directUrl, ",");
                 for (String du : dus) {
                     if (du.contains(":")) {
                         String[] hostPort = du.split(":");

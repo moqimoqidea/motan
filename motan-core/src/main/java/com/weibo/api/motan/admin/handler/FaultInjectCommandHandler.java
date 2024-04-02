@@ -30,7 +30,7 @@ public class FaultInjectCommandHandler extends AbstractAdminCommandHandler {
     static {
         String filters = MotanGlobalConfigUtil.getConfig(ENV_GLOBAL_FILTERS);
         filters = StringUtils.isBlank(filters) ? "faultInjection" : filters + MotanConstants.COMMA_SEPARATOR + "faultInjection";
-        MotanGlobalConfigUtil.putConfig(ENV_GLOBAL_FILTERS, filters);
+        MotanGlobalConfigUtil.setConfig(ENV_GLOBAL_FILTERS, filters);
     }
 
     @Override

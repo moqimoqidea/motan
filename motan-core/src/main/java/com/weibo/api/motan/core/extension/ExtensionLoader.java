@@ -172,7 +172,7 @@ public class ExtensionLoader<T> {
             return;
         }
 
-        extensionClasses = loadExtensionClasses(PREFIX);
+        extensionClasses = new ConcurrentHashMap<>();
         singletonInstances = new ConcurrentHashMap<>();
 
         init = true;

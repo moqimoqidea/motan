@@ -30,7 +30,7 @@ import com.weibo.api.motan.util.RequestIdGenerator;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-14
- * 
+ *
  */
 @SpiMeta(name = "motan")
 public class DefaultRpcHeartbeatFactory implements HeartbeatFactory {
@@ -93,7 +93,7 @@ public class DefaultRpcHeartbeatFactory implements HeartbeatFactory {
         @Override
         public Object handle(Channel channel, Object message) {
             if (isHeartbeatRequest(message)) {
-                Response response = getDefaultHeartbeatResponse(((Request)message).getRequestId());
+                HeartbeatResponse response = getDefaultHeartbeatResponse(((Request) message).getRequestId());
                 response.setRpcProtocolVersion(((Request) message).getRpcProtocolVersion());
                 return response;
             }

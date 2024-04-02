@@ -59,7 +59,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
         groupServiceCache = new ConcurrentHashMap<>();
         weights = new ConcurrentHashMap<>();
         // 从url里处理静态指令。仅处理流控指令
-        String mixGroupsString = refUrl.getParameter(URLParamType.mixGroups.getName());
+        String mixGroupsString = refUrl.getParameter(URLParamType.mixGroups.getName(), URLParamType.mixGroups.getValue());
         if (StringUtils.isNotBlank(mixGroupsString)) {
             LoggerUtil.info("CommandServiceManager process mixGroups:" + mixGroupsString);
             List<String> mergeGroups = new ArrayList<>();
@@ -111,7 +111,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
         if (!StringUtils.equals(commandString, commandStringCache)) {
             commandStringCache = commandString;
-            commandCache = RpcCommandUtil.stringToCommand(commandString);
+            commandCache = RpcCommand.parse(commandString);
             if (commandCache == null && StringUtils.isNotBlank(commandString)) {
                 LoggerUtil.warn("command parse fail, ignored! command:" + commandString);
             }
@@ -147,7 +147,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
         for (NotifyListener notifyListener : notifySet) {
             try {
-                notifyListener.notify(registry.getUrl(), finalResult);
+                notifyListener.notify(finalResult);
             } catch (Exception e) {
                 LoggerUtil.error("CommandServiceManager notify listener fail. listener:" + notifyListener.toString(), e);
             }
@@ -207,7 +207,18 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                         return false;
                     }
                     // 根据计算结果，分别发现各个group的service，合并结果
-                    mergedResult.addAll(mergeResult(refUrl, weights, isMixMode));
+                    if (isMixMode) {
+                        for (String group : command.getMergeGroups()) {
+                            URL urlTemp = refUrl.createCopy();
+                            urlTemp.addParameter(URLParamType.group.getName(), group);
+                            mergedResult.addAll(discoverOneGroup(urlTemp));
+                        }
+                    } else {
+                        for (String group : command.getMergeGroups()) {
+                            URL urlTemp = refUrl.createCopy();
+                            urlTemp.addParameter(URLParamType.group.getName(), group);
+                        }
+                    }
                 } else {
                     mergedResult.addAll(discoverOneGroup(refUrl));
                 }
@@ -327,7 +338,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
                 URL urlTemp = url.createCopy();
                 urlTemp.addParameter(URLParamType.group.getName(), key);
                 finalResult.addAll(discoverOneGroup(urlTemp));
-                registry.subscribeService(urlTemp, this);
+                groupServiceCache.put(key, finalResult);
             }
         }
         return finalResult;
@@ -340,7 +351,7 @@ public class CommandServiceManager implements CommandListener, ServiceListener {
 
     void setCommandCache(String command) {
         commandStringCache = command;
-        commandCache = RpcCommandUtil.stringToCommand(commandStringCache);
+        commandCache = RpcCommand.parse(command);
         LoggerUtil.info("CommandServiceManager set command cache. command string:" + commandStringCache + ", command cache "
                 + (commandCache == null ? "is null." : "is not null."));
     }

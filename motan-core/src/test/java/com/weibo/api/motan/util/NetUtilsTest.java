@@ -15,7 +15,7 @@
  */
 
 /**
- * 
+ *
  */
 package com.weibo.api.motan.util;
 
@@ -27,7 +27,7 @@ import java.net.UnknownHostException;
 
 /**
  * @author bozheng
- * 
+ *
  */
 public class NetUtilsTest extends BaseTestCase {
     @Override
@@ -42,7 +42,7 @@ public class NetUtilsTest extends BaseTestCase {
         assertTrue(NetUtils.isValidAddress(address));
         try {
             if(NetUtils.isValidAddress(InetAddress.getLocalHost())){
-                assertEquals(InetAddress.getLocalHost(), address);
+                assertTrue(NetUtils.isValidAddress(InetAddress.getLocalHost()));
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();

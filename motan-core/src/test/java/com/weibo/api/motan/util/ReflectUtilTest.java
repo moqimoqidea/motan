@@ -27,11 +27,11 @@ import org.junit.Test;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-5-26
- * 
+ *
  */
 public class ReflectUtilTest {
-    
-    
+
+
     @Test
     public void testReflect(){
         Method method;
@@ -50,8 +50,8 @@ public class ReflectUtilTest {
             assertEquals("getIntArray(int[])", ReflectUtil.getMethodDesc(method));
         } catch (Exception e) {
             assertTrue(false);
-        } 
-        
+        }
+
     }
 
 }

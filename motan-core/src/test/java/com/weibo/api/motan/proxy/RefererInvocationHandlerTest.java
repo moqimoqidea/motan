@@ -50,7 +50,7 @@ public class RefererInvocationHandlerTest extends BaseTestCase {
 
         List<Cluster> clus = new ArrayList<Cluster>();
         clus.add(cluster);
-        RefererInvocationHandler handler = new RefererInvocationHandler(String.class, clus);
+        RefererInvocationHandler<String> handler = new RefererInvocationHandler<String>(String.class, clus);
         Method[] methods = String.class.getMethods();
         try {
             handler.invoke(null, methods[1], null);

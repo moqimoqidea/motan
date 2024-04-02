@@ -26,7 +26,7 @@ import com.weibo.api.motan.rpc.Referer;
 import com.weibo.api.motan.rpc.Request;
 
 /**
- * 
+ *
  * RoundRobin loadBalance
  *
  * @author fishermen

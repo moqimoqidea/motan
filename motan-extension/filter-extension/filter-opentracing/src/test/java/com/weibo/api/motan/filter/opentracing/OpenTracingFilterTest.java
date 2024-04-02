@@ -95,7 +95,7 @@ public class OpenTracingFilterTest {
         assertEquals(response, res);
         checkMockTracer();
 
-        // brave test must run with jdk1.8 
+        // brave test must run with jdk1.8
         tracer = new BraveTracer();// use brave tracer
         res = OTFilter.filter(refer, request);
         assertEquals(response, res);

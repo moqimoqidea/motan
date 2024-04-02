@@ -95,7 +95,7 @@ public class ExceptionUtil {
         jsonObject.put("errcode", code);
         jsonObject.put("errmsg", errmsg);
         jsonObject.put("errtype", type);
-        return jsonObject.toString();
+        return jsonObject.toJSONString();
     }
 
     public static MotanAbstractException fromMessage(String msg) {

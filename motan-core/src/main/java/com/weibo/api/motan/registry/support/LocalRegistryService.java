@@ -37,10 +37,10 @@ import com.weibo.api.motan.util.LoggerUtil;
 import com.weibo.api.motan.util.NetUtils;
 
 /**
- * 
+ *
  * @author maijunsheng
  * @version 创建时间：2013-5-24
- * 
+ *
  */
 @SpiMeta(name = "local")
 public class LocalRegistryService extends AbstractRegistry {
@@ -156,7 +156,7 @@ public class LocalRegistryService extends AbstractRegistry {
 
     /**
      * 防止数据在外部被变更，因此copy一份
-     * 
+     *
      * @return
      */
     public Map<String, List<URL>> getAllUrl() {

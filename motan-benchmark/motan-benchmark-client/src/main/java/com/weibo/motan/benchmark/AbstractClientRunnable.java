@@ -68,7 +68,9 @@ public abstract class AbstractClientRunnable implements ClientRunnable {
             beginTime = System.nanoTime() / 1000L;
             Object result = call(benchmarkService);
             long responseTime = System.nanoTime() / 1000L - beginTime;
-            collectResponseTimeDistribution(responseTime);
+            if (responseTime > 1000000L) {
+                System.out.println("response time too long: " + responseTime);
+            }
             int currTime = (int) ((beginTime - startTime) / 1000000L);
             if (currTime >= statisticTime) {
                 continue;

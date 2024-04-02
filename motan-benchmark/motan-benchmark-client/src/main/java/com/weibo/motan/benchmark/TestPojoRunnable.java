@@ -39,7 +39,7 @@ public class TestPojoRunnable extends AbstractClientRunnable {
 
     @Override
     protected Object call(BenchmarkService benchmarkService) {
-        Object result = benchmarkService.echoService(person);
+        Person result = benchmarkService.echoService(person);
         return result;
     }
 }

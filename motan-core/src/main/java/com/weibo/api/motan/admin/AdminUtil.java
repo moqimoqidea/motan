@@ -25,7 +25,7 @@ public class AdminUtil {
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler) {
-        addCommandHandler(adminCommandHandler, false);
+        DEFAULT_ADMIN_HANDLER.addCommandHandler(adminCommandHandler);
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler, boolean override) {

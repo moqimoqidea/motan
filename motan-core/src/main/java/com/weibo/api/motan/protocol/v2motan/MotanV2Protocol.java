@@ -83,7 +83,7 @@ public class MotanV2Protocol extends AbstractProtocol {
         protected Response doCall(Request request) {
             try {
                 // use server end group
-                request.setAttachment(URLParamType.group.getName(), serviceUrl.getGroup());
+                request.setAttachment(URLParamType.group.getName(), this.url.getGroup());
                 request.setAttachment(M2_PROXY_PROTOCOL, this.url.getProtocol()); // add proxy protocol for request agent
                 return client.request(request);
             } catch (TransportException exception) {

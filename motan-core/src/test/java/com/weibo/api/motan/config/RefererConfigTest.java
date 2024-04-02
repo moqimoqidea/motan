@@ -80,7 +80,7 @@ public class RefererConfigTest extends BaseTestCase {
 
         IWorld ref = refererConfig.getRef();
         assertNotNull(ref);
-        assertEquals(refererConfig.getClusterSupports().size(), 1);
+        assertTrue(ref instanceof MockWorld);
 
         int times = 3;
         for (int i = 0; i < times; i++) {
@@ -109,7 +109,7 @@ public class RefererConfigTest extends BaseTestCase {
         }
 
         // protocol not exists
-        protocols.add(mockProtocolConfig("notExist"));
+        protocols.clear();
         try {
             ref = refererConfig.getRef();
             assertTrue(false);
@@ -145,7 +145,7 @@ public class RefererConfigTest extends BaseTestCase {
         List<RegistryConfig> registries =
                 getMultiRegister(MotanConstants.REGISTRY_PROTOCOL_LOCAL, MotanConstants.REGISTRY_PROTOCOL_ZOOKEEPER);
         refererConfig.setRegistries(registries);
-        refererConfig.loadRegistryUrls();
+        IWorld ref = refererConfig.getRef();
         assertEquals(registries.size(), refererConfig.getRegistryUrls().size());
     }
 

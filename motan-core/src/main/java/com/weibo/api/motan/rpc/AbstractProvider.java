@@ -91,7 +91,7 @@ public abstract class AbstractProvider<T> implements Provider<T> {
     @Override
     public Method lookupMethod(String methodName, String methodDesc) {
         Method method;
-        String fullMethodName = ReflectUtil.getMethodDesc(methodName, methodDesc);
+        String fullMethodName = methodName + methodDesc;
         method = methodMap.get(fullMethodName);
         if (method == null && StringUtils.isBlank(methodDesc)) {
             method = methodMap.get(methodName);

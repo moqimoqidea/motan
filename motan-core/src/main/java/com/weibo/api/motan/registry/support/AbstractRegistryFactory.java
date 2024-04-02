@@ -26,9 +26,9 @@ import com.weibo.api.motan.registry.RegistryFactory;
 import com.weibo.api.motan.rpc.URL;
 
 /**
- * 
+ *
  * Create and cache registry.
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-28
  */

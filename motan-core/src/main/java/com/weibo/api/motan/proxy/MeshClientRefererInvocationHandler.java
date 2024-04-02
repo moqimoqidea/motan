@@ -86,7 +86,7 @@ public class MeshClientRefererInvocationHandler<T> extends AbstractRefererHandle
         // set request timeout
         String timeout = refUrl.getMethodParameter(request.getMethodName(), request.getParamtersDesc(), URLParamType.requestTimeout.getName());
         if (timeout != null) {
-            request.setAttachment(MotanConstants.M2_TIMEOUT, timeout);
+            request.setRequestTimeout(Integer.parseInt(timeout));
         }
         return call(meshClient, refUrl, request, returnType, async);
     }

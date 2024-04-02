@@ -79,7 +79,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
         this.registryUrls = registryUrls;
         this.interfaceClass = interfaceClass;
         this.url = refUrl;
-        protocol = getDecorateProtocol(url.getProtocol());
+        this.protocol = getDecorateProtocol(this.url.getProtocol());
         int maxConnectionCount = this.url.getIntParameter(URLParamType.maxConnectionPerGroup.getName(), URLParamType.maxConnectionPerGroup.getIntValue());
         int maxClientConnection = this.url.getIntParameter(URLParamType.maxClientConnection.getName(), URLParamType.maxClientConnection.getIntValue());
         selectNodeCount = (int) Math.ceil(1.0 * maxConnectionCount / maxClientConnection);
@@ -97,7 +97,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             if (StringUtils.isNotBlank(directUrlStr)) {
                 List<URL> directUrls = UrlUtils.stringToURLs(directUrlStr);
                 if (!directUrls.isEmpty()) {
-                    notify(ru, directUrls);
+                    cluster.onRefresh(UrlUtils.toReferers(directUrls, interfaceClass, url));
                     LoggerUtil.info("Use direct urls, refUrl={}, directUrls={}", url, directUrls);
                     continue;
                 }
@@ -117,7 +117,7 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             }
             LoggerUtil.info("cluster init cost " + (System.currentTimeMillis() - start) + ", refer size:"
                     + (cluster.getReferers() == null ? 0 : cluster.getReferers().size()) + ", cluster:" + cluster.getUrl().toSimpleString());
-            StatsUtil.registryStatisticCallback(this);
+            refreshSet.add(this);
             return;
         }
 
@@ -189,7 +189,9 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
             refreshSet.add(this);
             serviceUrls = selectUrls(registryUrl, urls);
         } else {
-            refreshSet.remove(this);
+            if (MotanSwitcherUtil.switcherIsOpenWithDefault("feature.motan.cluster.refresh", true)) {
+                refreshSet.add(this);
+            }
         }
         doRefreshReferersByUrls(registryUrl, serviceUrls);
     }
@@ -463,7 +465,11 @@ public class ClusterSupport<T> implements NotifyListener, StatisticCallback {
 
             for (URL addedUrl : addedUrls) {
                 int addPosition = ThreadLocalRandom.current().nextInt(baseUrls.size() + 1);
-                baseUrls.add(addPosition, addedUrl);
+                if (addPosition == baseUrls.size()) {
+                    baseUrls.add(addedUrl);
+                } else {
+                    baseUrls.add(addPosition, addedUrl);
+                }
             }
         }
 

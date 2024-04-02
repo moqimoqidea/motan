@@ -104,7 +104,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         checkProcessNormal(url, attachments, isProcess);
         checkProcessWithTraceable(url, attachments, isProcess, true, false);
         checkProcessWithTraceable(url, attachments, isProcess, false, false);
-        checkProcessWithTraceable(url, attachments, isProcess, false, true);
+        checkProcessWithTraceable(url, attachments, isProcess, true, true);
     }
 
 
