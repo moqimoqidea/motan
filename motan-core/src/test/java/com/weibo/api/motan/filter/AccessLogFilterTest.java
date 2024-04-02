@@ -54,7 +54,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         final URL url = getDefaultUrl();
         url.addParameter(URLParamType.accessLog.getName(), String.valueOf(false));
         final Map<String, String> attachments = getDefaultAttachment();
-        // FIXME: Code Completion From Here.
+        checkProcess(url, attachments, false);
 
         url.addParameter(URLParamType.accessLog.getName(), String.valueOf(true));
         checkProcess(url, attachments, true);
@@ -84,7 +84,7 @@ public class AccessLogFilterTest extends BaseTestCase {
 
         // set trace log attachment
         attachments.put(MotanConstants.ATT_PRINT_TRACE_LOG, "true");
-        // FIXME: Code Completion From Here.
+        checkProcess(url, attachments, true);
 
     }
 
@@ -104,7 +104,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         checkProcessNormal(url, attachments, isProcess);
         checkProcessWithTraceable(url, attachments, isProcess, true, false);
         checkProcessWithTraceable(url, attachments, isProcess, false, false);
-        // FIXME: Code Completion From Here.
+        checkProcessWithTraceable(url, attachments, isProcess, true, true);
     }
 
 
@@ -161,7 +161,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         } else {
             caller = mockery.mock(Referer.class);
         }
-        // FIXME: Code Completion From Here.
+        final LogService logService = mockery.mock(LogService.class);
         final TraceableContext requestTraceableContext = mockery.mock(TraceableContext.class, "requestTraceableContext");
         final TraceableContext responseTraceableContext = mockery.mock(TraceableContext.class, "responseTraceableContext");
         if (!timeout){
@@ -226,7 +226,7 @@ public class AccessLogFilterTest extends BaseTestCase {
         if (isServerEnd) {
             Thread.sleep(100);
         }
-        // FIXME: Code Completion From Here.
+        mockery.assertIsSatisfied();
 
         LoggerUtil.setLogService(new DefaultLogService());
     }

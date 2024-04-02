@@ -55,7 +55,12 @@ public class ConfigUtil {
             }
             String[] ppDetail = pp.split(":");
             if (ppDetail.length == 2) {
-                // FIXME: Code Completion From Here.
+                int port = MathUtil.parseInt(ppDetail[1], 0);
+                if (port <= 0) {
+                    throw new MotanServiceException("Export is malformed :" + export);
+                } else {
+                    pps.put(ppDetail[0], port);
+                }
             } else if (ppDetail.length == 1) {
                 if (MotanConstants.PROTOCOL_INJVM.equals(ppDetail[0])) {
                     pps.put(ppDetail[0], MotanConstants.DEFAULT_INT_VALUE);
@@ -79,7 +84,7 @@ public class ConfigUtil {
         Map<String, Integer> protocols = parseExport(export);
         StringBuilder sb = new StringBuilder(16);
         for (String p : protocols.keySet()) {
-            // FIXME: Code Completion From Here.
+            sb.append(p).append(",");
         }
         if (sb.length() > 0) {
             sb.deleteCharAt(sb.length() - 1);

@@ -55,7 +55,7 @@ public class RefererConfigTest extends BaseTestCase {
         serviceConfig.setExport(MotanConstants.PROTOCOL_INJVM);
 
         refererConfig = mockIWorldRefererConfig();
-        // FIXME: Code Completion From Here.
+        refererConfig.setProtocol(mockProtocolConfig(MotanConstants.PROTOCOL_INJVM));
         refererConfig.setRegistry(registryConfig);
 
         refererConfig.setCheck("false");
@@ -80,7 +80,7 @@ public class RefererConfigTest extends BaseTestCase {
 
         IWorld ref = refererConfig.getRef();
         assertNotNull(ref);
-        // FIXME: Code Completion From Here.
+        assertTrue(ref instanceof MockWorld);
 
         int times = 3;
         for (int i = 0; i < times; i++) {
@@ -109,7 +109,7 @@ public class RefererConfigTest extends BaseTestCase {
         }
 
         // protocol not exists
-        // FIXME: Code Completion From Here.
+        protocols.clear();
         try {
             ref = refererConfig.getRef();
             assertTrue(false);
@@ -145,7 +145,7 @@ public class RefererConfigTest extends BaseTestCase {
         List<RegistryConfig> registries =
                 getMultiRegister(MotanConstants.REGISTRY_PROTOCOL_LOCAL, MotanConstants.REGISTRY_PROTOCOL_ZOOKEEPER);
         refererConfig.setRegistries(registries);
-        // FIXME: Code Completion From Here.
+        IWorld ref = refererConfig.getRef();
         assertEquals(registries.size(), refererConfig.getRegistryUrls().size());
     }
 
@@ -158,7 +158,7 @@ public class RefererConfigTest extends BaseTestCase {
         meshClient.init();
         refererConfig.setRequestTimeout(timeout);
         refererConfig.setMeshClient(meshClient);
-        // FIXME: Code Completion From Here.
+        IWorld ref = refererConfig.getRef();
         assertNotNull(ref);
         assertNotNull(refererConfig.getMeshClient());
 

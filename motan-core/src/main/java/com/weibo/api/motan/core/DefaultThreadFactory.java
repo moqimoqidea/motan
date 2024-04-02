@@ -51,7 +51,7 @@ public class DefaultThreadFactory implements ThreadFactory {
         SecurityManager s = System.getSecurityManager();
         this.threadGroup = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
         this.namePrefix = prefix + "-" + poolNumber.getAndIncrement() + "-thread-";
-        // FIXME: Code Completion From Here.
+        this.isDaemon = isDaemon;
         this.priority = priority;
     }
 

@@ -74,7 +74,7 @@ public abstract class AbstractCodec implements Codec {
         if (serializations == null) {
             serializations = new ConcurrentHashMap<Integer, String>();
             try {
-                // FIXME: Code Completion From Here.
+                ExtensionLoader<Serialization> loader = ExtensionLoader.getExtensionLoader(Serialization.class);
                 List<Serialization> exts = loader.getExtensions(null);
                 for (Serialization s : exts) {
                     String old = serializations.put(s.getSerializationNumber(), loader.getSpiName(s.getClass()));
