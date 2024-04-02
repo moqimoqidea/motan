@@ -61,6 +61,6 @@ public class AsyncUtil {
         if (request == null) {
             throw new MotanFrameworkException("can not get request from RpcContext");
         }
-        // FIXME: Code Completion From Here.
+        return DefaultResponseFuture.fromServerEndResponseFuture(request.getAsyncContext().getFuture());
     }
 }

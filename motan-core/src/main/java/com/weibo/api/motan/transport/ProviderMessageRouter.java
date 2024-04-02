@@ -84,7 +84,7 @@ public class ProviderMessageRouter implements MessageHandler {
         }
 
         Request request = (Request) message;
-        // FIXME: Code Completion From Here.
+        String serviceKey = MotanFrameworkUtil.getServiceKey(request);
         Provider<?> provider = providers.get(serviceKey);
 
         // 兼容模式。TODO：可以增加是否启用兼容的配置项
@@ -99,7 +99,7 @@ public class ProviderMessageRouter implements MessageHandler {
         }
         Method method = provider.lookupMethod(request.getMethodName(), request.getParamtersDesc());
         fillParamDesc(request, method);
-        // FIXME: Code Completion From Here.
+        fillRequestAttachment(request, provider);
         return call(request, provider);
     }
 
@@ -129,7 +129,7 @@ public class ProviderMessageRouter implements MessageHandler {
                 && request instanceof DefaultRequest) {
             DefaultRequest dr = (DefaultRequest) request;
             dr.setParamtersDesc(ReflectUtil.getMethodParamDesc(method));
-            // FIXME: Code Completion From Here.
+            processLazyDeserialize(dr, method);
         }
     }
 
@@ -148,7 +148,7 @@ public class ProviderMessageRouter implements MessageHandler {
         CompressRpcCodec.putMethodSign(provider, methods);// 对所有接口方法生成方法签名。适配方法签名压缩调用方式。
 
         int publicMethodCount = methods.size();
-        // FIXME: Code Completion From Here.
+        methodCounter.getAndAdd(publicMethodCount);
 
         LoggerUtil.info("RequestRouter addProvider: url=" + provider.getUrl() + " all_public_method_count=" + methodCounter.get());
     }

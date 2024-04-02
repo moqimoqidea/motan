@@ -89,7 +89,7 @@ public abstract class AbstractEndpointFactory implements EndpointFactory {
                     url = url.createCopy();
                 }
                 // 如果端口已经被使用了，使用该server bind 会有异常
-                // FIXME: Code Completion From Here.
+                server = createServer(url, messageHandler);
             }
 
             LoggerUtil.info(this.getClass().getSimpleName() + " create share_channel server: url={}", url);
@@ -104,7 +104,9 @@ public abstract class AbstractEndpointFactory implements EndpointFactory {
                                     + server.getUrl() + " target=" + url, MotanErrorMsgConstant.FRAMEWORK_EXPORT_ERROR);
                 }
 
-                // FIXME: Code Completion From Here.
+                if (server.getUrl().getPort() == 0) { // create new url for random port，the origin url port will be replaced in exporter
+                    url = url.createCopy();
+                }
 
                 return server;
             }
@@ -161,7 +163,7 @@ public abstract class AbstractEndpointFactory implements EndpointFactory {
             if (urls.isEmpty()) {
                 destory(endpoint);
                 ipPort2Endpoint.remove(ipPort);
-                // FIXME: Code Completion From Here.
+                endpoint2Urls.remove(endpoint);
             }
         }
     }

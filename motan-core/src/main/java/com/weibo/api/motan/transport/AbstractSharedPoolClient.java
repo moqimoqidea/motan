@@ -44,7 +44,7 @@ public abstract class AbstractSharedPoolClient extends AbstractClient {
 
     public AbstractSharedPoolClient(URL url) {
         super(url);
-        // FIXME: Code Completion From Here.
+        connections = url.getIntParameter(URLParamType.minClientConnection.getName(), URLParamType.minClientConnection.getIntValue());
         if (connections <= 0) {
             connections = URLParamType.minClientConnection.getIntValue();
         }
@@ -70,7 +70,9 @@ public abstract class AbstractSharedPoolClient extends AbstractClient {
     protected void initConnections(boolean async) {
         if (async) {
             EXECUTOR.execute(() -> {
-                // FIXME: Code Completion From Here.
+                try {
+                    createConnections();
+                }
                 LoggerUtil.info("async initPool {}. url:{}", state == ChannelState.ALIVE ? "success" : "fail", getUrl().getUri());
             });
         } else {

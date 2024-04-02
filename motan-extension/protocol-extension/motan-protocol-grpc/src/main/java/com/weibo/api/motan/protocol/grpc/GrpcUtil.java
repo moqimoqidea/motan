@@ -80,7 +80,7 @@ public class GrpcUtil {
                         }
                         methodMap.put(interfaceMethod.getName(), methodDesc);
                     }
-                    // FIXME: Code Completion From Here.
+                    serviceMap.put(clazzName, methodMap);
                 }
                 result = serviceMap.get(clazzName);
             }
@@ -149,7 +149,7 @@ public class GrpcUtil {
                 Reader reader = new InputStreamReader(stream, charset);
                 T proto;
                 try {
-                    // FIXME: Code Completion From Here.
+                    parser.merge(reader, builder);
                     proto = (T) builder.build();
                     reader.close();
                 } catch (InvalidProtocolBufferException e) {

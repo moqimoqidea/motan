@@ -54,7 +54,7 @@ public class MotanHandlerRegistry extends HandlerRegistry {
                     LoggerUtil.info("grpc method " + jsonDesc.getFullMethodName() +" use codec json.");
                 }
             }
-            // FIXME: Code Completion From Here.
+            methods.put(method.getMethodDescriptor().getFullMethodName(), method);
         }
     }
 

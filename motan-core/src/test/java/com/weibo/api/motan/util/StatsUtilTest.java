@@ -57,7 +57,7 @@ public class StatsUtilTest {
         } catch (Exception e) {}
         for (Map.Entry<String, AccessStatisticResult> entry : StatsUtil.getTotalAccessStatistic().entrySet()) {
             if ("application1|module1".equals(entry.getKey())) {
-                // FIXME: Code Completion From Here.
+                Assert.assertEquals(loop * count, entry.getValue().totalCount);
             }
             if ("application2|module2".equals(entry.getKey())) {
                 Assert.assertEquals(loop * count, entry.getValue().totalCount);

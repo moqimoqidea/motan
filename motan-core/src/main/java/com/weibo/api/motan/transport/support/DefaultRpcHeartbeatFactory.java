@@ -51,7 +51,7 @@ public class DefaultRpcHeartbeatFactory implements HeartbeatFactory {
         request.setRequestId(requestId);
         request.setInterfaceName(MotanConstants.HEARTBEAT_INTERFACE_NAME);
         request.setMethodName(MotanConstants.HEARTBEAT_METHOD_NAME);
-        // FIXME: Code Completion From Here.
+        request.setParamtersDesc(MotanConstants.HHEARTBEAT_PARAM);
 
         return request;
     }
@@ -93,7 +93,7 @@ public class DefaultRpcHeartbeatFactory implements HeartbeatFactory {
         @Override
         public Object handle(Channel channel, Object message) {
             if (isHeartbeatRequest(message)) {
-                // FIXME: Code Completion From Here.
+                HeartbeatResponse response = getDefaultHeartbeatResponse(((Request) message).getRequestId());
                 response.setRpcProtocolVersion(((Request) message).getRpcProtocolVersion());
                 return response;
             }

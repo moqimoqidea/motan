@@ -95,7 +95,7 @@ public class ExceptionUtil {
         jsonObject.put("errcode", code);
         jsonObject.put("errmsg", errmsg);
         jsonObject.put("errtype", type);
-        // FIXME: Code Completion From Here.
+        return jsonObject.toJSONString();
     }
 
     public static MotanAbstractException fromMessage(String msg) {
@@ -132,7 +132,7 @@ public class ExceptionUtil {
     public static void setMockStackTrace(Throwable e) {
         if (e != null) {
             try {
-                // FIXME: Code Completion From Here.
+                e.setStackTrace(REMOTE_MOCK_STACK);
             } catch (Exception e1) {
                 LoggerUtil.warn("replace remote exception stack fail!" + e1.getMessage());
             }
