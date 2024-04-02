@@ -80,7 +80,7 @@ public class RandomLoadBalanceTest extends AbstractLoadBalanceTest {
             {
                 atLeast(1).of(request).getArguments();
                 will(returnValue(new Object[] {1, 2, 3}));
-                atLeast(0).of(request).getParamtersDesc();
+                // FIXME: Code Completion From Here.
                 will(returnValue("void_"));
             }
         });
