@@ -81,7 +81,13 @@ public class ClusterSupportTest {
 
         mockery.checking(new Expectations() {
             {
-                // FIXME: Code Completion From Here.
+                allowing(any(Registry.class)).method("available").with(any(URL.class)).will(new Action() {
+                    @Override
+                    public Object invoke(Invocation invocation) throws Throwable {
+                        URL url = (URL) invocation.getParameter(0);
+                        return availableMap.get(url.getProtocol());
+                    }
+                });
                 allowing(any(Registry.class)).method("subscribe").with(any(URL.class), any(NotifyListener.class));
             }
         });
@@ -139,7 +145,7 @@ public class ClusterSupportTest {
 
                 atLeast(1).of(registries.get(regProtocol1)).getUrl();
                 will(returnValue(reg1Url));
-                // FIXME: Code Completion From Here.
+                atLeast(1).of(registries.get(regProtocol2)).getUrl();
                 will(returnValue(reg2Url));
             }
         });
@@ -174,7 +180,7 @@ public class ClusterSupportTest {
 
         // 利用registry2，通知有2个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 5)));
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 5);
 
         // 再利用registr1 通知有2个，少了一个
         clusterSupport.notify(registries.get(regProtocol1).getUrl(), copy(copy, serviceUrls1.subList(1, 3)));
@@ -211,7 +217,7 @@ public class ClusterSupportTest {
 
         // 再利用registry2 通知有1个
         clusterSupport.notify(registries.get(regProtocol2).getUrl(), copy(copy, serviceUrls1.subList(3, 4)));
-        // FIXME: Code Completion From Here.
+        Assert.assertEquals(clusterSupport.getCluster().getReferers().size(), 3);
 
     }
 
@@ -307,7 +313,11 @@ public class ClusterSupportTest {
         if (portReferers.get(url.getIdentity()) != null) {
             return portReferers.get(url.getIdentity());
         }
-        // FIXME: Code Completion From Here.
+        if (url.getPort() == 18081) {
+            portReferers.put(url.getIdentity(), mockReferer1);
+        } else if (url.getPort() == 18082) {
+            portReferers.put(url.getIdentity(), mockReferer2);
+        } else
         return portReferers.get(url.getIdentity());
 
     }

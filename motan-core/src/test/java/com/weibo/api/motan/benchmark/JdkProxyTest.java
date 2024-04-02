@@ -42,7 +42,7 @@ public class JdkProxyTest {
 
         for (int i = 0; i < count; i++) {
             call.call_1kb_string();
-            // FIXME: Code Completion From Here.
+            call.empty_method();
         }
 
         for (int i = 0; i < count; i++) {

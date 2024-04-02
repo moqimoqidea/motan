@@ -94,7 +94,16 @@ public class ConfigurableWeightLoadBalanceTest {
             }
         }
 
-        // FIXME: Code Completion From Here.
+        balance = new ConfigurableWeightLoadBalance<IHello>() {
+            @Override
+            protected Referer<IHello> doSelect(Request request) {
+                return null;
+            }
+
+            @Override
+            protected void doSelectToHolder(Request request, List<Referer<IHello>> refersHolder) {
+            }
+        };
         balance.setWeightString(sb.substring(0, sb.length() - 1));
         balance.onRefresh(list);
         return counterMap;

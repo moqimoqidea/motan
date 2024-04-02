@@ -152,7 +152,7 @@ public class OpenTracingFilter implements Filter {
         String operationName = buildOperationName(request);
         SpanBuilder span = tracer.buildSpan(operationName);
         try {
-            // FIXME: Code Completion From Here.
+            SpanContext spanContext = tracer.extract(Format.Builtin.TEXT_MAP, new TextMapExtractAdapter(request.getAttachments()));
             if (spanContext != null) {
                 span.asChildOf(spanContext);
             }

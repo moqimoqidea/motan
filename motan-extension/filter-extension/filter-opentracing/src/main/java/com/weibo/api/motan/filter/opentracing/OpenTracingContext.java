@@ -36,7 +36,7 @@ public class OpenTracingContext {
     }
 
     public static Span getActiveSpan() {
-        // FIXME: Code Completion From Here.
+        Object span = RpcContext.getContext().getAttribute(ACTIVE_SPAN);
         if (span != null && span instanceof Span) {
             return (Span) span;
         }
