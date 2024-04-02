@@ -68,7 +68,7 @@ public class LocalRegistryService extends AbstractRegistry {
         String subscribeKey = getSubscribeKey(url);
         ConcurrentHashMap<URL, ConcurrentHashSet<NotifyListener>> urlListeners = subscribeListeners.get(subscribeKey);
         if (urlListeners == null) {
-            // FIXME: Code Completion From Here.
+            subscribeListeners.putIfAbsent(subscribeKey, new ConcurrentHashMap<URL, ConcurrentHashSet<NotifyListener>>());
             urlListeners = subscribeListeners.get(subscribeKey);
         }
 
@@ -91,7 +91,7 @@ public class LocalRegistryService extends AbstractRegistry {
     @Override
     public void doUnsubscribe(URL url, NotifyListener listener) {
         String subscribeKey = getSubscribeKey(url);
-        // FIXME: Code Completion From Here.
+        ConcurrentHashMap<URL, ConcurrentHashSet<NotifyListener>> urlListeners = subscribeListeners.get(subscribeKey);
         if (urlListeners != null) {
             urlListeners.remove(url);
         }
@@ -216,7 +216,7 @@ public class LocalRegistryService extends AbstractRegistry {
             for (ConcurrentHashSet<NotifyListener> listeners : urlListeners.values()) {
                 for (NotifyListener ln : listeners) {
                     try {
-                        // FIXME: Code Completion From Here.
+                        ln.notify(getUrl(), interestingUrls);
                     } catch (Exception e) {
                         LoggerUtil.warn(String.format("Exception when notify listerner %s, changedUrl: %s", ln, changedUrl), e);
                     }
