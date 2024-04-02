@@ -61,7 +61,7 @@ public abstract class AbstractReferer<T> extends AbstractNode implements Referer
         incrActiveCount(request);
         Response response = null;
         try {
-            // FIXME: Code Completion From Here.
+            response = doCall(request);
 
             return response;
         } finally {

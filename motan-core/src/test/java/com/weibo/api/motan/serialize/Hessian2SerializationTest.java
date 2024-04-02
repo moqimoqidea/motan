@@ -79,7 +79,7 @@ public class Hessian2SerializationTest extends TestCase {
         serializerFactory.setAllowNonSerializable(true);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         Hessian2Output out = new Hessian2Output(bos);
-        // FIXME: Code Completion From Here.
+        out.setSerializerFactory(serializerFactory);
         out.writeObject(data);
         out.flush();
         return bos.toByteArray();
