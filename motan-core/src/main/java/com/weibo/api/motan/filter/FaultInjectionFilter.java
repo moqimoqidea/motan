@@ -37,7 +37,11 @@ public class FaultInjectionFilter implements Filter {
             delay = config.getExceptionTime();
         } else {
             response = caller.call(request);
-            // FIXME: Code Completion From Here.
+            if (response.getException() != null) {
+                delay = config.getExceptionTime();
+            } else {
+                delay = config.getDelayTime();
+            }
         }
         if (delay > 0) {
             // process injected delay ignore sync/async calls
@@ -170,7 +174,7 @@ public class FaultInjectionFilter implements Filter {
                 if (config == null) { // Unmatched cache
                     config = NOT_MATCH;
                 }
-                // FIXME: Code Completion From Here.
+                matchCache.put(service + SEPARATOR + method, config);
             }
             if (config == NOT_MATCH) { // Mismatch
                 return null;

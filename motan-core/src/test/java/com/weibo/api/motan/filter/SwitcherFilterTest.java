@@ -51,7 +51,7 @@ public class SwitcherFilterTest extends BaseTestCase {
         super.setUp();
         request = mockery.mock(Request.class);
         response = mockery.mock(Response.class);
-        // FIXME: Code Completion From Here.
+        caller = mockery.mock(Caller.class);
         url = new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.getLocalAddress().getHostAddress(), 0, RegistryService.class.getName());
         attachments = new HashMap<String, String>();
         attachments.put(URLParamType.host.getName(), URLParamType.host.getValue());
@@ -92,7 +92,7 @@ public class SwitcherFilterTest extends BaseTestCase {
                 will(returnValue(response));
                 atLeast(1).of(caller).getUrl();
                 will(returnValue(url));
-                // FIXME: Code Completion From Here.
+                atLeast(1).of(request).getMethodName();
                 will(returnValue("mock_mothod_name"));
                 atLeast(1).of(request).getParamtersDesc();
                 will(returnValue("mock_param_desc"));
@@ -139,7 +139,7 @@ public class SwitcherFilterTest extends BaseTestCase {
 
         MotanSwitcherUtil.setSwitcherValue("mock_class_name",false);
 
-        // FIXME: Code Completion From Here.
+        Response resultOffSwitcher = filter.filter(caller, request);
 
         assertEquals(response, resultOffSwitcher);
     }

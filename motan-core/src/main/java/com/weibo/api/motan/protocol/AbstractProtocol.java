@@ -62,7 +62,7 @@ public abstract class AbstractProtocol implements Protocol {
                         MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
             }
 
-            // FIXME: Code Completion From Here.
+            exporter = new DefaultExporter<T>(provider, url);
             exporter.init();
 
             protocolKey =  MotanFrameworkUtil.getProtocolKey(url);// rebuild protocolKey，maybe port change when using random port
@@ -92,7 +92,7 @@ public abstract class AbstractProtocol implements Protocol {
                     MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
         }
         long start = System.currentTimeMillis();
-        // FIXME: Code Completion From Here.
+        Referer<T> referer = createReferer(clz, url, serviceUrl);
         referer.init();
 
         LoggerUtil.info(this.getClass().getSimpleName() + " refer Success: url=" + url + ", cost:" + (System.currentTimeMillis() - start));
@@ -111,7 +111,7 @@ public abstract class AbstractProtocol implements Protocol {
 
             if (node != null) {
                 try {
-                    // FIXME: Code Completion From Here.
+                    node.destroy();
 
                     LoggerUtil.info(this.getClass().getSimpleName() + " destroy node Success: " + node);
                 } catch (Throwable t) {

@@ -53,7 +53,7 @@ public class ServiceMockFilter implements Filter {
         MockInfo info = mockServices.get(url.getIdentity());
         if (info == null) {
             info = new MockInfo(url);
-            // FIXME: Code Completion From Here.
+            mockServices.putIfAbsent(url.getIdentity(), info);
             info = mockServices.get(url.getIdentity());
         }
         return info;
@@ -80,7 +80,7 @@ public class ServiceMockFilter implements Filter {
                 long sleepTime = caclSleepTime(info);
                 Thread.sleep(sleepTime);
 
-                // FIXME: Code Completion From Here.
+                response.setValue(ReflectUtil.jsonToObject(value, caller.getInterface()));
             } catch (RuntimeException e) {
                 if (e.getCause() != null) {
                     response.setException(new MotanBizException("mock service call process error", e.getCause()));
@@ -140,7 +140,15 @@ public class ServiceMockFilter implements Filter {
     private Object invoke(Object clz, Method method, Object[] args, MockInfo info) throws InterruptedException, InvocationTargetException,
             IllegalAccessException {
 
-        // FIXME: Code Completion From Here.
+        if (info.errorRate != 0) {
+            int rate = 1;
+            while (info.errorRate * rate < 1) {
+                rate *= 10;
+            }
+            if (ThreadLocalRandom.current().nextInt(rate) == 0) {
+                throw new RuntimeException("mock service call process error");
+            }
+        }
 
         long sleepTime = caclSleepTime(info);
         Thread.sleep(sleepTime);
