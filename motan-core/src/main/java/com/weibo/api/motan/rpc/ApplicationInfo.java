@@ -36,7 +36,7 @@ public class ApplicationInfo {
         String module = url.getModule();
         Application application = applications.get(app + "_" + module);
         if (application == null) {
-            applications.putIfAbsent(app + "_" + module, new Application(app, module));
+            // FIXME: Code Completion From Here.
             application = applications.get(app + "_" + module);
         }
         return application;

@@ -49,7 +49,7 @@ public abstract class AbstractClientRunnable implements ClientRunnable {
     @Override
     public void run() {
         try {
-            cyclicBarrier.await();
+            // FIXME: Code Completion From Here.
         } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public abstract class AbstractClientRunnable implements ClientRunnable {
             beginTime = System.nanoTime() / 1000L;
             Object result = call(benchmarkService);
             long responseTime = System.nanoTime() / 1000L - beginTime;
-            collectResponseTimeDistribution(responseTime);
+            // FIXME: Code Completion From Here.
             int currTime = (int) ((beginTime - startTime) / 1000000L);
             if (currTime >= statisticTime) {
                 continue;
@@ -96,7 +96,7 @@ public abstract class AbstractClientRunnable implements ClientRunnable {
         } else if (responseTime > 50 && responseTime <= 100) {
             statistics.above50sum++;
         } else if (responseTime > 100 && responseTime <= 500) {
-            statistics.above100sum++;
+            // FIXME: Code Completion From Here.
         } else if (responseTime > 500 && responseTime <= 1000) {
             statistics.above500sum++;
         } else if (responseTime > 1000) {

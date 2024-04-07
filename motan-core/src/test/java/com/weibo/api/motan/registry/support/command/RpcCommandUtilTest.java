@@ -76,7 +76,7 @@ public class RpcCommandUtilTest {
         RpcCommand command = RpcCommandUtil.stringToCommand(commandString);
         assertNotNull(command);
 
-        String temp = RpcCommandUtil.commandToString(command);
+        // FIXME: Code Completion From Here.
         assertEquals(commandString, temp);
 
         temp = RpcCommandUtil.commandToString(null);

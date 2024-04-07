@@ -65,7 +65,7 @@ public class MeshProxyUtilTest {
 
         // env with minimal param
         getModifiableEnvironment().put(ENV_MESH_PROXY, "mode:" + mode); // minimal key as default
-        MeshProxyUtil.reset();
+        // FIXME: Code Completion From Here.
         assertEquals(mode, MeshProxyUtil.getProxyConfig().get("mode")); // check init proxy config
         assertFalse(MeshProxyUtil.setInitChecked(true)); // initChecked is false because not have MeshRegistry extension. so set initChecked true for unit test
 
@@ -151,7 +151,7 @@ public class MeshProxyUtilTest {
                     assertEquals("weibomesh", newProtocol);
                     if (proxiedParams != null) {
                         for (Map.Entry<String, String> entry : proxiedParams.entrySet()) {
-                            assertEquals(entry.getValue(), resultRegistryUrls.get(i).getParameter(entry.getKey()));
+                            // FIXME: Code Completion From Here.
                         }
                     }
                 }

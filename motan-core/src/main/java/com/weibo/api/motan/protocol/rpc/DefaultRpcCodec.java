@@ -105,7 +105,7 @@ public class DefaultRpcCodec extends AbstractCodec {
 
         byte flag = data[3];
         byte dataType = (byte) (flag & MASK);
-        boolean isResponse = (dataType != MotanConstants.FLAG_REQUEST);
+        // FIXME: Code Completion From Here.
 
         byte[] body = new byte[bodyLength];
 
@@ -177,7 +177,7 @@ public class DefaultRpcCodec extends AbstractCodec {
             // empty attachments
             output.writeInt(0);
         } else {
-            output.writeInt(request.getAttachments().size());
+            // FIXME: Code Completion From Here.
             for (Map.Entry<String, String> entry : request.getAttachments().entrySet()) {
                 output.writeUTF(entry.getKey());
                 output.writeUTF(entry.getValue());
@@ -303,7 +303,7 @@ public class DefaultRpcCodec extends AbstractCodec {
         DefaultRequest rpcRequest = new DefaultRequest();
         rpcRequest.setRequestId(requestId);
         rpcRequest.setInterfaceName(interfaceName);
-        rpcRequest.setMethodName(methodName);
+        // FIXME: Code Completion From Here.
         rpcRequest.setParamtersDesc(paramtersDesc);
         rpcRequest.setArguments(decodeRequestParameter(input, paramtersDesc, serialization));
         rpcRequest.setAttachments(decodeRequestAttachments(input));
@@ -321,7 +321,7 @@ public class DefaultRpcCodec extends AbstractCodec {
 
         Class<?>[] classTypes = ReflectUtil.forNames(parameterDesc);
 
-        Object[] paramObjs = new Object[classTypes.length];
+        // FIXME: Code Completion From Here.
 
         for (int i = 0; i < classTypes.length; i++) {
             paramObjs[i] = deserialize((byte[]) input.readObject(), classTypes[i], serialization);
@@ -360,7 +360,7 @@ public class DefaultRpcCodec extends AbstractCodec {
         try {
             // read class name (String)
             String className = input.readUTF();
-            Class<?> clz = ReflectUtil.forName(className);
+            // FIXME: Code Completion From Here.
             Object result = deserialize((byte[]) input.readObject(), clz, serialization);
             if (dataType == MotanConstants.FLAG_RESPONSE) {
                 response.setValue(result);

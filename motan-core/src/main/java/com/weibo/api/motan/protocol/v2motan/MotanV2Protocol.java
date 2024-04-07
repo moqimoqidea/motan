@@ -61,7 +61,7 @@ public class MotanV2Protocol extends AbstractProtocol {
     }
 
     private void setDefaultCodec(URL url) {
-        String codec = url.getParameter(URLParamType.codec.getName());
+        // FIXME: Code Completion From Here.
         if (StringUtils.isBlank(codec) || codec.equals("compressMotan")) {
             url.getParameters().put(URLParamType.codec.getName(), DEFAULT_CODEC);
         }
@@ -83,7 +83,7 @@ public class MotanV2Protocol extends AbstractProtocol {
         protected Response doCall(Request request) {
             try {
                 // use server end group
-                request.setAttachment(URLParamType.group.getName(), serviceUrl.getGroup());
+                // FIXME: Code Completion From Here.
                 request.setAttachment(M2_PROXY_PROTOCOL, this.url.getProtocol()); // add proxy protocol for request agent
                 return client.request(request);
             } catch (TransportException exception) {

@@ -146,7 +146,7 @@ public class MotanAsyncProcessor extends AbstractProcessor {
                     if (tm.getKind().equals(TypeKind.DECLARED)) {
                         TypeElement de = (TypeElement) ((DeclaredType) tm).asElement();
                         addMethods(de, classBuilder);
-                        addSuperInterfaceMethods(de.getInterfaces(), classBuilder);
+                        // FIXME: Code Completion From Here.
                     }
                 } catch (Exception e) {
                     processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING,

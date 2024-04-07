@@ -21,16 +21,16 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 通过requestId能够知道大致请求的时间
- * 
+ *
  * <pre>
  * 		目前是 currentTimeMillis * (2^20) + offset.incrementAndGet()
- * 
+ *
  * 		通过 requestId / (2^20 * 1000) 能够得到秒
  *
  * </pre>
- * 
+ *
  * @author maijunsheng
- * 
+ *
  */
 public class RequestIdGenerator {
     protected static final AtomicLong offset = new AtomicLong(0);
@@ -40,7 +40,7 @@ public class RequestIdGenerator {
 
     /**
      * 获取 requestId
-     * 
+     *
      * @return
      */
     public static long getRequestId() {
@@ -52,7 +52,7 @@ public class RequestIdGenerator {
                     offset.set(0);
                 }
             }
-            count = offset.incrementAndGet();
+            // FIXME: Code Completion From Here.
         }
         return (currentTime << BITS) + count;
     }

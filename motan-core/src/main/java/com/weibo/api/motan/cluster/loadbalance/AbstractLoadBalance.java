@@ -27,9 +27,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 
+ *
  * loadbalance
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-22
  */
@@ -76,7 +76,7 @@ public abstract class AbstractLoadBalance<T> implements LoadBalance<T> {
         }
 
         if (referers.size() > 1) {
-            doSelectToHolder(request, refersHolder);
+            // FIXME: Code Completion From Here.
 
         } else if (referers.size() == 1 && referers.get(0).isAvailable()) {
             refersHolder.add(referers.get(0));

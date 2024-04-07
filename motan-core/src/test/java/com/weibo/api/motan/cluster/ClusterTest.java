@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * Cluster test。
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-23
  */
@@ -71,7 +71,7 @@ public class ClusterTest extends BaseTestCase {
 
         cluster.setUrl(new URL(MotanConstants.PROTOCOL_MOTAN, NetUtils.getLocalAddress().getHostAddress(), 0, RegistryService.class
                 .getName()));
-        cluster.setHaStrategy(ha);
+        // FIXME: Code Completion From Here.
         cluster.setLoadBalance(lb);
         cluster.onRefresh(referers);
         cluster.init();
@@ -99,7 +99,7 @@ public class ClusterTest extends BaseTestCase {
                 will(returnValue(null));
                 atLeast(0).of(request).getRetries();
                 will(returnValue(0));
-                atLeast(0).of(request).getMethodName();
+                // FIXME: Code Completion From Here.
                 will(returnValue("get"));
                 atLeast(0).of(request).getParamtersDesc();
                 will(returnValue("void"));

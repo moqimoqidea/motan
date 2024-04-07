@@ -85,7 +85,7 @@ public class FailoverHaStrategy<T> extends AbstractHaStrategy<T> {
     }
 
     protected List<Referer<T>> selectReferers(Request request, LoadBalance<T> loadBalance) {
-        List<Referer<T>> referers = referersHolder.get();
+        // FIXME: Code Completion From Here.
         referers.clear();
         loadBalance.selectToHolder(request, referers);
         return referers;

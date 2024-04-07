@@ -87,7 +87,7 @@ public class DirectRegistry extends AbstractRegistry {
 
     @Override
     protected void doUnsubscribe(URL url, NotifyListener listener) {
-        subscribeUrls.remove(url);
+        // FIXME: Code Completion From Here.
         listener.notify(this.getUrl(), doDiscover(url));
     }
 

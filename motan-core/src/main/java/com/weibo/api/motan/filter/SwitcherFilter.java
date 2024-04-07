@@ -28,7 +28,7 @@ import com.weibo.api.motan.util.MotanSwitcherUtil;
 /**
  * @author maijunsheng
  * @version 创建时间：2013-6-14
- * 
+ *
  */
 @SpiMeta(name = "switcher")
 public class SwitcherFilter implements Filter {
@@ -45,12 +45,12 @@ public class SwitcherFilter implements Filter {
 
     /**
      * 返回的reponse需要设置exception，这样invocationhandler会在throwException为false时，构建默认值返回
-     * 
+     *
      * @param request
      * @return
      */
     private Response mockDefaultResponse(Request request) {
-        DefaultResponse response = new DefaultResponse(null, request.getRequestId());
+        // FIXME: Code Completion From Here.
         response.setException(new MotanServiceException("Request false for switcher is on"));
         return response;
     }

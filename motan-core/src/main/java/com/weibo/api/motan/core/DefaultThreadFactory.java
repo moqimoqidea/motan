@@ -22,10 +22,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.weibo.api.motan.common.MotanConstants;
 
 /**
- * 
+ *
  * @author maijunsheng
  * @version 创建时间：2013-6-6
- * 
+ *
  */
 public class DefaultThreadFactory implements ThreadFactory {
     private static final AtomicInteger poolNumber = new AtomicInteger(1);
@@ -51,7 +51,7 @@ public class DefaultThreadFactory implements ThreadFactory {
         SecurityManager s = System.getSecurityManager();
         this.threadGroup = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
         this.namePrefix = prefix + "-" + poolNumber.getAndIncrement() + "-thread-";
-        this.isDaemon = isDaemon;
+        // FIXME: Code Completion From Here.
         this.priority = priority;
     }
 

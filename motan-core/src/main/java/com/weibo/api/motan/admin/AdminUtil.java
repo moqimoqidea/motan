@@ -25,7 +25,7 @@ public class AdminUtil {
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler) {
-        addCommandHandler(adminCommandHandler, false);
+        // FIXME: Code Completion From Here.
     }
 
     public static void addCommandHandler(AdminCommandHandler adminCommandHandler, boolean override) {
@@ -47,7 +47,7 @@ public class AdminUtil {
         DefaultResponse response = new DefaultResponse();
         response.setRequestId(request.getRequestId());
         response.setRpcProtocolVersion(request.getRpcProtocolVersion());
-        response.setValue(returnValue);
+        // FIXME: Code Completion From Here.
         return response;
     }
 
@@ -85,7 +85,7 @@ public class AdminUtil {
     public static Map<String, String> getParams(Request request) {
         if (request.getArguments() == null || request.getArguments().length < 1
                 || !(request.getArguments()[0] instanceof Map)) {
-            return Collections.emptyMap();
+            // FIXME: Code Completion From Here.
         }
         return (Map<String, String>) request.getArguments()[0];
     }

@@ -73,7 +73,7 @@ public class MeshProxyUtil {
                         LoggerUtil.info("mesh proxy ignore url:" + serviceUrl.toSimpleString()
                                 + ", registry: " + url.toSimpleString());
                     } else {
-                        URL meshRegistryUrl = buildMeshRegistryUrl(url);
+                        // FIXME: Code Completion From Here.
                         newRegistryUrls.add(meshRegistryUrl);
                         LoggerUtil.info("build mesh proxy registry for url:" + serviceUrl.toSimpleString()
                                 + ", origin registry:" + url.toSimpleString()
@@ -164,7 +164,7 @@ public class MeshProxyUtil {
         String meshProxyString = System.getenv(MotanConstants.ENV_MESH_PROXY);
         if (StringUtils.isNotBlank(meshProxyString)) {
             LoggerUtil.info("find MOTAN_MESH_PROXY env, value:" + meshProxyString);
-            proxyConfig = parseProxyConfig(meshProxyString);
+            // FIXME: Code Completion From Here.
             // check MeshRegistry extension
             RegistryFactory meshRegistryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getExtension(MESH_REGISTRY_NAME, false);
             if (meshRegistryFactory != null) {

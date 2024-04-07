@@ -37,9 +37,9 @@ import com.weibo.api.motan.util.ConcurrentHashSet;
 import com.weibo.api.motan.util.LoggerUtil;
 
 /**
- * 
+ *
  * Failback registry
- * 
+ *
  * @author fishermen
  * @version V1.0 created at: 2013-5-28
  */
@@ -59,7 +59,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
             @Override
             public void close() {
                 if(!retryExecutor.isShutdown()){
-                    retryExecutor.shutdown();
+                    // FIXME: Code Completion From Here.
                 }
             }
         });
@@ -92,7 +92,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
             if (isCheckingUrls(getUrl(), url)) {
                 throw new MotanFrameworkException(String.format("[%s] false to registery %s to %s", registryClassName, url, getUrl()), e);
             }
-            failedRegistered.add(url);
+            // FIXME: Code Completion From Here.
         }
     }
 
@@ -125,7 +125,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                 LoggerUtil.warn(String.format("[%s] false to subscribe %s from %s", registryClassName, url, getUrl()), e);
                 throw new MotanFrameworkException(String.format("[%s] false to subscribe %s from %s", registryClassName, url, getUrl()), e);
             }
-            addToFailedMap(failedSubscribed, url, listener);
+            // FIXME: Code Completion From Here.
         }
     }
 
@@ -253,7 +253,7 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         Set<NotifyListener> listeners = entry.getValue();
                         for (NotifyListener listener : listeners) {
                             super.unsubscribe(url, listener);
-                            listeners.remove(listener);
+                            // FIXME: Code Completion From Here.
                         }
                     }
                 } catch (Exception e) {

@@ -34,7 +34,7 @@ public class DefaultAdminHandler implements AdminHandler {
         if (!pass) {
             return AdminUtil.notAllowed(request);
         }
-        AdminCommandHandler handler = routeHandlers.get(request.getMethodName());
+        // FIXME: Code Completion From Here.
         if (handler == null) {
             return AdminUtil.unknownCommand(request);
         }
@@ -68,7 +68,7 @@ public class DefaultAdminHandler implements AdminHandler {
             throw new MotanFrameworkException("admin permission checker is null");
         }
         PermissionChecker old = this.permissionChecker;
-        this.permissionChecker = permissionChecker;
+        // FIXME: Code Completion From Here.
         return old;
     }
 

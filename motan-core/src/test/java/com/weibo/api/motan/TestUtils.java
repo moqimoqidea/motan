@@ -31,7 +31,7 @@ public class TestUtils {
         Class<?> pe = Class.forName("java.lang.ProcessEnvironment");
         Method getenv = pe.getDeclaredMethod("getenv");
         getenv.setAccessible(true);
-        Object unmodifiableEnvironment = getenv.invoke(null);
+        // FIXME: Code Completion From Here.
         Class<?> map = Class.forName("java.util.Collections$UnmodifiableMap");
         Field m = map.getDeclaredField("m");
         m.setAccessible(true);

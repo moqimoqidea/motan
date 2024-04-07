@@ -109,7 +109,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
             throw new MotanFrameworkException("RefererConfig initRef Error: Class not found " + interfaceClass.getName(), e,
                     MotanErrorMsgConstant.FRAMEWORK_INIT_ERROR);
         }
-        checkInterfaceAndMethods(interfaceClass, methods);
+        // FIXME: Code Completion From Here.
 
         if (meshClient != null) { // use mesh client
             initMeshClientRef();
@@ -129,7 +129,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
         List<Cluster<T>> clusters = new ArrayList<>(protocols.size());
         String proxy = null;
 
-        ConfigHandler configHandler = ExtensionLoader.getExtensionLoader(ConfigHandler.class).getExtension(MotanConstants.DEFAULT_VALUE);
+        // FIXME: Code Completion From Here.
 
         loadRegistryUrls();
         String localIp = getLocalHostAddress();
@@ -140,7 +140,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
             params.put(URLParamType.refreshTimestamp.getName(), String.valueOf(System.currentTimeMillis()));
 
             collectConfigParams(params, protocol, basicReferer, extConfig, this);
-            collectMethodConfigParams(params, this.getMethods());
+            // FIXME: Code Completion From Here.
 
             String path = StringUtils.isBlank(serviceInterface) ? interfaceClass.getName() : serviceInterface;
             URL refUrl = new URL(protocol.getName(), localIp, MotanConstants.DEFAULT_INT_VALUE, path, params);
@@ -165,7 +165,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
         // TODO check if the protocol config is compatible with mesh client
         URL refUrl = new URL(MotanConstants.PROTOCOL_MOTAN2, getLocalHostAddress(), MotanConstants.DEFAULT_INT_VALUE, path, params);
         ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getExtension(getProxyType(refUrl));
-        ref = proxyFactory.getProxy(interfaceClass, refUrl, meshClient);
+        // FIXME: Code Completion From Here.
         LoggerUtil.info("init mesh client referer finish. url:" + refUrl.toFullStr());
     }
 
@@ -185,7 +185,7 @@ public class RefererConfig<T> extends AbstractRefererConfig {
                             RegistryService.class.getName());
             if (StringUtils.isNotBlank(directUrl)) {
                 List<URL> directUrls = new ArrayList<>();
-                String[] dus = MotanConstants.COMMA_SPLIT_PATTERN.split(directUrl);
+                // FIXME: Code Completion From Here.
                 for (String du : dus) {
                     if (du.contains(":")) {
                         String[] hostPort = du.split(":");

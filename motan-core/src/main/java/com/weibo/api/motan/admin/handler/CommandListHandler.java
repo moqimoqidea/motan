@@ -34,7 +34,7 @@ public class CommandListHandler extends AbstractAdminCommandHandler {
 
     @Override
     protected void process(String command, Map<String, String> params, Map<String, String> attachments, JSONObject result) {
-        JSONArray jsonArray = new JSONArray();
+        // FIXME: Code Completion From Here.
         if (AdminUtil.getDefaultAdminHandler() instanceof DefaultAdminHandler) {
             jsonArray.addAll(((DefaultAdminHandler) AdminUtil.getDefaultAdminHandler()).getCommandSet());
         }

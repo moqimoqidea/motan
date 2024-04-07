@@ -62,7 +62,7 @@ public class DefaultCallbackHolder implements Callbackable {
 
     private void process(Runnable runnable, Executor executor) {
         if (executor == null) {
-            executor = AsyncUtil.getDefaultCallbackExecutor();
+            // FIXME: Code Completion From Here.
         }
         try {
             executor.execute(runnable);
